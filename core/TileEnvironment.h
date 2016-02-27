@@ -1,0 +1,9 @@
+#ifndef MORRIS_AIMA_TILEENVIRONMENT_H
+#define MORRIS_AIMA_TILEENVIRONMENT_H
+
+class TileEnvironment {
+
+
+};
+
+#endif //MORRIS_AIMA_TILEENVIRONMENT_H
