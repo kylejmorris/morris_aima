@@ -35,5 +35,5 @@ set(GLOB H_CORE core/*.h)
 set(GLOB SRC_CORE core/*.cpp)
 #---------------------------
 
-set(SOURCE_FILES main.cpp core/Environment.cpp core/Environment.h)
+set(SOURCE_FILES main.cpp core/Environment.cpp core/Environment.h core/EnvironmentState.cpp core/EnvironmentState.h)
 add_executable(morris_aima ${SOURCE_FILES})
