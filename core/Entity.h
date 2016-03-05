@@ -6,18 +6,23 @@
 */
 #ifndef MORRIS_AIMA_ENTITY_H
 #define MORRIS_AIMA_ENTITY_H
+#include <string>
+
 
 class Entity {
 private:
+    static int UNIQUE_ID;
     /**
-     * Unique id for this entity. Starts at 0 and increments for each new entity created.
+     * Unique id for this entity. Starts at 0 and increments for each new entity created
+     * using static variable in this class.
      */
-    static int id;
+    int id;
 public:
     /**
      * Default constructor that will increment id counter.
      */
-    Entity::Entity();
+    Entity();
+    ~Entity(){};
     /**
      * Compare this entity with another one.
      * @param: Entity *other: The entity to compare to
@@ -31,7 +36,9 @@ public:
      * Convert the Entity into some readable string format.
      */
     virtual std::string toString() = 0;
+
     int getId();
+
 };
 
 #endif //MORRIS_AIMA_ENTITY_H

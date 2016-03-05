@@ -9,5 +9,4 @@ int TileEnvironmentState::compareTo(EnvironmentState *other) {
 }
 
 TileEnvironmentState::TileEnvironmentState(int width, int height) : WIDTH(width), HEIGHT(height) {
-
 }

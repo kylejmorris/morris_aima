@@ -4,12 +4,13 @@
 
 #include "Entity.h"
 
-int Entity::id = 0;
+int Entity::UNIQUE_ID = 0;
 
 Entity::Entity() {
-    this->id++;
+    Entity::UNIQUE_ID++;
+    this->id = UNIQUE_ID;
 }
 
 int Entity::getId() {
-    return this->id;
+    return id;
 }

@@ -11,6 +11,11 @@
 
 class TileEnvironmentState : public EnvironmentState {
 private:
+    /**
+     * 2D grid of all the tiles.
+     */
+    TileGrid *tiles;
+
     const int WIDTH;
     const int HEIGHT;
 public:

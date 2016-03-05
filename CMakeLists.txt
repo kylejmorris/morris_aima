@@ -32,9 +32,16 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 #MAIN FILES/INCLUDES TO USE#
 include_directories("core")
-set(GLOB H_CORE core/*.h)
-set(GLOB SRC_CORE core/*.cpp)
-#---------------------------
+set(CORE core/Agent.cpp core/Agent.h
+        core/Entity.cpp core/Entity.h
+        core/Environment.cpp core/Environment.h
+        core/EnvironmentState.cpp core/EnvironmentState.h
+        core/Location.cpp core/Location.h
+        core/TileEnvironment.cpp core/TileEnvironment.h
+        core/TileEnvironmentState.cpp core/TileEnvironmentState.h core/TileGrid.cpp core/TileGrid.h)
 
-set(SOURCE_FILES main.cpp ${H_CORE} ${SRC_CORE} core/TileEnvironment.cpp core/TileEnvironment.h)
+#---------------------------
+add_subdirectory(testing)
+
+set(SOURCE_FILES main.cpp ${CORE})
 add_executable(morris_aima ${SOURCE_FILES})
