@@ -14,10 +14,18 @@
 #define MORRIS_AIMA_ENVIRONMENT_H
 #include <string>
 #include "EnvironmentState.h"
+#include "Entity.h"
+#include "Location.h"
+#include <vector>
 
 using namespace std;
 
 class Environment {
+private:
+    /**
+     * How many cycles the environment has been through (ie calls to moment())
+     */
+    long age = 0;
 public:
     /**
      * Initialize the environment from a map file, setting initial environment state.
@@ -59,7 +67,13 @@ public:
      * Return a list of all entities in the environment.
      * @return: vector containing pointer to all entities in environment.
      */
-    virtual std::vector<Entities *> getEntities() = 0;
+    virtual std::vector<Entity *> getEntities() = 0;
+
+    /**
+     * Simple getter, return age of environment. All subclasses will simply call this
+     * and don't need to implement their own.
+     */
+    long getAge();
 };
 
 #endif //MORRIS_AIMA_ENVIRONMENT_H

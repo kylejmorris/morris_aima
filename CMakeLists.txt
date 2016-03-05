@@ -31,9 +31,10 @@ endif()
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 #MAIN FILES/INCLUDES TO USE#
+include_directories("core")
 set(GLOB H_CORE core/*.h)
 set(GLOB SRC_CORE core/*.cpp)
 #---------------------------
 
-set(SOURCE_FILES main.cpp core/Environment.cpp core/Environment.h core/EnvironmentState.cpp core/EnvironmentState.h)
+set(SOURCE_FILES main.cpp ${H_CORE} ${SRC_CORE} core/TileEnvironment.cpp core/TileEnvironment.h)
 add_executable(morris_aima ${SOURCE_FILES})

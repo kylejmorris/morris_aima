@@ -17,7 +17,22 @@
 #define MORRIS_AIMA_ENVIRONMENTSTATE_H
 
 class EnvironmentState {
+    /**
+     * Determine if the current state is valid or not. This is really just the invariant
+     * of the Environment. Useful for testing purposes and state searching.
+     * @return bool: True if state is valid, false otherwise
+     */
+    virtual bool isValid() = 0;
 
+    /**
+     * Compare this state to another Environment state.
+     * @return int: If return < 0 then this state is logically "less" than the other state.
+     *  What you deem as logically "less" may be determined by how beneficial the state is/valuable, or
+     *  which state should come logically first. Completely up to you.
+     *  Return > 0 means this state is logically great than the other state.
+     *  Return = 0 means both of these states are logically equivalent.
+     */
+    virtual int compareTo(EnvironmentState *other) = 0;
 };
 
 
