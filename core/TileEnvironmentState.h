@@ -8,6 +8,7 @@
 #ifndef MORRIS_AIMA_TILEENVIRONMENTSTATE_H
 #define MORRIS_AIMA_TILEENVIRONMENTSTATE_H
 #include "EnvironmentState.h"
+#include "TileGrid.h"
 
 class TileEnvironmentState : public EnvironmentState {
 private:
@@ -21,7 +22,6 @@ private:
 public:
     TileEnvironmentState(int width, int height);
     virtual bool isValid() override;
-
     virtual int compareTo(EnvironmentState *other) override;
 };
 
