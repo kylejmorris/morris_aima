@@ -38,7 +38,10 @@ set(CORE core/Agent.cpp core/Agent.h
         core/EnvironmentState.cpp core/EnvironmentState.h
         core/Location.cpp core/Location.h
         core/TileEnvironment.cpp core/TileEnvironment.h
-        core/TileEnvironmentState.cpp core/TileEnvironmentState.h core/TileGrid.cpp core/TileGrid.h core/TileLocation.cpp core/TileLocation.h)
+        core/TileEnvironmentState.cpp core/TileEnvironmentState.h
+        core/TileGrid.cpp core/TileGrid.h
+        core/TileLocation.cpp core/TileLocation.h
+        core/Tile.cpp core/Tile.h)
 
 #---------------------------
 add_subdirectory(testing)

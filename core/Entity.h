@@ -8,7 +8,6 @@
 #define MORRIS_AIMA_ENTITY_H
 #include <string>
 
-
 class Entity {
 private:
     static int UNIQUE_ID;
@@ -38,7 +37,6 @@ public:
     virtual std::string toString() = 0;
 
     int getId();
-
 };
 
 #endif //MORRIS_AIMA_ENTITY_H

@@ -1,8 +1,10 @@
-//
-// Created by votick on 05/03/16.
-//
-
 #include "TileLocation.h"
+
+TileLocation &TileLocation::operator=(const TileLocation &location) {
+    this->xPosition = location.xPosition;
+    this->yPosition = location.yPosition;
+    return (*this);
+}
 
 TileLocation::TileLocation(int x, int y) {
     this->xPosition = x;

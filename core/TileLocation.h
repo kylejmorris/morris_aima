@@ -17,6 +17,12 @@ private:
     int yPosition;
 public:
     TileLocation(int x, int y);
+
+    /**
+     * Set one TileLocation equal to another.
+     */
+    TileLocation& operator= (const TileLocation&);
+
     int getX();
     int getY();
 };

@@ -21,8 +21,13 @@ private:
     const int HEIGHT;
 public:
     TileEnvironmentState(int width, int height);
+    virtual ~TileEnvironmentState();
     virtual bool isValid() override;
     virtual int compareTo(EnvironmentState *other) override;
+    //These methods are the exact same as in TileEnvironment class. Read about them there.
+    virtual bool add(Entity *e, Location *location);
+    virtual Entity * remove(int id);
+    virtual bool exists(int id);
 };
 
 #endif //MORRIS_AIMA_TILEENVIRONMENTSTATE_H

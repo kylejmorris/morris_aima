@@ -14,22 +14,23 @@
 #include "Entity.h"
 #include "TileLocation.h"
 
+class Tile;
 class TileGrid {
 private:
     //Width and height of grid. Once set this doesn't change.
     const int WIDTH;
     const int HEIGHT;
-
-    Tile *tiles;
+    std::vector<std::vector<Tile>> tiles;
 public:
     TileGrid(int width, int height);
+    ~TileGrid();
 
     /**
      * Return all entities on a given tile.
      * @param location: The TileLocation to get entity at
      * @return vector<Entity *>: List of entities on this tile.
      */
-    std::vector<Entity *> getEntitiesAt(TileLocation location);
+    std::vector<Entity *> getEntitiesAt(TileLocation *location);
 
     /**
      * Add an entity to tile at position (x,y)
