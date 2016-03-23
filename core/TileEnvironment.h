@@ -12,8 +12,11 @@
 
 class TileEnvironment : public Environment {
 private:
-    TileEnvironmentState state;
+    TileEnvironmentState *state;
 public:
+    TileEnvironment();
+    ~TileEnvironment();
+
     virtual void loadEnvironment(string fileName);
 
     virtual EnvironmentState *readState();

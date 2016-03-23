@@ -15,7 +15,6 @@ virtual void setup() {
 virtual void TearDown() {
 
 }
-
 };
 
 #endif

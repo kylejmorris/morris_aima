@@ -35,5 +35,4 @@ class EnvironmentState {
     virtual int compareTo(EnvironmentState *other) = 0;
 };
 
-
 #endif //MORRIS_AIMA_ENVIRONMENTSTATE_H

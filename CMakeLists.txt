@@ -31,7 +31,14 @@ endif()
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 #MAIN FILES/INCLUDES TO USE#
+#CORE files
 include_directories("core")
+
+#JSONCPP support
+include_directories("$ENV{HOME}/libs")
+set(JSON_CPP $ENV{HOME}/libs/jsoncpp.cpp
+             $ENV{HOME}/libs/json/json.h
+             $ENV{HOME}/libs/json/json-forwards.h)
 set(CORE core/Agent.cpp core/Agent.h
         core/Entity.cpp core/Entity.h
         core/Environment.cpp core/Environment.h
@@ -46,5 +53,5 @@ set(CORE core/Agent.cpp core/Agent.h
 #---------------------------
 add_subdirectory(testing)
 
-set(SOURCE_FILES main.cpp ${CORE})
+set(SOURCE_FILES main.cpp ${CORE} ${JSON_CPP})
 add_executable(morris_aima ${SOURCE_FILES})

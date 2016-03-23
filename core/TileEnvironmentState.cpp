@@ -37,6 +37,18 @@ TileEnvironmentState::~TileEnvironmentState() {
     delete tiles;
 }
 
+int TileEnvironmentState::getWidth() {
+    return this->WIDTH;
+}
+
+int TileEnvironmentState::getHeight() {
+    return this->HEIGHT;
+}
+
 TileEnvironmentState::TileEnvironmentState(int width, int height) : WIDTH(width), HEIGHT(height) {
     this->tiles = new TileGrid(width, height);
+}
+
+std::vector<Entity *> TileEnvironmentState::getEntitiesAt(TileLocation *place) {
+    return this->tiles->getEntitiesAt(place);
 }

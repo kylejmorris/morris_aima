@@ -5,6 +5,7 @@
 #include "Entity.h"
 #include "Agent.h"
 #include "Tile.h"
+#include "json/json.h"
 
 class Tile_Tests : public ::testing::Test {
 protected:

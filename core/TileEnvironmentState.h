@@ -28,6 +28,9 @@ public:
     virtual bool add(Entity *e, Location *location);
     virtual Entity * remove(int id);
     virtual bool exists(int id);
+    virtual int getWidth();
+    virtual int getHeight();
+    virtual std::vector<Entity *> getEntitiesAt(TileLocation *place);
 };
 
 #endif //MORRIS_AIMA_TILEENVIRONMENTSTATE_H

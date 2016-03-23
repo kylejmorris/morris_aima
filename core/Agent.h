@@ -16,7 +16,6 @@
 class Agent : public Entity {
 public:
     virtual int compareTo(Entity *other) override;
-
     virtual std::string toString() override;
 };
 
