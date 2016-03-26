@@ -53,5 +53,5 @@ set(CORE core/Agent.cpp core/Agent.h
 #---------------------------
 add_subdirectory(testing)
 
-set(SOURCE_FILES main.cpp ${CORE} ${JSON_CPP})
+set(SOURCE_FILES main.cpp ${CORE} ${JSON_CPP} core/Visualizer.cpp core/Visualizer.h)
 add_executable(morris_aima ${SOURCE_FILES})

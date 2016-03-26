@@ -3,7 +3,7 @@ project(testing)
 
 #all the test files
 
-set(TEST_FILES Entity_Tests.cpp Tile_Tests.cpp TileEnvironment_Tests.cpp)
+set(TEST_FILES Entity_Tests.cpp Tile_Tests.cpp TileEnvironment_Tests.cpp ../core/Visualizer.cpp ../core/Visualizer.h)
 
 set(JSON_CPP $ENV{HOME}/libs/jsoncpp.cpp
              $ENV{HOME}/libs/json/json.h
