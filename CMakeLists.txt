@@ -29,6 +29,39 @@ if (CMAKE_VERSION VERSION_LESS 2.8.11)
 endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+###########################
+# OPENGL/GLUT PACKAGES
+###########################
+FIND_PACKAGE(OpenGL)
+IF (OPENGL_FOUND)
+	MESSAGE("OPENGL FOUND")
+	MESSAGE(${OPENGL_LIBRARIES})
+ELSE (OPENGL_FOUND)
+	MESSAGE("OPENGL NOT FOUND")
+	SET(OPENGL_gl_LIBRARY opengl32)
+	SET(OPENGL_glu_LIBRARY glu32)
+ENDIF (OPENGL_FOUND)
+
+#########################################################
+# FIND GLUT
+#########################################################
+find_package(GLUT)
+include_directories(${GLUT_INCLUDE_DIRS})
+link_directories(${GLUT_LIBRARY_DIRS})
+add_definitions(${GLUT_DEFINITIONS})
+if(NOT GLUT_FOUND)
+	message(ERROR " GLUT not found!")
+endif(NOT GLUT_FOUND)
+#########################################################
+# FIND OPENGL
+#########################################################
+find_package(OpenGL REQUIRED)
+include_directories(${OpenGL_INCLUDE_DIRS})
+link_directories(${OpenGL_LIBRARY_DIRS})
+add_definitions(${OpenGL_DEFINITIONS})
+if(NOT OPENGL_FOUND)
+	message(ERROR " OPENGL not found!")
+endif(NOT OPENGL_FOUND)
 
 #MAIN FILES/INCLUDES TO USE#
 #CORE files
@@ -48,10 +81,18 @@ set(CORE core/Agent.cpp core/Agent.h
         core/TileEnvironmentState.cpp core/TileEnvironmentState.h
         core/TileGrid.cpp core/TileGrid.h
         core/TileLocation.cpp core/TileLocation.h
-        core/Tile.cpp core/Tile.h)
+        core/Tile.cpp core/Tile.h core/FrameVisualizer.cpp core/FrameVisualizer.h)
 
+#########################
+#QT MODULES
+##########################
+find_package( Qt5Core REQUIRED )
+find_package( Qt5Widgets REQUIRED )
+find_package( Qt5Gui REQUIRED )
 #---------------------------
 add_subdirectory(testing)
 
 set(SOURCE_FILES main.cpp ${CORE} ${JSON_CPP} core/Visualizer.cpp core/Visualizer.h)
 add_executable(morris_aima ${SOURCE_FILES})
+qt5_use_modules( morris_aima Core Widgets Gui )
+target_link_libraries(morris_aima ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})

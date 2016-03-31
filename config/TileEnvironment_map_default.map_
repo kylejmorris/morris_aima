@@ -1,0 +1,21 @@
+{
+    "TileEnvironment" : 
+	{
+        "size" : 
+		{
+            "x": X_SIZE, 
+		    "y": Y_SIZE
+        },
+	    "tiles" : 
+       	[ //only needing to load tiles that actually contain something. To preserve space. Others will just be blank by default. 
+		    {
+                "x":xlocation, 
+		 	    "y":ylocation, 
+		 	    "contents" : 
+                [
+			        {"Entity"}
+			    ]
+		    }
+	    ]
+	}
+}

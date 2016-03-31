@@ -12,6 +12,7 @@
  */
 #ifndef MORRIS_AIMA_VISUALIZER_H
 #define MORRIS_AIMA_VISUALIZER_H
+#include <string>
 
 class Visualizer {
 public:
@@ -23,12 +24,11 @@ public:
      * @return bool: true if loading was successful, false otherwise.
      */
     virtual bool load(std::string state) = 0;
+
     /**
      * Render the given environment using whatever information was provided when it was loaded.
-     * @return bool: True if rendering was successful, false otherwise.
      */
-    virtual bool render() = 0;
+    virtual void render() = 0;
 };
-
 
 #endif //MORRIS_AIMA_VISUALIZER_H
