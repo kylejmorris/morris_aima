@@ -23,11 +23,6 @@ private:
     std::string frameName = "Frame Visualizer";
 
     /**
-     * Main application for this Frame Visualizer.
-     */
-    QApplication *application;
-
-    /**
      * The embodiement of the environment display, what is contained within it to be rendered.
      */
     QGraphicsScene *scene;
@@ -51,7 +46,7 @@ public:
 
     virtual ~FrameVisualizer();
 
-    virtual bool load(std::string state) override;
+    virtual void update(std::string state) override;
 
     virtual void render() override;
 };

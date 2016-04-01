@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.3)
 
 project(morris_aima)
-
+set(CMAKE_AUTOMOC ON)
 # Download and unpack googletest at configure time
 configure_file(CMakeLists.txt.in
         googletest-download/CMakeLists.txt)
@@ -65,23 +65,25 @@ endif(NOT OPENGL_FOUND)
 
 #MAIN FILES/INCLUDES TO USE#
 #CORE files
-include_directories("core")
+include_directories("core/include")
+include_directories("visualizer/include")
+include_directories("include")
 
 #JSONCPP support
 include_directories("$ENV{HOME}/libs")
 set(JSON_CPP $ENV{HOME}/libs/jsoncpp.cpp
              $ENV{HOME}/libs/json/json.h
              $ENV{HOME}/libs/json/json-forwards.h)
-set(CORE core/Agent.cpp core/Agent.h
-        core/Entity.cpp core/Entity.h
-        core/Environment.cpp core/Environment.h
-        core/EnvironmentState.cpp core/EnvironmentState.h
-        core/Location.cpp core/Location.h
-        core/TileEnvironment.cpp core/TileEnvironment.h
-        core/TileEnvironmentState.cpp core/TileEnvironmentState.h
-        core/TileGrid.cpp core/TileGrid.h
-        core/TileLocation.cpp core/TileLocation.h
-        core/Tile.cpp core/Tile.h core/FrameVisualizer.cpp core/FrameVisualizer.h)
+set(CORE src/Agent.cpp core/include/Agent.h
+		src/Entity.cpp core/include/Entity.h
+		src/Environment.cpp core/include/Environment.h
+		src/EnvironmentState.cpp core/include/EnvironmentState.h
+		src/Location.cpp core/include/Location.h
+		src/TileEnvironment.cpp include/TileEnvironment.h
+		src/TileEnvironmentState.cpp include/TileEnvironmentState.h
+		src/TileGrid.cpp include/TileGrid.h
+		src/TileLocation.cpp include/TileLocation.h
+		src/Tile.cpp include/Tile.h visualizer/src/FrameVisualizer.cpp visualizer/include/FrameVisualizer.h src/TileSimulator.cpp include/TileSimulator.h)
 
 #########################
 #QT MODULES
@@ -92,7 +94,7 @@ find_package( Qt5Gui REQUIRED )
 #---------------------------
 add_subdirectory(testing)
 
-set(SOURCE_FILES main.cpp ${CORE} ${JSON_CPP} core/Visualizer.cpp core/Visualizer.h)
+set(SOURCE_FILES main.cpp ${CORE} ${JSON_CPP} src/Visualizer.cpp core/include/Visualizer.h visualizer/src/TileFrameVisualizer.cpp visualizer/include/TileFrameVisualizer.h)
 add_executable(morris_aima ${SOURCE_FILES})
 qt5_use_modules( morris_aima Core Widgets Gui )
 target_link_libraries(morris_aima ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})

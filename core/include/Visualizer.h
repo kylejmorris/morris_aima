@@ -16,6 +16,7 @@
 
 class Visualizer {
 public:
+    //TODO update load/visualizer support after changing simulation design
     /**
      * Given a string representing the state of Robot/environment/etc, initialize the Visualizer accordingly
      * so we can render.
@@ -23,12 +24,13 @@ public:
      * but if you're looking to implement support for say, XML, then create other routines accordingly.
      * @return bool: true if loading was successful, false otherwise.
      */
-    virtual bool load(std::string state) = 0;
+    virtual void update(std::string state) = 0;
 
     /**
      * Render the given environment using whatever information was provided when it was loaded.
      */
     virtual void render() = 0;
+
 };
 
 #endif //MORRIS_AIMA_VISUALIZER_H
