@@ -10,6 +10,6 @@
 
 
 ##Functionality/Flow description from top-down
-![]({{site.baseurl}}//Selection_927.png)
+![](http://i.imgur.com/SDDS5mA.png)
 The timer will run the simulation through a cycle, which involves running a cycle in the environment (one logical iteration), then feeding the new environment state into the visualizer and displaying it.
 ##Principle of Substitution at work
