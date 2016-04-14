@@ -1,7 +1,3 @@
-//
-// Created by votick on 05/03/16.
-//
-
 #include "Agent.h"
 #include "Entity.h"
 

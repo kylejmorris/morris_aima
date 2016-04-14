@@ -3,11 +3,12 @@
 #include "TileEnvironment.h"
 #include "FrameVisualizer.h"
 #include <QDebug>
+#include <TileFrameVisualizer.h>
 
 static int counter = 0;
 TileSimulator::TileSimulator() {
     //set default incase nothing is specified
-    Construct(new TileEnvironment(), new FrameVisualizer(), 1000);
+    Construct(new TileEnvironment(), new TileFrameVisualizer(), 1000);
 }
 
 void TileSimulator::cycle() {

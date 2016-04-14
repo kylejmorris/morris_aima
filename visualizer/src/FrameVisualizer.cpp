@@ -2,14 +2,12 @@
 #include <string>
 #include <QApplication>
 #include <iostream>
-//TODO get QT working and QTGraphicsScene
 
 void FrameVisualizer::render() {
-    this->scene->clear();
 }
 
 FrameVisualizer::FrameVisualizer() {
-    Construct(500,500,"Frame Visualizer");
+    Construct(this->frameWidth,this->frameHeight,"Frame Visualizer");
 }
 
 FrameVisualizer::FrameVisualizer(int width, int height, std::string name) {
@@ -36,5 +34,4 @@ FrameVisualizer::~FrameVisualizer() {
 
 
 void FrameVisualizer::update(std::string state) {
-    this->scene->addRect(5,5,100,100);
 }

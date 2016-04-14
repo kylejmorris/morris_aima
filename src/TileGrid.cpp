@@ -1,9 +1,8 @@
-//
-// Created by votick on 05/03/16.
-//
-
-#include "TileGrid.h"
 #include <vector>
+#include <QtCore/qrect.h>
+#include <QPainter>
+#include "TileGrid.h"
+#include "TileGrid.h"
 #include "Tile.h"
 
 TileGrid::TileGrid(int width, int height) : WIDTH(width), HEIGHT(height) {
@@ -77,3 +76,4 @@ TileLocation *TileGrid::getLocation(int id) {
 
     return result;
 }
+

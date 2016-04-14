@@ -14,14 +14,16 @@ Arash.info & DATE: 29/03/16
 #include <QtCore/qtimer.h>
 
 class FrameVisualizer : public Visualizer{
-private:
+protected:
     /**
      * Frame properties and default values.
      */
-    int frameWidth = 500;
-    int frameHeight = 500;
+    int frameWidth = 1000;
+    int frameHeight = 1000;
+
     std::string frameName = "Frame Visualizer";
 
+private:
     /**
      * The embodiement of the environment display, what is contained within it to be rendered.
      */
@@ -37,7 +39,7 @@ public:
     FrameVisualizer();
     FrameVisualizer(int width, int height, std::string);
 
-    /**
+    virtual /**
      * Main constructor, which will be delegated to by the default constructor/etc.
      * The actual parameters are set here. Other constructors allow for a user to not
      * specify certain parameters, and instead have them defaulted here.
@@ -46,9 +48,17 @@ public:
 
     virtual ~FrameVisualizer();
 
-    virtual void update(std::string state) override;
+    virtual void update(std::string state);
 
-    virtual void render() override;
+    QGraphicsScene *getScene() const {
+        return scene;
+    }
+
+    void setScene(QGraphicsScene *scene) {
+        FrameVisualizer::scene = scene;
+    }
+
+    virtual void render();
 };
 
 #endif //MORRIS_AIMA_FRAMEVISUALIZER_H

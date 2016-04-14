@@ -16,7 +16,6 @@
 
 class Visualizer {
 public:
-    //TODO update load/visualizer support after changing simulation design
     /**
      * Given a string representing the state of Robot/environment/etc, initialize the Visualizer accordingly
      * so we can render.
@@ -30,7 +29,6 @@ public:
      * Render the given environment using whatever information was provided when it was loaded.
      */
     virtual void render() = 0;
-
 };
 
 #endif //MORRIS_AIMA_VISUALIZER_H

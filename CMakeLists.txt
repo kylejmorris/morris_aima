@@ -83,7 +83,9 @@ set(CORE src/Agent.cpp core/include/Agent.h
 		src/TileEnvironmentState.cpp include/TileEnvironmentState.h
 		src/TileGrid.cpp include/TileGrid.h
 		src/TileLocation.cpp include/TileLocation.h
-		src/Tile.cpp include/Tile.h visualizer/src/FrameVisualizer.cpp visualizer/include/FrameVisualizer.h src/TileSimulator.cpp include/TileSimulator.h)
+		src/Tile.cpp include/Tile.h visualizer/src/FrameVisualizer.cpp visualizer/include/FrameVisualizer.h src/TileSimulator.cpp include/TileSimulator.h
+		visualizer/src/VisualTileGrid.cpp visualizer/include/VisualTileGrid.h
+		)
 
 #########################
 #QT MODULES
@@ -94,7 +96,7 @@ find_package( Qt5Gui REQUIRED )
 #---------------------------
 add_subdirectory(testing)
 
-set(SOURCE_FILES main.cpp ${CORE} ${JSON_CPP} src/Visualizer.cpp core/include/Visualizer.h visualizer/src/TileFrameVisualizer.cpp visualizer/include/TileFrameVisualizer.h)
+set(SOURCE_FILES main.cpp ${CORE} ${JSON_CPP} src/Visualizer.cpp core/include/Visualizer.h visualizer/src/TileFrameVisualizer.cpp visualizer/include/TileFrameVisualizer.h visualizer/src/VisualTile.cpp visualizer/include/VisualTile.h visualizer/VisualEntity.cpp visualizer/VisualEntity.h)
 add_executable(morris_aima ${SOURCE_FILES})
 qt5_use_modules( morris_aima Core Widgets Gui )
 target_link_libraries(morris_aima ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})

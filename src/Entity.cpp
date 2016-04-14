@@ -1,7 +1,3 @@
-//
-// Created by votick on 04/03/16.
-//
-
 #include "Entity.h"
 
 int Entity::UNIQUE_ID = 0;

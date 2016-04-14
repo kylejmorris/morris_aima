@@ -9,9 +9,26 @@
 //TODO: Implement, make a Grid Object for visualizer
 #ifndef MORRIS_AIMA_TILEFRAMEVISUALIZER_H
 #define MORRIS_AIMA_TILEFRAMEVISUALIZER_H
+#include "FrameVisualizer.h"
+#include "TileGrid.h"
+#include "VisualTileGrid.h"
 
-class TileFrameVisualizer {
+class TileFrameVisualizer : public FrameVisualizer {
+private:
+    VisualTileGrid *grid;
+    VisualTile *testTile;
 
+public:
+    TileFrameVisualizer(int width, int height, std::string name);
+    TileFrameVisualizer();
+    virtual ~TileFrameVisualizer();
+
+
+    virtual void Construct(int width, int height, std::string name) override;
+
+    virtual void update(std::string state) override;
+
+    virtual void render() override;
 };
 
 
