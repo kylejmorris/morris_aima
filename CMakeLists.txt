@@ -45,35 +45,44 @@ ENDIF (OPENGL_FOUND)
 #########################################################
 # FIND GLUT
 #########################################################
-find_package(GLUT)
-include_directories(${GLUT_INCLUDE_DIRS})
-link_directories(${GLUT_LIBRARY_DIRS})
-add_definitions(${GLUT_DEFINITIONS})
-if(NOT GLUT_FOUND)
-	message(ERROR " GLUT not found!")
-endif(NOT GLUT_FOUND)
+#find_package(GLUT)
+#include_directories(${GLUT_INCLUDE_DIRS})
+#link_directories(${GLUT_LIBRARY_DIRS})
+#add_definitions(${GLUT_DEFINITIONS})
+#if(NOT GLUT_FOUND)
+#	message(ERROR " GLUT not found!")
+#endif(NOT GLUT_FOUND)
 #########################################################
 # FIND OPENGL
 #########################################################
-find_package(OpenGL REQUIRED)
-include_directories(${OpenGL_INCLUDE_DIRS})
-link_directories(${OpenGL_LIBRARY_DIRS})
-add_definitions(${OpenGL_DEFINITIONS})
-if(NOT OPENGL_FOUND)
-	message(ERROR " OPENGL not found!")
-endif(NOT OPENGL_FOUND)
-
-#MAIN FILES/INCLUDES TO USE#
-#CORE files
-include_directories("core/include")
-include_directories("visualizer/include")
-include_directories("include")
+#find_package(OpenGL REQUIRED)
+#include_directories(${OpenGL_INCLUDE_DIRS})
+#link_directories(${OpenGL_LIBRARY_DIRS})
+#add_definitions(${OpenGL_DEFINITIONS})
+#if(NOT OPENGL_FOUND)
+#	message(ERROR " OPENGL not found!")
+#endif(NOT OPENGL_FOUND)
 
 #JSONCPP support
 include_directories("$ENV{HOME}/libs")
 set(JSON_CPP $ENV{HOME}/libs/jsoncpp.cpp
              $ENV{HOME}/libs/json/json.h
              $ENV{HOME}/libs/json/json-forwards.h)
+
+#########################
+#QT MODULES
+##########################
+find_package( Qt5Core REQUIRED )
+find_package( Qt5Widgets REQUIRED )
+find_package( Qt5Gui REQUIRED )
+#---------------------------
+
+#MAIN FILES/INCLUDES TO USE#
+include_directories("core/include")
+include_directories("visualizer/include")
+include_directories("include")
+
+#PATHS TO INCLUDES/SRC
 set(CORE src/Agent.cpp core/include/Agent.h
 		src/Entity.cpp core/include/Entity.h
 		src/Environment.cpp core/include/Environment.h
@@ -86,17 +95,11 @@ set(CORE src/Agent.cpp core/include/Agent.h
 		src/Tile.cpp include/Tile.h visualizer/src/FrameVisualizer.cpp visualizer/include/FrameVisualizer.h src/TileSimulator.cpp include/TileSimulator.h
 		visualizer/src/VisualTileGrid.cpp visualizer/include/VisualTileGrid.h
 		)
+set(SOURCE_FILES main.cpp ${CORE} ${JSON_CPP} src/Visualizer.cpp core/include/Visualizer.h visualizer/src/TileFrameVisualizer.cpp visualizer/include/TileFrameVisualizer.h visualizer/src/VisualTile.cpp visualizer/include/VisualTile.h visualizer/VisualEntity.cpp visualizer/VisualEntity.h)
 
-#########################
-#QT MODULES
-##########################
-find_package( Qt5Core REQUIRED )
-find_package( Qt5Widgets REQUIRED )
-find_package( Qt5Gui REQUIRED )
 #---------------------------
 add_subdirectory(testing)
 
-set(SOURCE_FILES main.cpp ${CORE} ${JSON_CPP} src/Visualizer.cpp core/include/Visualizer.h visualizer/src/TileFrameVisualizer.cpp visualizer/include/TileFrameVisualizer.h visualizer/src/VisualTile.cpp visualizer/include/VisualTile.h visualizer/VisualEntity.cpp visualizer/VisualEntity.h)
 add_executable(morris_aima ${SOURCE_FILES})
 qt5_use_modules( morris_aima Core Widgets Gui )
-target_link_libraries(morris_aima ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
+#target_link_libraries(morris_aima ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})

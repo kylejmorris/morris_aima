@@ -9,6 +9,11 @@
 	visualizer: module for handling display/gui 
 
 
+##INSTALLATION
+### Dependencies
+    It is suggested you create a /libs to your home directory. Example: /home/kyle/libs/
+    The dependencies are Jsoncpp(install into /libs/jsoncpp with required headers), Qt5
+
 ##Functionality/Flow description from top-down
 ![](http://i.imgur.com/SDDS5mA.png)
 
