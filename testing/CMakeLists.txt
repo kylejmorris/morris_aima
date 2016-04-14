@@ -5,7 +5,7 @@ project(testing)
 
 set(TEST_FILES Entity_Tests.cpp Tile_Tests.cpp TileEnvironment_Tests.cpp ../src/Visualizer.cpp ../core/include/Visualizer.h)
 
-set(JSON_CPP $ENV{HOME}/libs/jsoncpp.cpp
+set(JSON_CPP $ENV{HOME}/libs/json/jsoncpp.cpp
              $ENV{HOME}/libs/json/json.h
              $ENV{HOME}/libs/json/json-forwards.h)
 add_executable(unit_tests main.cpp ${TEST_FILES} ${JSON_CPP}

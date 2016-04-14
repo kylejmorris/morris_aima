@@ -65,7 +65,7 @@ ENDIF (OPENGL_FOUND)
 
 #JSONCPP support
 include_directories("$ENV{HOME}/libs")
-set(JSON_CPP $ENV{HOME}/libs/jsoncpp.cpp
+set(JSON_CPP $ENV{HOME}/libs/json/jsoncpp.cpp
              $ENV{HOME}/libs/json/json.h
              $ENV{HOME}/libs/json/json-forwards.h)
 
