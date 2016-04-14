@@ -2,7 +2,6 @@
 #include <QtGui/qpainter.h>
 #include <QtWidgets/qstyleoption.h>
 #include <VisualTileGrid.h>
-#include "TileGrid.h"
 
 VisualTileGrid::VisualTileGrid(int width, int height) : WIDTH(width), HEIGHT(height) {
 }
