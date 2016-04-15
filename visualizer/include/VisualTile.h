@@ -16,11 +16,12 @@ class VisualTile : public QGraphicsItem {
 public:
     static const int RELATIVE_SIZE = 100; //tile is a box, we know that. This is it's relative coordinate scale, (0,0) is top left, (100,100) is bottom right
 private:
-    std::vector<VisualEntity> contents;
+    std::vector<VisualEntity *> contents;
 public:
     VisualTile();
     virtual QRectF boundingRect() const;
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    bool addEntity(VisualEntity *entity);
 };
 
 #endif //MORRIS_AIMA_VISUALTILE_H

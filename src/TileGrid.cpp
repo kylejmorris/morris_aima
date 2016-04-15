@@ -76,4 +76,3 @@ TileLocation *TileGrid::getLocation(int id) {
 
     return result;
 }
-

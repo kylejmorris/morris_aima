@@ -5,7 +5,6 @@
 #include <VisualTileGrid.h>
 #include <sstream>
 
-//TODO handle tile generation
 VisualTileGrid::VisualTileGrid(int cols, int rows, int width, int height) : WIDTH(width), HEIGHT(height) {
     double scaleFactor = (WIDTH*1.0)/(cols*1.0*VisualTile::RELATIVE_SIZE);
     this->rows = rows;
@@ -45,15 +44,20 @@ void VisualTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 }
 
 void VisualTileGrid::paintTiles(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
+    VisualEntity *currEntity;
+
     if(!drawn) {
         for (int row = 0; row < this->rows; row++) {
             for (int col = 0; col < this->columns; col++) {
                 QGraphicsScene *scene = this->scene();
                 if (scene != NULL) {
+                    currEntity = new VisualEntity;
                     scene->addItem(this->tiles[row][col]);
+                    this->tiles[row][col]->addEntity(currEntity);
                 }
             }
         }
+
         //make sure to record that we've drawn the tiles and created memory for them referenced by global Scene
         drawn = true;
     }

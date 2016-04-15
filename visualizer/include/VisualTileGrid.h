@@ -12,6 +12,7 @@
 
 class VisualTileGrid : public QGraphicsItem {
 private:
+
 //Width and height of grid. Once set this doesn't change. This is the actual grids coordinate system/bounding rect
     const int WIDTH;
     const int HEIGHT;
@@ -28,6 +29,7 @@ private:
     int rows;
     int columns;
     std::vector<std::vector<VisualTile *>> tiles;
+
 public:
     VisualTileGrid(int rows, int cols, int width, int height);
     virtual QRectF boundingRect() const;
@@ -38,6 +40,8 @@ public:
      * isn't constantly being redrawn.
      */
     void paintTiles(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
+    void addEntity(VisualEntity *entity);
 };
 
 

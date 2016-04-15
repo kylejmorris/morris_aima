@@ -13,7 +13,11 @@
 #include <QGraphicsItem>
 
 
-class VisualEntity {
+class VisualEntity : public QGraphicsItem {
+public:
+    virtual QRectF boundingRect() const;
+
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 };
 
 
