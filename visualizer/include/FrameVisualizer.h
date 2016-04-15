@@ -21,7 +21,7 @@ protected:
     int frameWidth = 1000;
     int frameHeight = 1000;
 
-    std::string frameName = "Frame Visualizer";
+    QString frameName = "Frame Visualizer";
 
 private:
     /**
@@ -49,16 +49,31 @@ public:
     virtual ~FrameVisualizer();
 
     virtual void update(std::string state);
-
-    QGraphicsScene *getScene() const {
-        return scene;
-    }
-
-    void setScene(QGraphicsScene *scene) {
-        FrameVisualizer::scene = scene;
-    }
-
     virtual void render();
+
+    /**
+     * Update the displayed gui title if the frame name has been changed. This isn't to be confused with the frameName
+     * which can be changed at any point. The gui must still be updated.
+     */
+    void updateFrameTitle();
+/*========================================
+         GETTERS AND SETTERS
+ =========================================*/
+    QGraphicsScene *getScene() const;
+
+    void setScene(QGraphicsScene *scene);
+
+    std::string getFrameName() const;
+
+    void setFrameName(const std::string &newName);
+
+    int getFrameHeight() const;
+
+    void setFrameHeight(int frameHeight);
+
+    int getFrameWidth() const;
+
+    void setFrameWidth(int frameWidth);
 };
 
 #endif //MORRIS_AIMA_FRAMEVISUALIZER_H

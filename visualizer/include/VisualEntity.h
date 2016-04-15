@@ -10,10 +10,10 @@
 
 #ifndef MORRIS_AIMA_VISUALENTITY_H
 #define MORRIS_AIMA_VISUALENTITY_H
+#include <QGraphicsItem>
 
 
 class VisualEntity {
-
 };
 
 

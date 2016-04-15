@@ -2,27 +2,28 @@
 #include "TileFrameVisualizer.h"
 #include "FrameVisualizer.h"
 
+TileFrameVisualizer::TileFrameVisualizer() {
+  Construct(this->frameWidth,this->frameHeight, "Tile Frame Visualizer");
+}
+
+TileFrameVisualizer::TileFrameVisualizer(int rows, int cols, std::string name) {
+  Construct(rows, cols, name);
+}
+
+void TileFrameVisualizer::Construct(int rows, int cols, std::string name) {
+  this->setFrameName(name);
+  this->grid = new VisualTileGrid(rows, cols, this->getFrameWidth(), this->getFrameHeight());
+  this->getScene()->addItem(this->grid);
+  this->updateFrameTitle();
+  this->render();
+}
+
+
 void TileFrameVisualizer::update(std::string state) {
 }
 
 void TileFrameVisualizer::render() {
-}
-
-TileFrameVisualizer::TileFrameVisualizer(int width, int height, std::string name) {
-  FrameVisualizer::Construct(width, height, name);
-  Construct(width, height, name);
-}
-
-void TileFrameVisualizer::Construct(int width, int height, std::string name) {
-  this->frameWidth = width;
-  this->frameHeight = height;
-  this->frameName = name;
-  this->grid = new VisualTileGrid(width/2, height/2);
-  this->getScene()->addItem(this->grid);
-}
-
-TileFrameVisualizer::TileFrameVisualizer() {
-  Construct(this->frameWidth,this->frameHeight, "Tile Frame Visualizer");
+  FrameVisualizer::render();
 }
 
 TileFrameVisualizer::~TileFrameVisualizer() {
