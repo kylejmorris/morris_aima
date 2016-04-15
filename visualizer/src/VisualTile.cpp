@@ -6,10 +6,13 @@
 #include <QPainter>
 
 QRectF VisualTile::boundingRect() const {
-    return QRectF(50,0,100,100);
+    return QRectF(0,0,RELATIVE_SIZE,RELATIVE_SIZE); //internal coordinate system (0-100)
 }
 
 void VisualTile::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
-    painter->setBrush(Qt::yellow);
+    painter->setBrush(Qt::white);
     painter->drawRect(this->boundingRect());
+}
+
+VisualTile::VisualTile() {
 }

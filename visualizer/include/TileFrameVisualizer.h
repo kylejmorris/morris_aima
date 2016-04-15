@@ -6,7 +6,6 @@
 * This class will allow for a grid to be generated, and various objects to be displayed on screen.
 */
 
-//TODO: Implement, make a Grid Object for visualizer
 #ifndef MORRIS_AIMA_TILEFRAMEVISUALIZER_H
 #define MORRIS_AIMA_TILEFRAMEVISUALIZER_H
 #include "FrameVisualizer.h"

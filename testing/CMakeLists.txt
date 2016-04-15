@@ -1,6 +1,19 @@
 cmake_minimum_required(VERSION 3.3)
 project(testing)
 
+#########################
+#QT MODULES
+##########################
+find_package( Qt5Core REQUIRED )
+find_package( Qt5Widgets REQUIRED )
+find_package( Qt5Gui REQUIRED )
+#---------------------------
+
+#MAIN FILES/INCLUDES TO USE#
+include_directories("../core/include")
+include_directories("../visualizer/include")
+include_directories("../include")
+
 #all the test files
 
 set(TEST_FILES Entity_Tests.cpp Tile_Tests.cpp TileEnvironment_Tests.cpp ../src/Visualizer.cpp ../core/include/Visualizer.h)
@@ -25,4 +38,5 @@ add_executable(unit_tests main.cpp ${TEST_FILES} ${JSON_CPP}
         ../src/Tile.cpp ../include/Tile.h)
 
 target_link_libraries(unit_tests gtest_main gtest)
+qt5_use_modules( unit_tests Core Widgets Gui )
 
