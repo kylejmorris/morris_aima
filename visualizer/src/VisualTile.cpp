@@ -13,10 +13,10 @@ QRectF VisualTile::boundingRect() const {
 void VisualTile::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     painter->setBrush(Qt::white);
     painter->drawRect(this->boundingRect());
-
-    for(auto currEntity : contents) {
+//TODO fix tile display bug top left is showing some NULL text
+    /*for(auto currEntity : contents) {
         currEntity->paint(painter,option,widget);
-    }
+    }*/
 }
 
 bool VisualTile::addEntity(VisualEntity *target) {

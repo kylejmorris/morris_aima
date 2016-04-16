@@ -34,9 +34,9 @@ void VisualTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 
 #ifndef NDEBUG //grid size/properties
     QGraphicsTextItem *debugText = new QGraphicsTextItem(this->parentItem());
-    out << "[" << WIDTH << "x" << HEIGHT << " grid]\nRows: " << this->rows << "\nColumns: " << this->columns << "\n";
+    out << "DEBUG INFO \n_____\n[" << WIDTH << "x" << HEIGHT << " grid]\nRows: " << this->rows << "\nColumns: " << this->columns << "\n";
     debugText->setPlainText(QString::fromStdString(out.str()));
-    debugText->setZValue(1);
+    debugText->setZValue(4);
     this->scene()->addItem(debugText);
 
 #endif
@@ -53,10 +53,10 @@ void VisualTileGrid::paintTiles(QPainter *painter, const QStyleOptionGraphicsIte
                 if (scene != NULL) {
                     currEntity = new VisualEntity;
                     scene->addItem(this->tiles[row][col]);
-                    this->tiles[row][col]->addEntity(currEntity);
                 }
             }
         }
+        this->tiles[0][0]->addEntity(currEntity);
 
         //make sure to record that we've drawn the tiles and created memory for them referenced by global Scene
         drawn = true;

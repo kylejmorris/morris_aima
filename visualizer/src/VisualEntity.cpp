@@ -7,7 +7,7 @@ QRectF VisualEntity::boundingRect() const {
 }
 
 void VisualEntity::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
-    //painter->setBrush(Qt::black);
-    painter->drawRect(this->boundingRect());
-    painter->drawText(0,0,QString::fromStdString("NULL ENTITY"));
+    painter->setBrush(Qt::blue);
+    this->setZValue(3);
+    painter->drawText(250,50,QString::fromStdString("NULL ENTITY"));
 }
