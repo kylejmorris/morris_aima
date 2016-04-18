@@ -23,6 +23,11 @@ public:
     virtual QRectF boundingRect() const;
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     bool addEntity(VisualEntity *entity);
+
+    /**
+     * Clean an individual tile, removing the contents from it and from the graphics scene.
+     */
+    void clean();
 };
 
 #endif //MORRIS_AIMA_VISUALTILE_H

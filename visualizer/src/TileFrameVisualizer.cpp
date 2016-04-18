@@ -2,6 +2,7 @@
 #include "TileFrameVisualizer.h"
 #include "FrameVisualizer.h"
 
+static int row = 0;
 TileFrameVisualizer::TileFrameVisualizer() {
   Construct(this->frameWidth,this->frameHeight, "Tile Frame Visualizer");
 }
@@ -23,7 +24,6 @@ void TileFrameVisualizer::update(std::string state) {
 }
 
 void TileFrameVisualizer::render() {
-  FrameVisualizer::render();
 }
 
 TileFrameVisualizer::~TileFrameVisualizer() {

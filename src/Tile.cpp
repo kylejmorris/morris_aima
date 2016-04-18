@@ -2,6 +2,9 @@
 #include "Entity.h"
 #include "Agent.h"
 
+Tile::Tile() {
+}
+
 Tile::~Tile() {
 }
 

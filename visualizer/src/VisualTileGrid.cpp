@@ -4,6 +4,7 @@
 #include <QtWidgets/qstyleoption.h>
 #include <VisualTileGrid.h>
 #include <sstream>
+#include <TileLocation.h>
 
 VisualTileGrid::VisualTileGrid(int cols, int rows, int width, int height) : WIDTH(width), HEIGHT(height) {
     double scaleFactor = (WIDTH*1.0)/(cols*1.0*VisualTile::RELATIVE_SIZE);
@@ -19,6 +20,37 @@ VisualTileGrid::VisualTileGrid(int cols, int rows, int width, int height) : WIDT
             curr->setScale(scaleFactor);
         }
         tiles.push_back(currentRow);
+    }
+}
+
+bool VisualTileGrid::addEntity(VisualEntity *entity, TileLocation *location) {
+    double scaleFactor = (WIDTH*1.0)/(this->columns*1.0*VisualTile::RELATIVE_SIZE);
+    bool result = false; //false until proven otherwise
+    int xPos;
+    int yPos;
+
+    if (entity != NULL && location != NULL) {
+        xPos = location->getX();
+        yPos = location->getY();
+        //TODO make a method for handling out of bounds check
+        //make sure we don't go out of bounds
+        if(xPos<this->columns && yPos<this->rows) {
+            entity->moveBy((WIDTH / this->columns) * xPos,
+                           (HEIGHT / this->rows) * yPos); //moving it by relative tile distnace, based on #tiles in grid
+            entity->setScale(scaleFactor);
+            this->tiles[yPos][xPos]->addEntity(entity);
+            result = true;
+        }
+    }
+
+    return result;
+}
+
+void VisualTileGrid::clean() {
+    for(int row=0; row<this->rows; row++) {
+        for(int col=0; col<this->columns;col++) {
+            tiles[row][col]->clean();
+        }
     }
 }
 
@@ -51,12 +83,10 @@ void VisualTileGrid::paintTiles(QPainter *painter, const QStyleOptionGraphicsIte
             for (int col = 0; col < this->columns; col++) {
                 QGraphicsScene *scene = this->scene();
                 if (scene != NULL) {
-                    currEntity = new VisualEntity;
                     scene->addItem(this->tiles[row][col]);
                 }
             }
         }
-        this->tiles[0][0]->addEntity(currEntity);
 
         //make sure to record that we've drawn the tiles and created memory for them referenced by global Scene
         drawn = true;

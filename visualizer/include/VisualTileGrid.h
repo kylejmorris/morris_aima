@@ -9,6 +9,7 @@
 #include <QtWidgets/qgraphicsitem.h>
 #include "VisualTile.h"
 #include <vector>
+#include <TileLocation.h>
 
 class VisualTileGrid : public QGraphicsItem {
 private:
@@ -31,6 +32,7 @@ private:
     std::vector<std::vector<VisualTile *>> tiles;
 
 public:
+    //TODO implement a clean routine to remove tile entities/refresh grid, but not the whole grid. We only have to redraw certain things.
     VisualTileGrid(int rows, int cols, int width, int height);
     virtual QRectF boundingRect() const;
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
@@ -41,7 +43,14 @@ public:
      */
     void paintTiles(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-    void addEntity(VisualEntity *entity);
+    bool addEntity(VisualEntity *entity, TileLocation *location);
+
+    /**
+     * Cleans the grid, in that we want to remove entities within tiles; but don't signal that we need to redraw the whole grid each cycle.
+     * We only need to redraw tile contents each cycle.
+     * PRECONDITION: Any entity within the tile is currently saved in the graphics scene.
+     */
+    void clean();
 };
 
 

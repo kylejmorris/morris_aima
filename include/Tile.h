@@ -16,6 +16,7 @@ class Tile {
 private:
     std::vector<Entity *>contents;
 public:
+    Tile();
     ~Tile();
 
     /**
