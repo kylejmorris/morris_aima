@@ -95,7 +95,7 @@ set(CORE src/Agent.cpp core/include/Agent.h
 		src/Tile.cpp include/Tile.h visualizer/src/FrameVisualizer.cpp visualizer/include/FrameVisualizer.h src/TileSimulator.cpp include/TileSimulator.h
 		visualizer/src/VisualTileGrid.cpp visualizer/include/VisualTileGrid.h
 		visualizer/src/VisualEntity.cpp visualizer/include/VisualEntity.h)
-set(SOURCE_FILES main.cpp ${CORE} ${JSON_CPP} src/Visualizer.cpp core/include/Visualizer.h visualizer/src/TileFrameVisualizer.cpp visualizer/include/TileFrameVisualizer.h visualizer/src/VisualTile.cpp visualizer/include/VisualTile.h)
+set(SOURCE_FILES main.cpp ${CORE} ${JSON_CPP} src/Visualizer.cpp core/include/Visualizer.h visualizer/src/TileFrameVisualizer.cpp visualizer/include/TileFrameVisualizer.h visualizer/src/VisualTile.cpp visualizer/include/VisualTile.h visualizer/src/VisualEntityFactory.cpp visualizer/include/VisualEntityFactory.h visualizer/src/VisualShapeEntity.cpp visualizer/include/VisualShapeEntity.h)
 
 #---------------------------
 add_subdirectory(testing)

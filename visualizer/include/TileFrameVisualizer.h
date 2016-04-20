@@ -26,8 +26,6 @@ public:
     virtual void Construct(int width, int height, std::string name) override;
 
     virtual void update(std::string state) override;
-
-    virtual void render() override;
 };
 
 

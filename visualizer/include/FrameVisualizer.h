@@ -39,17 +39,21 @@ public:
     FrameVisualizer();
     FrameVisualizer(int width, int height, std::string);
 
-    virtual /**
+    /**
      * Main constructor, which will be delegated to by the default constructor/etc.
      * The actual parameters are set here. Other constructors allow for a user to not
      * specify certain parameters, and instead have them defaulted here.
      */
-    void Construct(int width, int height, std::string name);
+    virtual void Construct(int width, int height, std::string name);
 
     virtual ~FrameVisualizer();
 
     virtual void update(std::string state);
-    virtual void render();
+
+    /**
+     * Update the view with changes made.
+     */
+    void render();
 
     /**
      * Update the displayed gui title if the frame name has been changed. This isn't to be confused with the frameName
@@ -74,6 +78,8 @@ public:
     int getFrameWidth() const;
 
     void setFrameWidth(int frameWidth);
+
+    QGraphicsView *getView();
 };
 
 #endif //MORRIS_AIMA_FRAMEVISUALIZER_H

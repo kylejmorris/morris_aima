@@ -15,7 +15,9 @@ TileSimulator::TileSimulator() {
 void TileSimulator::cycle() {
     qDebug() << "cycle running...";
     counter++;
-    this->display->update("nil");
+    if(counter>3) {
+        this->display->update("nil");
+    }
     this->display->render();
 }
 

@@ -16,14 +16,11 @@ void TileFrameVisualizer::Construct(int rows, int cols, std::string name) {
   this->grid = new VisualTileGrid(rows, cols, this->getFrameWidth(), this->getFrameHeight());
   this->getScene()->addItem(this->grid);
   this->updateFrameTitle();
-  this->render();
 }
 
 
 void TileFrameVisualizer::update(std::string state) {
-}
-
-void TileFrameVisualizer::render() {
+  this->grid->addEntity(new VisualEntity, new TileLocation(1,0));
 }
 
 TileFrameVisualizer::~TileFrameVisualizer() {

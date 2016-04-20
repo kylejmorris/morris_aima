@@ -3,7 +3,7 @@
 #include <QApplication>
 #include <iostream>
 void FrameVisualizer::render() {
-    this->view->setWindowTitle(this->frameName);
+    this->view->viewport()->update();
 }
 
 FrameVisualizer::FrameVisualizer() {
@@ -22,6 +22,7 @@ void FrameVisualizer::Construct(int width, int height, std::string name) {
     //initialize the QT gui stuff
     this->scene = new QGraphicsScene();
     this->view = new QGraphicsView(this->scene);
+    this->view->setViewportUpdateMode(QGraphicsView::NoViewportUpdate); //we only want update on render
     this->view->resize(this->frameWidth, this->frameHeight);
     updateFrameTitle();
     this->view->show();
@@ -76,4 +77,8 @@ void FrameVisualizer::update(std::string state) {
 
 void FrameVisualizer::updateFrameTitle() {
     this->view->setWindowTitle(this->frameName);
+}
+
+QGraphicsView *FrameVisualizer::getView() {
+    return this->view;
 }
