@@ -17,7 +17,8 @@ int main(int argc, char *argv[]) {
     e->add(new Agent(), new TileLocation(2, 3));
     std::vector<Entity *> entities = e->getEntities();
 
-    TileSimulator *simulation = new TileSimulator();
-    simulation->start();
-    return application.exec();
+    //TileSimulator *simulation = new TileSimulator();
+    //simulation->start();
+    //return application.exec();
+    return 0;
 }

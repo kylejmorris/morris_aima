@@ -6,13 +6,17 @@
 */
 #ifndef MORRIS_AIMA_VISUALBLOCKENTITY_H
 #define MORRIS_AIMA_VISUALBLOCKENTITY_H
-
-
 #include "VisualEntity.h"
 
-class VisualShapeEntity : public VisualEntity {
-private:
+class QRectF;
+class QPainter;
+class QStyleOptionGraphicsItem;
+class QWidget;
 
+class VisualShapeEntity : public VisualEntity {
+    //TODO add ability to customize color, make enums for handling color types/other properties of shape
+public:
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 };
 
 

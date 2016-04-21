@@ -3,14 +3,17 @@
 //
 
 #include <bits/stringfwd.h>
+#include <VisualShapeEntity.h>
 #include "VisualEntityFactory.h"
 #include "VisualEntity.h"
 
 
-void VisualEntityFactory::createEntity(std::string type, std::string jsonProperties) {
+VisualEntity * VisualEntityFactory::createEntity(std::string type, std::string jsonProperties) {
     VisualEntity *result;
     if(type.compare("dirt")) {
+        result = new VisualShapeEntity;
     } else if(type.compare("vacuum")) {
-
+        result = new VisualShapeEntity;
     }
+    return result;
 }

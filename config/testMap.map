@@ -1,6 +1,7 @@
 {
-    "TileEnvironment" : 
+    "Environment" :
 	{
+	    "type" : "TileEnvironment",
         "size" : 
 		{
             "x": 4, 

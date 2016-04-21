@@ -26,24 +26,27 @@ void TileEnvironment::loadEnvironment(string fileName) {
     Json::Value root;
     Json::Value tiles; //pointers to all the tiles in map
     Json::Reader reader;
+    std::string environmentType;
     std::ifstream inputFile(fileName);
     bool success = reader.parse(inputFile, root, false);
-
     if(!success) {
         std::cout << reader.getFormatedErrorMessages();
     } else {
-        tiles = root["TileEnvironment"]["tiles"];
-        x = root["TileEnvironment"]["size"]["x"].asInt();
-        y = root["TileEnvironment"]["size"]["y"].asInt();
-        state = new TileEnvironmentState(x, y);
+        environmentType= root["Enviroment"].get("type", "TileEnvironment").asString();
+        if(environmentType.compare("TileEnvironment")==0) {
+            tiles = root["Environment"]["tiles"];
+            x = root["Environment"]["size"]["x"].asInt();
+            y = root["Environment"]["size"]["y"].asInt();
+            state = new TileEnvironmentState(x, y);
 
-        for(auto iterator : tiles) {
-            x = iterator["x"].asInt();
-            y = iterator["y"].asInt();
-            currentEntities = iterator["contents"];
-            entityCount = currentEntities.get("Agent", 0).asInt();
-            for(int count =0; count < entityCount; count++) {
-                state->add(new Agent, new TileLocation(x, y));
+            for (auto iterator : tiles) {
+                x = iterator["x"].asInt();
+                y = iterator["y"].asInt();
+                currentEntities = iterator["contents"];
+                entityCount = currentEntities.get("Agent", 0).asInt();
+                for (int count = 0; count < entityCount; count++) {
+                    state->add(new Agent, new TileLocation(x, y));
+                }
             }
         }
     }

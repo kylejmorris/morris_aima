@@ -8,11 +8,10 @@
 #ifndef MORRIS_AIMA_VISUALENTITYFACTORY_H
 #define MORRIS_AIMA_VISUALENTITYFACTORY_H
 
-
+class VisualEntity;
 class VisualEntityFactory {
 public:
-    void createEntity(std::string type, std::string jsonProperties);
+    static VisualEntity *createEntity(std::string type, std::string jsonProperties);
 };
-
 
 #endif //MORRIS_AIMA_VISUALENTITYFACTORY_H

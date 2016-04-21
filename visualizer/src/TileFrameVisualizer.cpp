@@ -1,6 +1,7 @@
 #include <VisualTile.h>
 #include "TileFrameVisualizer.h"
 #include "FrameVisualizer.h"
+#include "VisualEntityFactory.h"
 
 static int row = 0;
 TileFrameVisualizer::TileFrameVisualizer() {
@@ -20,7 +21,7 @@ void TileFrameVisualizer::Construct(int rows, int cols, std::string name) {
 
 
 void TileFrameVisualizer::update(std::string state) {
-  this->grid->addEntity(new VisualEntity, new TileLocation(1,0));
+  this->grid->addEntity(VisualEntityFactory::createEntity("vacuum", state), new TileLocation(1,0));
 }
 
 TileFrameVisualizer::~TileFrameVisualizer() {

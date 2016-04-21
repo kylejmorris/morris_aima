@@ -1,7 +1,8 @@
 //all tiles are 0-based coordinates. So [0,n-1] for an nxn grid.
 {
-    "TileEnvironment" : 
+    "Environment" :
 	{
+	    "type" : "ENVIRONMENT_TYPE",
         "size" : 
 		{
             "x": X_SIZE, 
