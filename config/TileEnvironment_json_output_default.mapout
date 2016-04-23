@@ -1,0 +1,22 @@
+TileEnvironment json output
+{
+	"Environment"
+	{
+		"age"
+		"type" : "TileEnvironment"
+		"size" :
+		{
+			"x": X_SIZE
+			"y": Y_SIZE
+		},
+		"entities" [
+			"entity_type" : TYPE
+			"id" : ENTITY_ID (as assigned in environment)
+			"location" 
+			{
+				"x" : X_LOCATION,
+				"y" : Y_LOCATION
+			}
+		]
+	}
+}
