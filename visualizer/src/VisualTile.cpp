@@ -25,5 +25,7 @@ VisualTile::VisualTile() {
 void VisualTile::clean() {
     for(auto entity : contents) {
         this->scene()->removeItem(entity);
+        delete entity;
     }
+    this->contents.clear();
 }

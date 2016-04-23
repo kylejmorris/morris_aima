@@ -74,6 +74,26 @@ public:
      * and don't need to implement their own.
      */
     long getAge();
+
+    /**
+     * Output all relevant state information of the environment into a string. By default this is json formatted
+     * Note that the output of an environment may have more details than an initial loading map. For example, the age of Environment
+     * will be part of it's state, although we don't load this by default as it's always initialized to 0.
+     * @return string: the json string output of the environment.
+     */
+    virtual std::string outputToJson() = 0;
+
+    /**
+     * A cycle in the Environment will involve updating states, performance measures, and so forth.
+     * This is a baseclass routine since it will call upon overridden methods from child Environments.
+     */
+    void cycle();
+
+protected:
+    /**
+     * Run through all agents in environment and let them act.
+     */
+    virtual void act() = 0;
 };
 
 #endif //MORRIS_AIMA_ENVIRONMENT_H

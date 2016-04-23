@@ -8,3 +8,7 @@ int Agent::compareTo(Entity *other) {
 std::string Agent::toString() {
     return "";
 }
+
+std::string Agent::getType() {
+    return "agent";
+}

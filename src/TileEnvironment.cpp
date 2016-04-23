@@ -18,6 +18,36 @@ TileEnvironment::~TileEnvironment() {
     delete this->state;
 }
 
+std::string TileEnvironment::outputToJson() {
+    Json::Value outputRoot;
+    std::string result;
+    //general environment info
+    outputRoot["Environment"]["age"] = (int)getAge();
+    outputRoot["Environment"]["size"]["x"] = state->getWidth();
+    outputRoot["Environment"]["size"]["y"] = state->getHeight();
+
+    //handling all entity info in the environment
+    outputRoot["Environment"]["entities"] = Json::arrayValue;
+    for(int row=0; row<this->state->getHeight(); row++) {
+        for(int col=0; col<state->getWidth(); col++) {
+            TileLocation location(col,row);
+            std::vector<Entity *> onTile = state->getEntitiesAt(&location);
+            for(auto current : onTile) {
+                Json::Value currentEntity; //current entity on a tile we're making info for
+                currentEntity["type"] = current->getType();
+                currentEntity["id"] = current->getId();
+                currentEntity["location"]["x"] = col;
+                currentEntity["location"]["y"] = row;
+
+                outputRoot["Environment"]["entities"].append(currentEntity);
+            }
+        }
+    }
+    result = outputRoot.toStyledString();
+    return result;
+}
+
+//TODO this should be updated for using a FACTORY, just feeding in the Environment type and file info as parameters
 void TileEnvironment::loadEnvironment(string fileName) {
     TileEnvironmentState *state;
     int x, y;
@@ -50,6 +80,7 @@ void TileEnvironment::loadEnvironment(string fileName) {
             }
         }
     }
+
     this->state = state;
 }
 
@@ -67,6 +98,11 @@ Entity *TileEnvironment::remove(int id) {
 
 bool TileEnvironment::exists(int id) {
     return this->state->exists(id);
+}
+
+void TileEnvironment::act() {
+    TileLocation loc(1,1);
+    add(new Agent, &loc);
 }
 
 std::vector<Entity *> TileEnvironment::getEntities() {

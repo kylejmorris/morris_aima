@@ -28,7 +28,11 @@ public:
     virtual bool exists(int id);
 
     virtual std::vector<Entity *> getEntities();
-public:
+
+    virtual std::string outputToJson() override;
+
+protected:
+    virtual void act();
 };
 
 #endif //MORRIS_AIMA_TILEENVIRONMENT_H

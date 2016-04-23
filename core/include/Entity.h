@@ -37,6 +37,11 @@ public:
     virtual std::string toString() = 0;
 
     int getId();
+
+    /**
+     * String representation of Entities type. Just saves having to do constant instance checks.
+     */
+    virtual std::string getType() = 0;
 };
 
 #endif //MORRIS_AIMA_ENTITY_H

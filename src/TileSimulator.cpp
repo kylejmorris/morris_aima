@@ -6,18 +6,21 @@
 #include <TileFrameVisualizer.h>
 
 static int counter = 0;
+//TODO could probably use a factory to support generating a simulator object
 //TODO fix some weird behaviour if you do AxB sized grid where A is very large relative to B
 TileSimulator::TileSimulator() {
     //set default incase nothing is specified
-    Construct(new TileEnvironment(), new TileFrameVisualizer(2,1,"Small World"), 1000);
+    Construct(new TileEnvironment(), new TileFrameVisualizer(10,10,"Small World"), 1000);
 }
 
 void TileSimulator::cycle() {
     qDebug() << "cycle running...";
     counter++;
     if(counter>3) {
-        this->display->update("nil");
+        environment->cycle();
     }
+    std::string environmentState = this->environment->outputToJson();
+    this->display->update(environmentState);
     this->display->render();
 }
 
@@ -32,7 +35,7 @@ TileSimulator::~TileSimulator() {
 }
 
 void TileSimulator::Construct(Environment *e, Visualizer *v, long cycleTime) {
-    this->environment = environment;
+    this->environment = e;
     this->display = v;
     this->cycleTime = cycleTime;
     this->timer = new QTimer();

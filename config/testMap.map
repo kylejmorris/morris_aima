@@ -8,7 +8,7 @@
 		    "y": 4 
         },
 	    "tiles" : 
-       	[ //only needing to load tiles that actually contain something. To preserve space. Others will just be blank by default. 
+        [
 		    {
                 "x":2, 
 		 	    "y":1, 
