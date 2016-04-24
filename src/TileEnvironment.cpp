@@ -100,11 +100,6 @@ bool TileEnvironment::exists(int id) {
     return this->state->exists(id);
 }
 
-void TileEnvironment::act() {
-    TileLocation loc(1,1);
-    add(new Agent, &loc);
-}
-
 std::vector<Entity *> TileEnvironment::getEntities() {
     std::vector<Entity *> result;
     std::vector<Entity *> onTile; //entities on a specific tile.

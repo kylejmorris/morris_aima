@@ -12,7 +12,7 @@
 #include "Environment.h"
 #include "Visualizer.h"
 
-class TileSimulator : public QObject {
+class Simulator : public QObject {
     Q_OBJECT
 private:
 
@@ -44,9 +44,9 @@ public:
      */
     void Construct(Environment *e, Visualizer *v, long cycleTime);
 
-    TileSimulator();
-    TileSimulator(Environment *e, Visualizer *v, long cycleTime);
-    virtual ~TileSimulator();
+    Simulator();
+    Simulator(Environment *e, Visualizer *v, long cycleTime);
+    virtual ~Simulator();
 
     /**
      * Begin running the simulation/start timer.
@@ -54,7 +54,7 @@ public:
     void start();
 
     /**
-     * Run a simulation cycle. For a TileSimulator this will run a moment() in the TileEnvironment
+     * Run a simulation cycle. For a Simulator this will run a moment() in the TileEnvironment
      * and update the Visualizer display.
      */
     void cycle();

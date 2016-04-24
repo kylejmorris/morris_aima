@@ -6,18 +6,19 @@
 
 #include "TileGrid.h"
 #include <QApplication>
-#include <TileSimulator.h>
+#include "Simulator.h"
 #include <TileFrameVisualizer.h>
+#include <VacuumEnvironment.h>
 
 using namespace std;
 
 int main(int argc, char *argv[]) {
     QApplication application(argc, argv);
-    TileEnvironment *e = new TileEnvironment();
+    TileEnvironment *e = new VacuumEnvironment();
     Visualizer *v = new TileFrameVisualizer(4,4,"Real world!!!");
     e->loadEnvironment("config/testMap.map");
 
-    TileSimulator *simulation = new TileSimulator(e,v,1000);
+    Simulator *simulation = new Simulator(e, v, 1000);
     simulation->start();
     return application.exec();
 }

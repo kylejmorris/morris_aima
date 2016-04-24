@@ -81,6 +81,7 @@ find_package( Qt5Gui REQUIRED )
 include_directories("core/include")
 include_directories("visualizer/include")
 include_directories("include")
+include_directories("Projects/VacuumWorld/include")
 
 #PATHS TO INCLUDES/SRC
 set(CORE src/Agent.cpp core/include/Agent.h
@@ -92,14 +93,22 @@ set(CORE src/Agent.cpp core/include/Agent.h
 		src/TileEnvironmentState.cpp include/TileEnvironmentState.h
 		src/TileGrid.cpp include/TileGrid.h
 		src/TileLocation.cpp include/TileLocation.h
-		src/Tile.cpp include/Tile.h visualizer/src/FrameVisualizer.cpp visualizer/include/FrameVisualizer.h src/TileSimulator.cpp include/TileSimulator.h
+		src/Tile.cpp include/Tile.h)
+
+set(VISUALIZER
+		visualizer/src/FrameVisualizer.cpp visualizer/include/FrameVisualizer.h
+		src/Simulator.cpp include/Simulator.h
 		visualizer/src/VisualTileGrid.cpp visualizer/include/VisualTileGrid.h
 		visualizer/src/VisualEntity.cpp visualizer/include/VisualEntity.h)
-set(SOURCE_FILES main.cpp ${CORE} ${JSON_CPP} src/Visualizer.cpp core/include/Visualizer.h visualizer/src/TileFrameVisualizer.cpp visualizer/include/TileFrameVisualizer.h visualizer/src/VisualTile.cpp visualizer/include/VisualTile.h visualizer/src/VisualEntityFactory.cpp visualizer/include/VisualEntityFactory.h visualizer/src/VisualShapeEntity.cpp visualizer/include/VisualShapeEntity.h)
 
+set(VACUUM_WORLD_PROJECT
+		 Projects/VacuumWorld/src/VacuumEnvironment.cpp
+		 Projects/VacuumWorld/include/VacuumEnvironment.h)
+
+set(SOURCE_FILES main.cpp ${CORE} ${JSON_CPP} src/Visualizer.cpp core/include/Visualizer.h visualizer/src/TileFrameVisualizer.cpp visualizer/include/TileFrameVisualizer.h visualizer/src/VisualTile.cpp visualizer/include/VisualTile.h visualizer/src/VisualEntityFactory.cpp visualizer/include/VisualEntityFactory.h visualizer/src/VisualShapeEntity.cpp visualizer/include/VisualShapeEntity.h)
+#TODO organize cmake files into more specific looks
 #---------------------------
 add_subdirectory(testing)
 
-add_executable(morris_aima ${SOURCE_FILES})
+add_executable(morris_aima ${SOURCE_FILES} ${VISUALIZER} ${VACUUM_WORLD_PROJECT})
 qt5_use_modules( morris_aima Core Widgets Gui )
-#target_link_libraries(morris_aima ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})

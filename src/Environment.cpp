@@ -6,4 +6,9 @@ long Environment::getAge() {
 
 void Environment::cycle() {
     act();
+    generate();
+    updateResults();
+
+    //update environments age
+    this->age++;
 }

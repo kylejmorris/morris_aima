@@ -23,7 +23,7 @@ using namespace std;
 class Environment {
 private:
     /**
-     * How many cycles the environment has been through (ie calls to moment())
+     * How many cycles the environment has been through (ie calls to cycle())
      */
     long age = 0;
 public:
@@ -88,12 +88,24 @@ public:
      * This is a baseclass routine since it will call upon overridden methods from child Environments.
      */
     void cycle();
-
+    //TODO implement a getStatistics method to return some EnvironmentStatistics object.
 protected:
     /**
      * Run through all agents in environment and let them act.
      */
     virtual void act() = 0;
+
+    /**
+     * Phase involving generation of non agents, ie other factors in the environment that may change every cycle
+     * randomly, or in other words they alter irregardless of the agents actions. For example random dirt generation
+     * could occur here.
+     */
+    virtual void generate() = 0;
+
+    /**
+     * Performance measures and any other statistics of the environment are updated here.
+     */
+    virtual void updateResults() = 0;
 };
 
 #endif //MORRIS_AIMA_ENVIRONMENT_H

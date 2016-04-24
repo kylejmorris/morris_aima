@@ -30,9 +30,6 @@ public:
     virtual std::vector<Entity *> getEntities();
 
     virtual std::string outputToJson() override;
-
-protected:
-    virtual void act();
 };
 
 #endif //MORRIS_AIMA_TILEENVIRONMENT_H
