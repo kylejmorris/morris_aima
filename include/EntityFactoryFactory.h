@@ -9,8 +9,8 @@
 #ifndef MORRIS_AIMA_ENTITYFACTORYFACTORY_H
 #define MORRIS_AIMA_ENTITYFACTORYFACTORY_H
 #include <string>
+#include "EntityFactory.h"
 
-class EntityFactory;
 class EntityFactoryFactory { //Thanks Mike. You could have stopped this; but it's too late now.
 public:
     /**

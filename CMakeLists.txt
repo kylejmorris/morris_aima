@@ -93,7 +93,7 @@ set(CORE src/Agent.cpp core/include/Agent.h
 		src/TileEnvironmentState.cpp include/TileEnvironmentState.h
 		src/TileGrid.cpp include/TileGrid.h
 		src/TileLocation.cpp include/TileLocation.h
-		src/Tile.cpp include/Tile.h)
+		src/Tile.cpp include/Tile.h core/include/Action.h core/include/Percept.h)
 
 set(VISUALIZER
 		src/Visualizer.cpp
@@ -108,10 +108,10 @@ set(VISUALIZER
 		visualizer/include/VisualShapeEntity.h)
 
 set(VACUUM_WORLD_PROJECT
-		 Projects/VacuumWorld/src/VacuumEnvironment.cpp
-		 Projects/VacuumWorld/include/VacuumEnvironment.h)
+		Projects/VacuumWorld/src/VacuumEnvironment.cpp
+		Projects/VacuumWorld/include/VacuumEnvironment.h Projects/VacuumWorld/src/VacuumAgent.cpp Projects/VacuumWorld/include/VacuumAgent.h)
 
-set(SOURCE_FILES main.cpp ${CORE} ${JSON_CPP} core/include/Visualizer.h visualizer/src/TileFrameVisualizer.cpp visualizer/include/TileFrameVisualizer.h visualizer/src/VisualTile.cpp visualizer/include/VisualTile.h visualizer/src/VisualEntityFactory.cpp visualizer/include/VisualEntityFactory.h visualizer/src/VisualShapeEntity.cpp visualizer/include/VisualShapeEntity.h EntityFactory.cpp EntityFactory.h EntityFactoryFactory.cpp EntityFactoryFactory.h)
+set(SOURCE_FILES main.cpp ${CORE} ${JSON_CPP} core/include/Visualizer.h visualizer/src/TileFrameVisualizer.cpp visualizer/include/TileFrameVisualizer.h visualizer/src/VisualTile.cpp visualizer/include/VisualTile.h visualizer/src/VisualEntityFactory.cpp visualizer/include/VisualEntityFactory.h visualizer/src/VisualShapeEntity.cpp visualizer/include/VisualShapeEntity.h src/EntityFactory.cpp include/EntityFactory.h src/EntityFactoryFactory.cpp include/EntityFactoryFactory.h Projects/VacuumWorld/src/VacuumFactory.cpp Projects/VacuumWorld/include/VacuumFactory.h)
 #TODO organize cmake files into more specific looks
 #---------------------------
 add_subdirectory(testing)

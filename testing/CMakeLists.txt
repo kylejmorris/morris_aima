@@ -35,7 +35,10 @@ add_executable(unit_tests main.cpp ${TEST_FILES} ${JSON_CPP}
         ../src/TileEnvironmentState.cpp ../include/TileEnvironmentState.h
         ../src/TileGrid.cpp ../include/TileGrid.h
         ../src/TileLocation.cpp ../include/TileLocation.h
-        ../src/Tile.cpp ../include/Tile.h)
+        ../src/Tile.cpp ../include/Tile.h
+        ../src/EntityFactoryFactory.cpp ../include/EntityFactoryFactory.h
+        ../src/EntityFactory.cpp ../include/EntityFactory.h
+        ../Projects/VacuumWorld/src/VacuumFactory.cpp ../Projects/VacuumWorld/include/VacuumAgent.h)
 
 target_link_libraries(unit_tests gtest_main gtest)
 qt5_use_modules( unit_tests Core Widgets Gui )

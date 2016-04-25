@@ -9,6 +9,10 @@ std::string Agent::toString() {
     return "";
 }
 
+Action *Agent::think(Percept *given) {
+    return NULL; //NOP action
+}
+
 std::string Agent::getType() {
     return "agent";
 }

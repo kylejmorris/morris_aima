@@ -10,13 +10,15 @@ TileEnvironment json output
 			"y": Y_SIZE
 		},
 		"entities" [
-			"entity_type" : TYPE
-			"id" : ENTITY_ID (as assigned in environment)
-			"location" 
-			{
-				"x" : X_LOCATION,
-				"y" : Y_LOCATION
-			}
+            {
+			    "type" : TYPE
+			    "id" : ENTITY_ID (as assigned in environment)
+			    "location" 
+			    {
+				    "x" : X_LOCATION,
+				    "y" : Y_LOCATION
+			    }
+            }
 		]
 	}
 }

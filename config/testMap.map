@@ -7,14 +7,22 @@
             "x": 4, 
 		    "y": 4 
         },
-	    "tiles" : 
+	    "entities" : 
         [
 		    {
-                "x":2, 
-		 	    "y":1, 
-		 	    "contents" : 
+                "type" : "Agent",
+		 	    "location" : 
                 { 
-			        "Agent":1
+                    "x" : 0,
+                    "y" : 2
+			    } 
+		    },
+            {
+                "type" : "Agent",
+		 	    "location" : 
+                { 
+                    "x" : 1,
+                    "y" : 1
 			    } 
 		    }
 	    ]
