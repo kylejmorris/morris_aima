@@ -15,7 +15,10 @@
 class Simulator : public QObject {
     Q_OBJECT
 private:
-
+    /**
+     * How many cycles to perform in the environment. Default is 1.
+     */
+    long maxCycles = 1;
     /**
      * How long a given cycle of environment should take, that is to process environment/display.
      * Measured in millisec
@@ -37,10 +40,16 @@ private:
      */
     Visualizer *display;
 
+private:
+    /**
+     * Run a simulation cycle. For a Simulator this will run a moment() in the TileEnvironment
+     * and update the Visualizer display.
+     */
+    void cycle();
 public:
     /**
      * Construct delegates the other constructors, ensuring a stable construction is done even
-     * if only the defaultconstructor is initially used.
+     * if only the default constructor is initially used.
      */
     void Construct(Environment *e, Visualizer *v, long cycleTime);
 
@@ -51,14 +60,12 @@ public:
     /**
      * Begin running the simulation/start timer.
      */
-    void start();
+    void start(int numCycles);
 
     /**
-     * Run a simulation cycle. For a Simulator this will run a moment() in the TileEnvironment
-     * and update the Visualizer display.
+     * Stop running simulation cycles.
      */
-    void cycle();
-
+    void stop();
 public slots:
 
     /**

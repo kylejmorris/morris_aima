@@ -8,6 +8,7 @@ int TileEnvironmentState::compareTo(EnvironmentState *other) {
     return 0;
 }
 
+//TODO add bounds checking/testing
 bool TileEnvironmentState::add(Entity *e, Location *location) {
     bool result = false;
     result = tiles->add(e, static_cast<TileLocation *>(location));

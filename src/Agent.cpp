@@ -14,5 +14,5 @@ Action *Agent::think(Percept *given) {
 }
 
 std::string Agent::getType() {
-    return "agent";
+    return "Agent";
 }

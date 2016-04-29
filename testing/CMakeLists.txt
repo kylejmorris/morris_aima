@@ -38,7 +38,9 @@ add_executable(unit_tests main.cpp ${TEST_FILES} ${JSON_CPP}
         ../src/Tile.cpp ../include/Tile.h
         ../src/EntityFactoryFactory.cpp ../include/EntityFactoryFactory.h
         ../src/EntityFactory.cpp ../include/EntityFactory.h
-        ../Projects/VacuumWorld/src/VacuumFactory.cpp ../Projects/VacuumWorld/include/VacuumAgent.h)
+        ../Projects/VacuumWorld/src/VacuumFactory.cpp ../Projects/VacuumWorld/include/VacuumAgent.h
+        ../Projects/VacuumWorld/src/DirtEntity.cpp ../Projects/VacuumWorld/include/DirtEntity.h
+        ../Projects/VacuumWorld/src/VacuumAgent.cpp ../Projects/VacuumWorld/include/VacuumAgent.h)
 
 target_link_libraries(unit_tests gtest_main gtest)
 qt5_use_modules( unit_tests Core Widgets Gui )

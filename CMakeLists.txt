@@ -105,11 +105,12 @@ set(VISUALIZER
 		visualizer/include/TileFrameVisualizer.h visualizer/src/VisualTile.cpp
 		visualizer/include/VisualTile.h visualizer/src/VisualEntityFactory.cpp
 		visualizer/include/VisualEntityFactory.h visualizer/src/VisualShapeEntity.cpp
+		visualizer/include/VisualImageEntity.h visualizer/src/VisualImageEntity.cpp
 		visualizer/include/VisualShapeEntity.h)
 
 set(VACUUM_WORLD_PROJECT
 		Projects/VacuumWorld/src/VacuumEnvironment.cpp
-		Projects/VacuumWorld/include/VacuumEnvironment.h Projects/VacuumWorld/src/VacuumAgent.cpp Projects/VacuumWorld/include/VacuumAgent.h)
+		Projects/VacuumWorld/include/VacuumEnvironment.h Projects/VacuumWorld/src/VacuumAgent.cpp Projects/VacuumWorld/include/VacuumAgent.h Projects/VacuumWorld/src/DirtEntity.cpp Projects/VacuumWorld/include/DirtEntity.h)
 
 set(SOURCE_FILES main.cpp ${CORE} ${JSON_CPP} core/include/Visualizer.h visualizer/src/TileFrameVisualizer.cpp visualizer/include/TileFrameVisualizer.h visualizer/src/VisualTile.cpp visualizer/include/VisualTile.h visualizer/src/VisualEntityFactory.cpp visualizer/include/VisualEntityFactory.h visualizer/src/VisualShapeEntity.cpp visualizer/include/VisualShapeEntity.h src/EntityFactory.cpp include/EntityFactory.h src/EntityFactoryFactory.cpp include/EntityFactoryFactory.h Projects/VacuumWorld/src/VacuumFactory.cpp Projects/VacuumWorld/include/VacuumFactory.h)
 #TODO organize cmake files into more specific looks

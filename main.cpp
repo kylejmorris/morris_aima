@@ -15,11 +15,11 @@ using namespace std;
 int main(int argc, char *argv[]) {
     QApplication application(argc, argv);
     TileEnvironment *e = new VacuumEnvironment();
-    Visualizer *v = new TileFrameVisualizer(4,4,"Real world!!!");
-    e->loadEnvironment("config/testMap.map");
+    Visualizer *v = new TileFrameVisualizer(2,1,"Vacuum World");
+    e->loadEnvironment("config/VacuumWorld_map1.map");
 
     Simulator *simulation = new Simulator(e, v, 1000);
-    simulation->start();
+    simulation->start(1000);
     return application.exec();
 }
 //TODO: note for future update: perhaps have simulator that only takes in a map name then does all the loading.

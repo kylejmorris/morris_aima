@@ -4,6 +4,7 @@
 * AUTHOR: Kyle Morris
 * DESCRIPTION: General vacuum environment support for the AIMA chapter 1 problems involving reflex agent,
 * and such.
+ * This map is a 2x1 grid (2 columns x 1 row) The map file must have sizes set accordingly for the agent to work!
 */
 
 #ifndef MORRIS_AIMA_VACUUMENVIRONMENT_H
@@ -21,6 +22,8 @@ protected:
     virtual void generate() override;
 
     virtual void updateResults() override;
+
+    virtual ~VacuumEnvironment();
 };
 
 

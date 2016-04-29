@@ -27,6 +27,10 @@ void TileFrameVisualizer::update(std::string state) {
   Json::Reader reader;
   bool success = reader.parse(state,root,false);
 
+#ifndef NDEBUG
+  std::cout << "input state: " << state << "\n";
+#endif
+
   if(success) {
     this->grid->clean();
     //generating entities and their locations on the grid

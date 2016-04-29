@@ -6,20 +6,17 @@
 #include <TileFrameVisualizer.h>
 #include <VacuumEnvironment.h>
 
-static int counter = 0;
+static int currentCycle = 0;
 //TODO could probably use a factory to support generating a simulator object
 //TODO fix some weird behaviour if you do AxB sized grid where A is very large relative to B
 Simulator::Simulator() {
     //set default incase nothing is specified
-    Construct(new VacuumEnvironment(), new TileFrameVisualizer(10,10,"Small World"), 1000);
+    Construct(new VacuumEnvironment(), new TileFrameVisualizer(1,2,"Small World"), 1000);
 }
 
 void Simulator::cycle() {
     qDebug() << "cycle running...";
-    counter++;
-    if(counter>3) {
-        environment->cycle();
-    }
+    environment->cycle();
     std::string environmentState = this->environment->outputToJson();
     this->display->update(environmentState);
     this->display->render();
@@ -43,10 +40,21 @@ void Simulator::Construct(Environment *e, Visualizer *v, long cycleTime) {
     connect(this->timer, SIGNAL(timeout()), this, SLOT(TimerSlot()));
 }
 
-void Simulator::start() {
+void Simulator::start(int numCycles) {
+    currentCycle = 0;
+    this->maxCycles = numCycles;
     this->timer->start(cycleTime);
 }
 
+void Simulator::stop() {
+    this->timer->stop();
+}
+
 void Simulator::TimerSlot() {
-    this->cycle();
+    if(currentCycle<maxCycles) {
+        this->cycle();
+        currentCycle++;
+    } else {
+        stop();
+    }
 }

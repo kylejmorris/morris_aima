@@ -12,10 +12,17 @@ class QRectF;
 class QPainter;
 class QStyleOptionGraphicsItem;
 class QWidget;
+class QColor;
 
 class VisualShapeEntity : public VisualEntity {
+    const QColor DEFAULT_ITEM_COLOR = Qt::blue;
     //TODO add ability to customize color, make enums for handling color types/other properties of shape
+    QColor itemColor;
+
 public:
+    VisualShapeEntity();
+    VisualShapeEntity(QColor color);
+
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 };
 
