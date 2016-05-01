@@ -37,7 +37,7 @@ public:
      * Return the state of the environment.
      * @returns: EnvironmentState - this is a current snapshot of the environment.
      */
-    virtual EnvironmentState *readState() = 0;
+     virtual EnvironmentState *readState() = 0;
 
     /**
      * Add a new entity to the environment at a desired location.

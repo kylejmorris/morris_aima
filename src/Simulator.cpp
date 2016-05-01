@@ -10,16 +10,17 @@ static int currentCycle = 0;
 //TODO could probably use a factory to support generating a simulator object
 //TODO fix some weird behaviour if you do AxB sized grid where A is very large relative to B
 Simulator::Simulator() {
-    //set default incase nothing is specified
+    //set default in case nothing is specified
     Construct(new VacuumEnvironment(), new TileFrameVisualizer(1,2,"Small World"), 1000);
 }
 
 void Simulator::cycle() {
     qDebug() << "cycle running...";
-    environment->cycle();
+
     std::string environmentState = this->environment->outputToJson();
     this->display->update(environmentState);
     this->display->render();
+    currentCycle++;
 }
 
 Simulator::Simulator(Environment *e, Visualizer *v, long cycleTime) {
@@ -37,6 +38,9 @@ void Simulator::Construct(Environment *e, Visualizer *v, long cycleTime) {
     this->display = v;
     this->cycleTime = cycleTime;
     this->timer = new QTimer();
+    std::string environmentState = this->environment->outputToJson();
+    this->display->update(environmentState);
+    this->display->render();
     connect(this->timer, SIGNAL(timeout()), this, SLOT(TimerSlot()));
 }
 

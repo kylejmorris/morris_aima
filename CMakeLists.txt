@@ -110,9 +110,9 @@ set(VISUALIZER
 
 set(VACUUM_WORLD_PROJECT
 		Projects/VacuumWorld/src/VacuumEnvironment.cpp
-		Projects/VacuumWorld/include/VacuumEnvironment.h Projects/VacuumWorld/src/VacuumAgent.cpp Projects/VacuumWorld/include/VacuumAgent.h Projects/VacuumWorld/src/DirtEntity.cpp Projects/VacuumWorld/include/DirtEntity.h)
+		Projects/VacuumWorld/include/VacuumEnvironment.h Projects/VacuumWorld/src/VacuumAgent.cpp Projects/VacuumWorld/include/VacuumAgent.h Projects/VacuumWorld/src/DirtEntity.cpp Projects/VacuumWorld/include/DirtEntity.h Projects/VacuumWorld/src/VacuumPercept.cpp Projects/VacuumWorld/include/VacuumPercept.h Projects/VacuumWorld/src/VacuumAction.cpp Projects/VacuumWorld/include/VacuumAction.h)
 
-set(SOURCE_FILES main.cpp ${CORE} ${JSON_CPP} core/include/Visualizer.h visualizer/src/TileFrameVisualizer.cpp visualizer/include/TileFrameVisualizer.h visualizer/src/VisualTile.cpp visualizer/include/VisualTile.h visualizer/src/VisualEntityFactory.cpp visualizer/include/VisualEntityFactory.h visualizer/src/VisualShapeEntity.cpp visualizer/include/VisualShapeEntity.h src/EntityFactory.cpp include/EntityFactory.h src/EntityFactoryFactory.cpp include/EntityFactoryFactory.h Projects/VacuumWorld/src/VacuumFactory.cpp Projects/VacuumWorld/include/VacuumFactory.h)
+set(SOURCE_FILES main.cpp ${CORE} ${JSON_CPP} core/include/Visualizer.h visualizer/src/TileFrameVisualizer.cpp visualizer/include/TileFrameVisualizer.h visualizer/src/VisualTile.cpp visualizer/include/VisualTile.h visualizer/src/VisualEntityFactory.cpp visualizer/include/VisualEntityFactory.h visualizer/src/VisualShapeEntity.cpp visualizer/include/VisualShapeEntity.h src/EntityFactory.cpp include/EntityFactory.h src/EntityFactoryFactory.cpp include/EntityFactoryFactory.h Projects/VacuumWorld/src/VacuumFactory.cpp Projects/VacuumWorld/include/VacuumFactory.h Projects/VacuumWorld/src/VacuumEnvironmentState.cpp Projects/VacuumWorld/include/VacuumEnvironmentState.h src/EnvironmentStateFactory.cpp include/EnvironmentStateFactory.h)
 #TODO organize cmake files into more specific looks
 #---------------------------
 add_subdirectory(testing)

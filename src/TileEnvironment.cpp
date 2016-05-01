@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <EntityFactoryFactory.h>
+#include <EnvironmentStateFactory.h>
 #include "TileEnvironment.h"
 #include "json/json.h"
 #include "Agent.h"
@@ -77,7 +78,11 @@ void TileEnvironment::loadEnvironment(string fileName) {
         tiles = root["Environment"]["tiles"];
         x = root["Environment"]["size"]["x"].asInt();
         y = root["Environment"]["size"]["y"].asInt();
-        state = new TileEnvironmentState(x, y);
+
+        //figure out which environment state is associated with this environment
+        EnvironmentState *tempState = EnvironmentStateFactory::createEnvironmentState(environmentType,root["Environment"]);
+        state = static_cast<TileEnvironmentState *>(tempState);
+
 
         for (auto entity : root["Environment"]["entities"]) {
             Entity *current = this->entityFactory->createEntity(entity["type"].asString(), entity["properties"]);
@@ -93,6 +98,10 @@ EnvironmentState *TileEnvironment::readState() {
     return this->state;
 }
 
+TileLocation *TileEnvironment::getLocationOf(int id) {
+    return this->state->getLocationOf(id);
+}
+
 bool TileEnvironment::add(Entity *e, Location *place) {
     this->state->add(e, place);
 }
@@ -106,17 +115,9 @@ bool TileEnvironment::exists(int id) {
 }
 
 std::vector<Entity *> TileEnvironment::getEntities() {
-    std::vector<Entity *> result;
-    std::vector<Entity *> onTile; //entities on a specific tile.
-    TileLocation loc(0, 0);
+    return this->state->getEntities();
+}
 
-    for (int y = 0; y < this->state->getHeight(); y++) {
-        for (int x = 0; x < this->state->getWidth(); x++) {
-            loc = TileLocation(x, y); //current tile we're checking
-            onTile = this->state->getEntitiesAt(&loc);
-            result.insert(result.end(), onTile.begin(), onTile.end());
-        }
-    }
-
-    return result;
+std::vector<Entity *> TileEnvironment::getEntitiesAt(TileLocation *place) {
+    return this->state->getEntitiesAt(place);
 }

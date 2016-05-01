@@ -21,9 +21,10 @@ protected:
 };
 
 TEST_F(Entity_Tests, unique_id) {
-    EXPECT_EQ(a->getId(), 1);
-    EXPECT_EQ(b->getId(), 2);
-    EXPECT_EQ(c->getId(), 3);
+    int origId = a->getId();
+    EXPECT_EQ(a->getId(), origId);
+    EXPECT_EQ(b->getId(), origId+1);
+    EXPECT_EQ(c->getId(), origId+2);
 }
 
 #endif

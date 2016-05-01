@@ -33,6 +33,13 @@ public:
 
     virtual std::string outputToJson() override;
 
+    virtual std::vector<Entity *> getEntitiesAt(TileLocation *place);
+
+    /**
+     * Find location of an Entity with specified id.
+     * @return TileLocation: The location in which entity was found, NULL if it doesn't exist
+     */
+    virtual TileLocation *getLocationOf(int id);
 protected:
     /**
      * These are all dummy methods, they don't do anything for a TileEnvironment, but should be overriden.
@@ -44,5 +51,6 @@ protected:
 
     virtual void updateResults() override;
 };
+
 
 #endif //MORRIS_AIMA_TILEENVIRONMENT_H

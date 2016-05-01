@@ -28,7 +28,7 @@ void TileFrameVisualizer::update(std::string state) {
   bool success = reader.parse(state,root,false);
 
 #ifndef NDEBUG
-  std::cout << "input state: " << state << "\n";
+  std::cout << "TileFrameVisualizer.cpp: input state: " << state << "\n";
 #endif
 
   if(success) {

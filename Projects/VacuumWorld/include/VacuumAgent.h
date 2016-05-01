@@ -15,6 +15,8 @@ public:
     virtual std::string toString() override;
 
     virtual std::string getType() override;
+
+    virtual Action *think(Percept *given) override;
 };
 
 #endif //MORRIS_AIMA_VACUUMAGENT_H
