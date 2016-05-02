@@ -18,7 +18,7 @@ bool VacuumEnvironmentState::cleanTile() {
     std::vector<Entity *> entities;
     bool result = false;
 
-    if(isDirty(vacLocation)) {
+    if(isDirty(vacLocation->getX(), vacLocation->getY())) {
         entities = getEntitiesAt(vacLocation);
         //traverse all entities on tile and find dirt
         for(vector<Entity *>::iterator it = entities.begin(); it != entities.end(); ++it) {
@@ -64,7 +64,8 @@ VacuumAgent *VacuumEnvironmentState::findVacuum() {
 }
 
 //TODO these general isDirty and findVacuum are almost identical. Make some more helpful methods in superclass for locating entities of given type, and test those.
-bool VacuumEnvironmentState::isDirty(TileLocation *tile) {
+bool VacuumEnvironmentState::isDirty(int x, int y) {
+    TileLocation *tile = new TileLocation(x, y);
     bool found = false;
     vector<Entity *> entities = getEntitiesAt(tile);
 
@@ -77,5 +78,6 @@ bool VacuumEnvironmentState::isDirty(TileLocation *tile) {
         }
     }
 
+    delete tile;
     return found;
 }

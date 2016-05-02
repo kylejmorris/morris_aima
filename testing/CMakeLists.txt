@@ -16,7 +16,7 @@ include_directories("../include")
 
 #all the test files
 
-set(TEST_FILES TileEnvironmentState_Tests.cpp Entity_Tests.cpp Tile_Tests.cpp TileEnvironment_Tests.cpp ../src/Visualizer.cpp ../core/include/Visualizer.h)
+set(TEST_FILES TileEnvironmentState_Tests.cpp Entity_Tests.cpp Tile_Tests.cpp TileEnvironment_Tests.cpp ../src/Visualizer.cpp ../core/include/Visualizer.h ../Projects/VacuumWorld/src/VacuumWorldPerformanceMeasure.cpp ../Projects/VacuumWorld/include/VacuumWorldPerformanceMeasure.h ../core/SimulationResult.cpp ../core/SimulationResult.h)
 
 set(JSON_CPP $ENV{HOME}/libs/json/jsoncpp.cpp
              $ENV{HOME}/libs/json/json.h

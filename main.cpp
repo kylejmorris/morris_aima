@@ -9,6 +9,7 @@
 #include "Simulator.h"
 #include <TileFrameVisualizer.h>
 #include <VacuumEnvironment.h>
+#include <unistd.h>
 
 using namespace std;
 

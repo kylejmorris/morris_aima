@@ -11,7 +11,7 @@ void VacuumEnvironment::act() {
     this->vacuum = this->state->findVacuum();
     this->vacuumLocation = this->state->getLocationOf(this->vacuum->getId());
     if(this->vacuum!=NULL) { //did we find vacuum?
-        VacuumPercept *forVacuum = new VacuumPercept(vacuumLocation, this->state->isDirty(vacuumLocation));
+        VacuumPercept *forVacuum = new VacuumPercept(vacuumLocation, this->state->isDirty(vacuumLocation->getX(), vacuumLocation->getY()));
         VacuumAction *action = (VacuumAction *)(this->vacuum->think(forVacuum));
 
         //respond to the action made by agent, updating environment state

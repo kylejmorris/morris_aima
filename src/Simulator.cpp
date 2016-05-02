@@ -7,6 +7,7 @@
 #include <VacuumEnvironment.h>
 
 static int currentCycle = 0;
+static int initialDisplay = 3;
 //TODO could probably use a factory to support generating a simulator object
 //TODO fix some weird behaviour if you do AxB sized grid where A is very large relative to B
 Simulator::Simulator() {
@@ -17,6 +18,7 @@ Simulator::Simulator() {
 void Simulator::cycle() {
     qDebug() << "cycle running...";
 
+    this->environment->cycle();
     std::string environmentState = this->environment->outputToJson();
     this->display->update(environmentState);
     this->display->render();
@@ -38,9 +40,7 @@ void Simulator::Construct(Environment *e, Visualizer *v, long cycleTime) {
     this->display = v;
     this->cycleTime = cycleTime;
     this->timer = new QTimer();
-    std::string environmentState = this->environment->outputToJson();
-    this->display->update(environmentState);
-    this->display->render();
+
     connect(this->timer, SIGNAL(timeout()), this, SLOT(TimerSlot()));
 }
 
@@ -55,10 +55,18 @@ void Simulator::stop() {
 }
 
 void Simulator::TimerSlot() {
-    if(currentCycle<maxCycles) {
-        this->cycle();
-        currentCycle++;
+    if(initialDisplay>0) {
+       initialDisplay--;
+       std::string environmentState = this->environment->outputToJson();
+       this->display->update(environmentState);
+       this->display->render();
     } else {
-        stop();
+        if (currentCycle < maxCycles) {
+            this->cycle();
+            currentCycle++;
+        } else {
+            stop();
+        }
     }
 }
+

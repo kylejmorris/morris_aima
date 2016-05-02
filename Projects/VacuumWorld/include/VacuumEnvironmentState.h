@@ -30,11 +30,11 @@ public:
      */
     virtual bool moveVacuum(int x, int y);
 
-/**
- * Determine if a given tile is dirty or not.
- * @return bool: True if tile contains turn, false otherwise.
- */
-    bool isDirty(TileLocation *tile);
+    /**
+    * Determine if a given tile is dirty or not.
+    * @return bool: True if tile contains turn, false otherwise.
+    */
+    bool isDirty(int x, int y);
 
     /**
      * Remove dirt from a given tile.
@@ -42,6 +42,5 @@ public:
      */
     bool cleanTile();
 };
-
 
 #endif //MORRIS_AIMA_VACUUMENVIRONMENTSTATE_H
