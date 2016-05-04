@@ -12,6 +12,7 @@
 #include "Environment.h"
 #include "Visualizer.h"
 
+class SimulatorResult;
 class Simulator : public QObject {
     Q_OBJECT
 private:
@@ -42,7 +43,7 @@ private:
 
 private:
     /**
-     * Run a simulation cycle. For a Simulator this will run a moment() in the TileEnvironment
+     * Run a simulation cycle. For a Simulator this will run a cycle() in the TileEnvironment
      * and update the Visualizer display.
      */
     void cycle();
@@ -52,10 +53,21 @@ public:
      * if only the default constructor is initially used.
      */
     void Construct(Environment *e, Visualizer *v, long cycleTime);
-
     Simulator();
     Simulator(Environment *e, Visualizer *v, long cycleTime);
     virtual ~Simulator();
+    //=========GETTERS AND SETTERS=============
+    static long getCurrentCycle();
+
+    long getMaxCycles() const;
+
+    long getCycleTime() const;
+
+    void setCycleTime(long cycleTime);
+
+    Environment *getEnvironment() const;
+
+    Visualizer *getDisplay() const;
 
     /**
      * Begin running the simulation/start timer.
@@ -66,6 +78,11 @@ public:
      * Stop running simulation cycles.
      */
     void stop();
+
+    /**
+     * Save the results of the simulation.
+     */
+    void save();
 public slots:
 
     /**

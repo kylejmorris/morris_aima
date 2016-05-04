@@ -5,8 +5,9 @@
 #include <QDebug>
 #include <TileFrameVisualizer.h>
 #include <VacuumEnvironment.h>
+#include <SimulatorResultFactory.h>
 
-static int currentCycle = 0;
+static long currentCycle = 0;
 static int initialDisplay = 3;
 //TODO could probably use a factory to support generating a simulator object
 //TODO fix some weird behaviour if you do AxB sized grid where A is very large relative to B
@@ -54,6 +55,12 @@ void Simulator::stop() {
     this->timer->stop();
 }
 
+void Simulator::save() {
+    //TODO noticing a LOT of factories using the same "VacuumWorld" and other names of projects. Should probably make some global set of variables for the project names so I don't have to manuelly update several factories. Perhaps a root Factory object?
+
+    SimulatorResult *result = SimulatorResultFactory::createSimulatorResult("VacuumWorld");
+}
+
 void Simulator::TimerSlot() {
     if(initialDisplay>0) {
        initialDisplay--;
@@ -70,3 +77,27 @@ void Simulator::TimerSlot() {
     }
 }
 
+
+long Simulator::getMaxCycles() const {
+    return this->maxCycles;
+}
+
+long Simulator::getCycleTime() const {
+    return this->cycleTime;
+}
+
+void Simulator::setCycleTime(long cycleTime) {
+    this->cycleTime = cycleTime;
+}
+
+Environment *Simulator::getEnvironment() const {
+    return this->environment;
+}
+
+long Simulator::getCurrentCycle() {
+    return currentCycle;
+}
+
+Visualizer *Simulator::getDisplay() const {
+    return this->display;
+}

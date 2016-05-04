@@ -85,17 +85,19 @@ include_directories("Projects/VacuumWorld/include")
 
 #PATHS TO INCLUDES/SRC
 set(CORE src/Agent.cpp core/include/Agent.h
-		src/Entity.cpp core/include/Entity.h
-		src/Environment.cpp core/include/Environment.h
-		src/EnvironmentState.cpp core/include/EnvironmentState.h
-		src/Location.cpp core/include/Location.h
-		src/TileEnvironment.cpp include/TileEnvironment.h
-		src/TileEnvironmentState.cpp include/TileEnvironmentState.h
-		src/TileGrid.cpp include/TileGrid.h
-		src/TileLocation.cpp include/TileLocation.h
-		src/Tile.cpp include/Tile.h core/include/Action.h core/include/Percept.h
-		core/include/PerformanceMeasure.h
-		core/SimulationResult.cpp core/SimulationResult.h)
+        src/Entity.cpp core/include/Entity.h
+        src/Environment.cpp core/include/Environment.h
+        src/EnvironmentState.cpp core/include/EnvironmentState.h
+        src/Location.cpp core/include/Location.h
+        src/TileEnvironment.cpp include/TileEnvironment.h
+        src/TileEnvironmentState.cpp include/TileEnvironmentState.h
+        src/TileGrid.cpp include/TileGrid.h
+        src/TileLocation.cpp include/TileLocation.h
+        src/EnvironmentStateFactory.cpp include/EnvironmentStateFactory.h
+        src/Tile.cpp include/Tile.h core/include/Action.h core/include/Percept.h
+        core/include/PerformanceMeasure.h
+        core/include/SimulatorResult.h src/SimulatorResult.cpp
+        src/EntityFactoryFactory.cpp include/EntityFactoryFactory.h src/SimulatorFactory.cpp include/SimulatorFactory.h src/SimulatorResultFactory.cpp include/SimulatorResultFactory.h)
 
 set(VISUALIZER
 		src/Visualizer.cpp
@@ -111,11 +113,20 @@ set(VISUALIZER
 		visualizer/include/VisualShapeEntity.h)
 
 set(VACUUM_WORLD_PROJECT
-		Projects/VacuumWorld/src/VacuumEnvironment.cpp
-		Projects/VacuumWorld/include/VacuumEnvironment.h Projects/VacuumWorld/src/VacuumAgent.cpp Projects/VacuumWorld/include/VacuumAgent.h Projects/VacuumWorld/src/DirtEntity.cpp Projects/VacuumWorld/include/DirtEntity.h Projects/VacuumWorld/src/VacuumPercept.cpp Projects/VacuumWorld/include/VacuumPercept.h Projects/VacuumWorld/src/VacuumAction.cpp Projects/VacuumWorld/include/VacuumAction.h Projects/VacuumWorld/src/VacuumWorldPerformanceMeasure.cpp Projects/VacuumWorld/include/VacuumWorldPerformanceMeasure.h)
+		Projects/VacuumWorld/src/VacuumEnvironment.cpp Projects/VacuumWorld/include/VacuumEnvironment.h
+		Projects/VacuumWorld/src/VacuumAgent.cpp Projects/VacuumWorld/include/VacuumAgent.h
+		Projects/VacuumWorld/src/DirtEntity.cpp Projects/VacuumWorld/include/DirtEntity.h
+		Projects/VacuumWorld/src/VacuumPercept.cpp Projects/VacuumWorld/include/VacuumPercept.h
+		Projects/VacuumWorld/src/VacuumAction.cpp Projects/VacuumWorld/include/VacuumAction.h
+		Projects/VacuumWorld/src/VacuumWorldPerformanceMeasure.cpp Projects/VacuumWorld/include/VacuumWorldPerformanceMeasure.h
+		Projects/VacuumWorld/src/VacuumFactory.cpp Projects/VacuumWorld/include/VacuumFactory.h
+		Projects/VacuumWorld/src/VacuumEnvironmentState.cpp Projects/VacuumWorld/include/VacuumEnvironmentState.h
+		Projects/VacuumWorld/src/VacuumWorldSimulationResult.cpp Projects/VacuumWorld/src/VacuumFactory.cpp
+		Projects/VacuumWorld/include/VacuumFactory.h Projects/VacuumWorld/src/VacuumEnvironmentState.cpp
+		Projects/VacuumWorld/include/VacuumEnvironmentState.h Projects/VacuumWorld/include/VacuumWorldSimulationResult.h
+		Projects/VacuumWorld/src/VacuumWorldSimulationResult.cpp)
 
-set(SOURCE_FILES main.cpp ${CORE} ${JSON_CPP} core/include/Visualizer.h visualizer/src/TileFrameVisualizer.cpp visualizer/include/TileFrameVisualizer.h visualizer/src/VisualTile.cpp visualizer/include/VisualTile.h visualizer/src/VisualEntityFactory.cpp visualizer/include/VisualEntityFactory.h visualizer/src/VisualShapeEntity.cpp visualizer/include/VisualShapeEntity.h src/EntityFactory.cpp
-		include/EntityFactory.h src/EntityFactoryFactory.cpp include/EntityFactoryFactory.h Projects/VacuumWorld/src/VacuumFactory.cpp Projects/VacuumWorld/include/VacuumFactory.h Projects/VacuumWorld/src/VacuumEnvironmentState.cpp Projects/VacuumWorld/include/VacuumEnvironmentState.h src/EnvironmentStateFactory.cpp include/EnvironmentStateFactory.h core/include/PerformanceMeasure.h)
+set(SOURCE_FILES main.cpp ${CORE} ${JSON_CPP})
 #TODO organize cmake files into more specific looks
 #---------------------------
 add_subdirectory(testing)

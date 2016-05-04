@@ -30,7 +30,6 @@ void TileFrameVisualizer::update(std::string state) {
 #ifndef NDEBUG
   std::cout << "TileFrameVisualizer.cpp: input state: " << state << "\n";
 #endif
-
   if(success) {
     this->grid->clean();
     //generating entities and their locations on the grid

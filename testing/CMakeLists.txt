@@ -16,7 +16,6 @@ include_directories("../include")
 
 #all the test files
 
-set(TEST_FILES TileEnvironmentState_Tests.cpp Entity_Tests.cpp Tile_Tests.cpp TileEnvironment_Tests.cpp ../src/Visualizer.cpp ../core/include/Visualizer.h ../Projects/VacuumWorld/src/VacuumWorldPerformanceMeasure.cpp ../Projects/VacuumWorld/include/VacuumWorldPerformanceMeasure.h ../core/SimulationResult.cpp ../core/SimulationResult.h)
 
 set(JSON_CPP $ENV{HOME}/libs/json/jsoncpp.cpp
              $ENV{HOME}/libs/json/json.h
@@ -44,7 +43,7 @@ add_executable(unit_tests main.cpp ${TEST_FILES} ${JSON_CPP}
         ../Projects/VacuumWorld/src/VacuumAgent.cpp ../Projects/VacuumWorld/include/VacuumAgent.h
         ../Projects/VacuumWorld/src/VacuumAction.cpp ../Projects/VacuumWorld/include/VacuumAction.h
         ../Projects/VacuumWorld/src/VacuumPercept.cpp ../Projects/VacuumWorld/include/VacuumPercept.h
-        ../Projects/VacuumWorld/src/VacuumEnvironmentState.cpp ../Projects/VacuumWorld/include/VacuumEnvironmentState.h)
+        ../Projects/VacuumWorld/src/VacuumEnvironmentState.cpp ../Projects/VacuumWorld/include/VacuumEnvironmentState.h ../src/SimulatorResultFactory.cpp ../include/SimulatorResultFactory.h)
 
 target_link_libraries(unit_tests gtest_main gtest)
 qt5_use_modules( unit_tests Core Widgets Gui )
