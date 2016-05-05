@@ -13,7 +13,7 @@
 
 class SimulatorResultFactory {
 public:
-    static SimulatorResult *createSimulatorResult(std::string type);
+    static SimulatorResult *createSimulatorResult(std::string type, Simulator *sim);
 };
 
 

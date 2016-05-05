@@ -11,7 +11,7 @@
 
 class VacuumWorldPerformanceMeasure : public PerformanceMeasure {
 private:
-    double measure;
+    double performanceMeasureValue = 0;
 public:
     virtual double getPerformanceMeasure() override;
 

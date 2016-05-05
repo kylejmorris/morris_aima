@@ -4,11 +4,16 @@
 #include "SimulatorFactory.h"
 
 #define DEFAULT_CYCLE_TIME 1000
-Simulator *SimulatorFactory::createSimulator(std::string name) {
+Simulator *SimulatorFactory::createSimulator(std::string type, std::string name, std::string mapFile, long cycleTime) {
     Simulator *created;
+    Environment *environment;
+    Visualizer *visualizer;
 
-    if(name.compare("VacuumWorld")==0) {
-        created = new Simulator(new VacuumEnvironment, new TileFrameVisualizer(2,1, "Vacuum World!"), DEFAULT_CYCLE_TIME);
+    if(type.compare("VacuumWorld")==0) {
+        environment = new VacuumEnvironment;
+        environment->loadEnvironment(mapFile);
+        visualizer = new TileFrameVisualizer(2,1, name);
+        created = new Simulator(environment, visualizer, cycleTime);
     } else {
         created = NULL;
     }

@@ -16,6 +16,7 @@
 #include "EnvironmentState.h"
 #include "Entity.h"
 #include "Location.h"
+#include "PerformanceMeasure.h"
 #include <vector>
 
 using namespace std;
@@ -83,6 +84,11 @@ public:
      */
     virtual std::string outputToJson() = 0;
 
+    /**
+     * Return performance measure associated with this environment.
+     * @return double: the performance measure in float form for this environment.
+     */
+    virtual double getPerformanceMeasure() = 0;
     /**
      * A cycle in the Environment will involve updating states, performance measures, and so forth.
      * This is a baseclass routine since it will call upon overridden methods from child Environments.

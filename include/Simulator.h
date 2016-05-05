@@ -16,6 +16,7 @@ class SimulatorResult;
 class Simulator : public QObject {
     Q_OBJECT
 private:
+
     /**
      * How many cycles to perform in the environment. Default is 1.
      */
@@ -41,6 +42,12 @@ private:
      */
     Visualizer *display;
 
+    /**
+     * Whether or not simulation has been completed.
+     * Replace with asynchronous approach in the future. For now just use this for
+     * polling the simulator.
+     */
+    bool complete = false;
 private:
     /**
      * Run a simulation cycle. For a Simulator this will run a cycle() in the TileEnvironment
@@ -83,8 +90,8 @@ public:
      * Save the results of the simulation.
      */
     void save();
-public slots:
 
+public slots:
     /**
      * Slot for receiving call to timer, ensuring a steady simulation is kept.
      */

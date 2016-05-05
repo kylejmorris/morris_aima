@@ -23,7 +23,6 @@ void Simulator::cycle() {
     std::string environmentState = this->environment->outputToJson();
     this->display->update(environmentState);
     this->display->render();
-    currentCycle++;
 }
 
 Simulator::Simulator(Environment *e, Visualizer *v, long cycleTime) {
@@ -51,14 +50,16 @@ void Simulator::start(int numCycles) {
     this->timer->start(cycleTime);
 }
 
+//TODO figure out a way to signal that simulation is done.
 void Simulator::stop() {
     this->timer->stop();
+    save();
 }
 
 void Simulator::save() {
     //TODO noticing a LOT of factories using the same "VacuumWorld" and other names of projects. Should probably make some global set of variables for the project names so I don't have to manuelly update several factories. Perhaps a root Factory object?
-
-    SimulatorResult *result = SimulatorResultFactory::createSimulatorResult("VacuumWorld");
+    SimulatorResult *result = SimulatorResultFactory::createSimulatorResult("VacuumWorld", this);
+    result->writeToFile("simulation_output.txt");
 }
 
 void Simulator::TimerSlot() {

@@ -13,6 +13,7 @@
 class VacuumWorldSimulationResult : public SimulatorResult {
 
 public:
+    VacuumWorldSimulationResult(Simulator *sim);
     virtual std::string getResults() override;
 };
 

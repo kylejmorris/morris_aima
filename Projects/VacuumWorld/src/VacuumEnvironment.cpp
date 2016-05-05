@@ -5,6 +5,7 @@
 #include "VacuumAgent.h"
 
 VacuumEnvironment::VacuumEnvironment() : TileEnvironment() {
+    this->performanceMeasure = new VacuumWorldPerformanceMeasure;
 }
 
 void VacuumEnvironment::act() {
@@ -30,7 +31,6 @@ void VacuumEnvironment::act() {
     }
 }
 
-
 void VacuumEnvironment::generate() {
 
 }
@@ -39,7 +39,7 @@ VacuumEnvironment::~VacuumEnvironment() {
 }
 
 void VacuumEnvironment::updateResults() {
-
+    this->performanceMeasure->update(readState());
 }
 
 EnvironmentState *VacuumEnvironment::readState() {
@@ -49,4 +49,8 @@ EnvironmentState *VacuumEnvironment::readState() {
 void VacuumEnvironment::loadEnvironment(string fileName) {
     TileEnvironment::loadEnvironment(fileName);
     this->state = dynamic_cast<VacuumEnvironmentState *>(TileEnvironment::readState());
+}
+
+double VacuumEnvironment::getPerformanceMeasure() {
+    return this->performanceMeasure->getPerformanceMeasure();
 }

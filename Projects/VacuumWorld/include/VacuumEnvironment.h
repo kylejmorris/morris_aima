@@ -21,6 +21,7 @@
 #define MORRIS_AIMA_VACUUMENVIRONMENT_H
 #include <TileEnvironment.h>
 #include "VacuumEnvironmentState.h"
+#include "VacuumWorldPerformanceMeasure.h"
 
 class VacuumAgent;
 class VacuumEnvironment : public TileEnvironment {
@@ -34,12 +35,15 @@ private:
      */
     VacuumAgent *vacuum;
 
+    VacuumWorldPerformanceMeasure *performanceMeasure;
     /**
      * Where we found vacuum. Only valid if the Vacuum is found.
      */
     TileLocation *vacuumLocation;
 
 public:
+    virtual double getPerformanceMeasure();
+
     virtual EnvironmentState *readState() override;
 
 public:

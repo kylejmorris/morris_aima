@@ -30,6 +30,20 @@ public:
      * Return results summary as a string.
      */
     virtual std::string getResults() = 0;
+
+    /**
+     * Output the simulation results to a file
+     * @param outputFile: the file to put results in. These results will be appended.
+     * So this is useful if you want to have multiple simulation results all put in the same place.
+     * @return bool: true if writing was successful, false otherwise
+     */
+    virtual bool writeToFile(std::string outputFile);
+
+    /**
+     * Write to a file. A new file will be created with a name specifying the time of simulation.
+     * @return bool: true if writing was successful, false otherwise
+     */
+    virtual bool writeToFile();
 };
 
 #endif //MORRIS_AIMA_SIMULATIONRESULT_H
