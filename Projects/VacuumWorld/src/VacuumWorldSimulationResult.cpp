@@ -17,5 +17,4 @@ std::string VacuumWorldSimulationResult::getResults() {
 }
 
 VacuumWorldSimulationResult::VacuumWorldSimulationResult(Simulator *sim) : SimulatorResult(sim) {
-
 }
