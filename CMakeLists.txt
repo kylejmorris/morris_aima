@@ -131,5 +131,5 @@ set(SOURCE_FILES main.cpp ${CORE} ${JSON_CPP})
 #---------------------------
 add_subdirectory(testing)
 
-add_executable(morris_aima ${SOURCE_FILES} ${VISUALIZER} ${VACUUM_WORLD_PROJECT})
+add_executable(morris_aima ${SOURCE_FILES} ${VISUALIZER} ${VACUUM_WORLD_PROJECT} ${JSON_CPP})
 qt5_use_modules( morris_aima Core Widgets Gui )

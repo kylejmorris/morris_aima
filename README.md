@@ -19,4 +19,7 @@
 
 The timer will run the simulation through a cycle, which involves running a cycle in the environment (one logical iteration), then feeding the new environment state into the visualizer and displaying it.
 
-##Principle of Substitution at work
+##PROJECTS
+###Vacuum World
+    Simulation of the chapter 2 Vacuum World, in which is a 2x1 grid system with a simple reflex agent.
+

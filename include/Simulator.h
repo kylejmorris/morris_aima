@@ -8,11 +8,11 @@
 #ifndef MORRIS_AIMA_TILESIMULATOR_H
 #define MORRIS_AIMA_TILESIMULATOR_H
 #include <QObject>
+#include "SimulatorResult.h"
 #include <QtCore/qtimer.h>
 #include "Environment.h"
 #include "Visualizer.h"
 
-class SimulatorResult;
 class Simulator : public QObject {
     Q_OBJECT
 private:
