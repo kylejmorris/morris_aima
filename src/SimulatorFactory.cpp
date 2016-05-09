@@ -12,7 +12,8 @@ Simulator *SimulatorFactory::createSimulator(std::string type, std::string name,
     if(type.compare("VacuumWorld")==0) {
         environment = new VacuumEnvironment;
         environment->loadEnvironment(mapFile);
-        visualizer = new TileFrameVisualizer(2,1, name);
+        VacuumEnvironmentState *state = dynamic_cast<VacuumEnvironmentState *>(environment->readState());
+        visualizer = new TileFrameVisualizer(state->getWidth(), state->getHeight(), name);
         created = new Simulator(environment, visualizer, cycleTime);
     } else {
         created = NULL;

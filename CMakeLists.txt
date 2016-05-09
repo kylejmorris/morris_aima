@@ -1,4 +1,15 @@
 cmake_minimum_required(VERSION 3.3)
+#PATHS
+set(MORRIS_AIMA_PATH $ENV{HOME}/workspace/morris_aima)
+set(VISUALIZER_PATH ${MORRIS_AIMA_PATH}/visualizer)
+set(PROJECT_PATH ${MORRIS_AIMA_PATH}/Projects)
+#INCLUDES
+include_directories("core/include")
+include_directories("visualizer/include")
+include_directories("include")
+include_directories("Projects/VacuumWorld/include")
+include_directories(${VISUALIZER_PATH}/include)
+include_directories("$ENV{HOME}/libs")
 
 project(morris_aima)
 set(CMAKE_AUTOMOC ON)
@@ -64,7 +75,11 @@ ENDIF (OPENGL_FOUND)
 #endif(NOT OPENGL_FOUND)
 
 #JSONCPP support
-include_directories("$ENV{HOME}/libs")
+set(jsoncpp_ROOT "$ENV{HOME}/libs/jsoncpp")
+message(JSON dir: ${jsoncpp_ROOT})
+find_library(jsoncpp NAMES jsoncpp)
+include_directories(${jsoncpp_ROOT}/include)
+link_directories(${jsoncpp_ROOT}/lib)
 set(JSON_CPP $ENV{HOME}/libs/json/jsoncpp.cpp
              $ENV{HOME}/libs/json/json.h
              $ENV{HOME}/libs/json/json-forwards.h)
@@ -77,14 +92,9 @@ find_package( Qt5Widgets REQUIRED )
 find_package( Qt5Gui REQUIRED )
 #---------------------------
 
-#MAIN FILES/INCLUDES TO USE#
-include_directories("core/include")
-include_directories("visualizer/include")
-include_directories("include")
-include_directories("Projects/VacuumWorld/include")
-
 #PATHS TO INCLUDES/SRC
 set(CORE src/Agent.cpp core/include/Agent.h
+		src/Simulator.cpp include/Simulator.h
         src/Entity.cpp core/include/Entity.h
         src/Environment.cpp core/include/Environment.h
         src/EnvironmentState.cpp core/include/EnvironmentState.h
@@ -99,18 +109,20 @@ set(CORE src/Agent.cpp core/include/Agent.h
         core/include/SimulatorResult.h src/SimulatorResult.cpp
         src/EntityFactoryFactory.cpp include/EntityFactoryFactory.h src/SimulatorFactory.cpp include/SimulatorFactory.h src/SimulatorResultFactory.cpp include/SimulatorResultFactory.h)
 
-set(VISUALIZER
-		src/Visualizer.cpp
-		visualizer/src/FrameVisualizer.cpp visualizer/include/FrameVisualizer.h
-		src/Simulator.cpp include/Simulator.h
-		visualizer/src/VisualTileGrid.cpp visualizer/include/VisualTileGrid.h
-		visualizer/src/VisualEntity.cpp visualizer/include/VisualEntity.h
-		core/include/Visualizer.h visualizer/src/TileFrameVisualizer.cpp
-		visualizer/include/TileFrameVisualizer.h visualizer/src/VisualTile.cpp
-		visualizer/include/VisualTile.h visualizer/src/VisualEntityFactory.cpp
-		visualizer/include/VisualEntityFactory.h visualizer/src/VisualShapeEntity.cpp
-		visualizer/include/VisualImageEntity.h visualizer/src/VisualImageEntity.cpp
-		visualizer/include/VisualShapeEntity.h)
+#VISUALIZER SUPPORT
+set(VISUALIZER_SRC ${VISUALIZER_PATH}/src/FrameVisualizer.cpp
+        ${VISUALIZER_PATH}/src/TileFrameVisualizer.cpp
+        ${VISUALIZER_PATH}/src/VisualEntity.cpp
+        ${VISUALIZER_PATH}/src/VisualEntityFactory.cpp
+        ${VISUALIZER_PATH}/src/VisualImageEntity.cpp
+        ${VISUALIZER_PATH}/src/VisualShapeEntity.cpp
+        ${VISUALIZER_PATH}/src/VisualTile.cpp
+        ${VISUALIZER_PATH}/src/VisualTileGrid.cpp
+        )
+
+add_library(visualizer STATIC ${VISUALIZER_SRC} )
+qt5_use_modules(visualizer Core Widgets Gui )
+###########################
 
 set(VACUUM_WORLD_PROJECT
 		Projects/VacuumWorld/src/VacuumEnvironment.cpp Projects/VacuumWorld/include/VacuumEnvironment.h
@@ -131,5 +143,6 @@ set(SOURCE_FILES main.cpp ${CORE} ${JSON_CPP})
 #---------------------------
 add_subdirectory(testing)
 
-add_executable(morris_aima ${SOURCE_FILES} ${VISUALIZER} ${VACUUM_WORLD_PROJECT} ${JSON_CPP})
-qt5_use_modules( morris_aima Core Widgets Gui )
+add_executable(VacuumWorld ${SOURCE_FILES} ${VACUUM_WORLD_PROJECT} ${JSON_CPP})
+target_link_libraries(VacuumWorld visualizer "jsoncpp")
+qt5_use_modules( VacuumWorld Core Widgets Gui )

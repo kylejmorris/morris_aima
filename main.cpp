@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
         std::cin >> simulationId;
     }
     frameName << "Vacuum World Sim_" << simulationId;
-    fileName<<"config/map"<< simulationId << ".map";
+    fileName<<"Projects/VacuumWorld/config/map"<< simulationId << ".map";
     Simulator *sim = SimulatorFactory::createSimulator("VacuumWorld",frameName.str(), fileName.str(), cycleSpeed);
     sim->start(cycles);
     return application.exec();

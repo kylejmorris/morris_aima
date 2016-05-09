@@ -14,4 +14,3 @@ EnvironmentState *EnvironmentStateFactory::createEnvironmentState(std::string ty
     }
    return selected;
 }
-

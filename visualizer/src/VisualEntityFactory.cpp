@@ -14,11 +14,11 @@ VisualEntity * VisualEntityFactory::createEntity(std::string type, std::string j
         temp->moveBy(100,100); //place it in bottom right corner
         temp->moveBy(100,100); //place it in bottom right corner
         temp->moveBy(40,40); //place it in bottom right corner
-        temp->scale(0.5);
+        temp->scale(0.2);
         result = temp;
     } else if(type.compare("VacuumAgent")==0) {
         VisualImageEntity *temp = new VisualImageEntity("vacuum.png");
-        temp->scale(0.5);
+        temp->scale(0.3);
         result = temp;
     }
 
