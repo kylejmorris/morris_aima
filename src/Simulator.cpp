@@ -8,7 +8,7 @@
 #include <SimulatorResultFactory.h>
 
 static long currentCycle = 0;
-static int initialDisplay = 3;
+static int initialDisplay = 10;
 //TODO could probably use a factory to support generating a simulator object
 //TODO fix some weird behaviour if you do AxB sized grid where A is very large relative to B
 Simulator::Simulator() {

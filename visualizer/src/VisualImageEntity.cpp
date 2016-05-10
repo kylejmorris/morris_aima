@@ -17,13 +17,10 @@ void VisualImageEntity::scale(double amount) {
     }
 }
 
+
 void VisualImageEntity::moveBy(int x, int y) {
-    //TODO fix weird hack for moving entity, I don't even know why 100 is used here... IMplement relative coordinates for this, it should be clear what you need to have here.
-    if(x>=0 && x <= 100 && y>=0 && y <=100) {
-        //adjust values so it holds for each render
-        this->moveX+=x;
-        this->moveY+=y;
-    }
+    this->moveX+=x;
+    this->moveY+=y;
 }
 
 VisualImageEntity::~VisualImageEntity() {

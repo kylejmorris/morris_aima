@@ -34,7 +34,7 @@ void TileFrameVisualizer::update(std::string state) {
     this->grid->clean();
     //generating entities and their locations on the grid
     for(auto entity : root["Environment"]["entities"]) {
-      VisualEntity *currentEntity = VisualEntityFactory::createEntity(entity["type"].asString(), "");
+      VisualEntity *currentEntity = VisualEntityFactory::createEntity(entity["type"].asString(), grid->getTileSize(), "");
       TileLocation currentLocation(entity["location"]["x"].asInt(), entity["location"]["y"].asInt());
       this->grid->addEntity(currentEntity, &currentLocation);
     }

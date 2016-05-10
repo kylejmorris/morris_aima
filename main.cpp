@@ -28,7 +28,7 @@ void displayPrompt() {
     std::cout << "\n----------------\n";
 }
 int main(int argc, char *argv[]) {
-    int cycleSpeed = 500;
+    int cycleSpeed = 800;
     int cycles = 10;
     int simulationId = 0; //between 0 and 8, which file to run
     QApplication application(argc, argv);
