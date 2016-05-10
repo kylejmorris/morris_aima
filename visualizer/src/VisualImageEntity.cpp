@@ -17,13 +17,10 @@ void VisualImageEntity::scale(double amount) {
     }
 }
 
+
 void VisualImageEntity::moveBy(int x, int y) {
-    //TODO fix weird hack for moving entity, I don't even know why 100 is used here... IMplement relative coordinates for this, it should be clear what you need to have here.
-    if(x>=0 && x <= 100 && y>=0 && y <=100) {
-        //adjust values so it holds for each render
-        this->moveX+=x;
-        this->moveY+=y;
-    }
+    this->moveX+=x;
+    this->moveY+=y;
 }
 
 VisualImageEntity::~VisualImageEntity() {
@@ -32,7 +29,7 @@ VisualImageEntity::~VisualImageEntity() {
 
 void VisualImageEntity::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     this->setZValue(Z_VALUE_PRIORITY);
-    VisualEntity::moveBy(moveX+5,moveY+5); //the +5 is to offset border of tile image is on
+    VisualEntity::moveBy(moveX,moveY); //the +5 is to offset border of tile image is on
     this->setScale(VisualEntity::scale()*this->scaleFactor);
     painter->drawRect(this->boundingRect());
 }

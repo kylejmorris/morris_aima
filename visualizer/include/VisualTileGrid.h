@@ -36,6 +36,11 @@ public:
     virtual QRectF boundingRect() const;
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
+    /*
+     * We know the grid is square, so this will return the width/height of any given tile.
+     */
+    int getTileSize();
+
     /**
      * Paint the individual tiles within grid. We do this separately from the grid itself, so the grid
      * isn't constantly being redrawn.

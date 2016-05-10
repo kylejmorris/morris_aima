@@ -17,9 +17,13 @@ void VacuumEnvironment::act() {
 
         //respond to the action made by agent, updating environment state
         if(action->choice==VacuumAction::LEFT) {
-            state->moveVacuum(this->vacuumLocation->getX()-1, this->vacuumLocation->getY());
+            if(!state->hasWall(this->vacuumLocation->getX()-1, this->vacuumLocation->getY())) {
+                state->moveVacuum(this->vacuumLocation->getX()-1, this->vacuumLocation->getY());
+            }
         } else if(action->choice==VacuumAction::RIGHT) {
-            state->moveVacuum(this->vacuumLocation->getX()+1, this->vacuumLocation->getY());
+            if(!state->hasWall(this->vacuumLocation->getX()+1, this->vacuumLocation->getY())) {
+                state->moveVacuum(this->vacuumLocation->getX() + 1, this->vacuumLocation->getY());
+            }
         } else if(action->choice==VacuumAction::SUCK) {
             state->cleanTile();
         }

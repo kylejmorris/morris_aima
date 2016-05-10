@@ -1,0 +1,24 @@
+VacuumWorld Environment json output
+{
+	"Environment"
+	{
+		"age"
+		"type" : "VacuumWorld"
+		"size" :
+		{
+			"x": X_SIZE
+			"y": Y_SIZE
+		},
+		"entities" [
+            {
+			    "type" : TYPE
+			    "id" : ENTITY_ID (as assigned in environment)
+			    "location"
+			    {
+				    "x" : X_LOCATION,
+				    "y" : Y_LOCATION
+			    }
+            }
+		]
+	}
+}

@@ -2,7 +2,7 @@
 * CLASS: VacuumFactory
 * DATE: 25/04/16
 * AUTHOR: Kyle Morris
-* DESCRIPTION: Factory for creating vacuums.
+* DESCRIPTION: Factory for creating objects in VacuumWorld
 */
 #ifndef MORRIS_AIMA_VACUUMFACTORY_H
 #define MORRIS_AIMA_VACUUMFACTORY_H

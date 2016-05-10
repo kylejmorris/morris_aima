@@ -15,7 +15,7 @@ Simulator *SimulatorFactory::createSimulator(std::string type, std::string name,
         VacuumEnvironmentState *state = dynamic_cast<VacuumEnvironmentState *>(environment->readState());
         visualizer = new TileFrameVisualizer(state->getWidth(), state->getHeight(), name);
         created = new Simulator(environment, visualizer, cycleTime);
-    } else {
+    } else{
         created = NULL;
     }
     return created;

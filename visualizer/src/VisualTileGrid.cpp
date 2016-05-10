@@ -75,6 +75,10 @@ void VisualTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     this->paintTiles(painter,option,widget);
 }
 
+int VisualTileGrid::getTileSize() {
+    return WIDTH/std::max(rows,columns);
+}
+
 void VisualTileGrid::paintTiles(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     VisualEntity *currEntity;
 

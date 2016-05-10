@@ -5,20 +5,22 @@
 #include "VisualEntity.h"
 
 
-VisualEntity * VisualEntityFactory::createEntity(std::string type, std::string jsonProperties) {
+VisualEntity * VisualEntityFactory::createEntity(std::string type, int boundingBoxSize, std::string jsonProperties) {
     VisualEntity *result = NULL;
+    double moveFactor = (1.0*boundingBoxSize)/100.0;
 
     if(type.compare("Dirt")==0) {
         VisualImageEntity *temp = new VisualImageEntity("dirt.png");
-        //TODO this part is goofed due to how coordinates are handled. fix sometime
-        temp->moveBy(100,100); //place it in bottom right corner
-        temp->moveBy(100,100); //place it in bottom right corner
-        temp->moveBy(40,40); //place it in bottom right corner
-        temp->scale(0.2);
+        temp->scale(0.4*0.25); //fitting it into a given tile, then making it 25% of that tile size
+        temp->moveBy(60*moveFactor, 60*moveFactor);
         result = temp;
     } else if(type.compare("VacuumAgent")==0) {
         VisualImageEntity *temp = new VisualImageEntity("vacuum.png");
         temp->scale(0.3);
+        result = temp;
+    } else if(type.compare("Wall")==0) {
+        VisualImageEntity *temp = new VisualImageEntity("wall.png");
+        temp->scale(0.4); //exact size of tile
         result = temp;
     }
 

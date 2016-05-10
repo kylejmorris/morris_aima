@@ -107,7 +107,7 @@ set(CORE src/Agent.cpp core/include/Agent.h
         src/Tile.cpp include/Tile.h core/include/Action.h core/include/Percept.h
         core/include/PerformanceMeasure.h
         core/include/SimulatorResult.h src/SimulatorResult.cpp
-        src/EntityFactoryFactory.cpp include/EntityFactoryFactory.h src/SimulatorFactory.cpp include/SimulatorFactory.h src/SimulatorResultFactory.cpp include/SimulatorResultFactory.h)
+        src/EntityFactoryFactory.cpp include/EntityFactoryFactory.h src/SimulatorFactory.cpp include/SimulatorFactory.h include/SimulatorResultFactory.h src/SimulatorResultFactory.cpp)
 
 #VISUALIZER SUPPORT
 set(VISUALIZER_SRC ${VISUALIZER_PATH}/src/FrameVisualizer.cpp
@@ -124,7 +124,7 @@ add_library(visualizer STATIC ${VISUALIZER_SRC} )
 qt5_use_modules(visualizer Core Widgets Gui )
 ###########################
 
-set(VACUUM_WORLD_PROJECT
+set(VACUUM_WORLD_CORE
 		Projects/VacuumWorld/src/VacuumEnvironment.cpp Projects/VacuumWorld/include/VacuumEnvironment.h
 		Projects/VacuumWorld/src/VacuumAgent.cpp Projects/VacuumWorld/include/VacuumAgent.h
 		Projects/VacuumWorld/src/DirtEntity.cpp Projects/VacuumWorld/include/DirtEntity.h
@@ -136,13 +136,13 @@ set(VACUUM_WORLD_PROJECT
 		Projects/VacuumWorld/src/VacuumWorldSimulationResult.cpp Projects/VacuumWorld/src/VacuumFactory.cpp
 		Projects/VacuumWorld/include/VacuumFactory.h Projects/VacuumWorld/src/VacuumEnvironmentState.cpp
 		Projects/VacuumWorld/include/VacuumEnvironmentState.h Projects/VacuumWorld/include/VacuumWorldSimulationResult.h
-		Projects/VacuumWorld/src/VacuumWorldSimulationResult.cpp)
+		Projects/VacuumWorld/src/VacuumWorldSimulationResult.cpp
+		Projects/VacuumWorld/src/WallEntity.cpp Projects/VacuumWorld/include/WallEntity.h)
 
-set(SOURCE_FILES main.cpp ${CORE} ${JSON_CPP})
+add_executable(VacuumWorld Projects/VacuumWorld/src/VacuumWorld_simple_DEMO.cpp ${CORE} ${VACUUM_WORLD_CORE} ${JSON_CPP})
+target_link_libraries(VacuumWorld visualizer "jsoncpp")
+qt5_use_modules( VacuumWorld Core Widgets Gui )
+
 #TODO organize cmake files into more specific looks
 #---------------------------
 add_subdirectory(testing)
-
-add_executable(VacuumWorld ${SOURCE_FILES} ${VACUUM_WORLD_PROJECT} ${JSON_CPP})
-target_link_libraries(VacuumWorld visualizer "jsoncpp")
-qt5_use_modules( VacuumWorld Core Widgets Gui )

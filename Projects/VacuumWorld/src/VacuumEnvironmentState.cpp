@@ -6,6 +6,7 @@
 #include "VacuumAgent.h"
 #include <vector>
 #include <DirtEntity.h>
+#include <WallEntity.h>
 
 VacuumEnvironmentState::VacuumEnvironmentState(int width, int height) : TileEnvironmentState(width, height) {
 
@@ -32,6 +33,24 @@ bool VacuumEnvironmentState::cleanTile() {
     }
 
     remove(found->getId()); //remove the dirt we found
+}
+
+bool VacuumEnvironmentState::hasWall(int x, int y) {
+    TileLocation *tile = new TileLocation(x, y);
+    bool found = false;
+    vector<Entity *> entities = getEntitiesAt(tile);
+
+    //traverse all entities on tile and find dirt
+    for(vector<Entity *>::iterator it = entities.begin(); it != entities.end(); ++it) {
+        Entity *current = (*it);
+        WallEntity *wall = dynamic_cast<WallEntity *>(current);
+        if(wall!=NULL) { //we found the dirt
+            found = true;
+        }
+    }
+
+    delete tile;
+    return found;
 }
 
 bool VacuumEnvironmentState::moveVacuum(int x, int y) {

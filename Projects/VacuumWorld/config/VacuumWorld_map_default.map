@@ -1,0 +1,33 @@
+{
+    "Environment" :
+	{
+	    "type" : "VacuumEnvironment",
+        "size" :
+		{
+            "x": _WIDTH_,
+		    "y": _HEIGHT_
+        },
+	    "entities" :
+        [
+		    {
+                "type" : ENTITY_NAME,
+		 	    "location" :
+                {
+                    "x" : LOCATION_X,
+                    "y" : LOCATION_Y
+			    }
+		    },
+            {
+                "type" : ENTITY_NAME,
+		 	    "location" :
+                {
+                    "x" : LOCATION_X,
+                    "y" : LOCATION_Y
+			    }
+		    }
+	    ]
+	}
+}
+;valid entities:
+;VacuumAgent
+;Dirt

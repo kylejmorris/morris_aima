@@ -31,6 +31,11 @@ public:
     virtual bool moveVacuum(int x, int y);
 
     /**
+     * Determine if a given tile has a wall on it or not.
+     * @return bool: true if there is a wall, false otherwise
+     */
+    bool hasWall(int x, int y);
+    /**
     * Determine if a given tile is dirty or not.
     * @return bool: True if tile contains turn, false otherwise.
     */

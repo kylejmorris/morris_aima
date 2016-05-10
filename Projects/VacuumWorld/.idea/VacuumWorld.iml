@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="CPP_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$USER_HOME$/.CLion12/system/cmake/generated/e4eb749a/e4eb749a/Debug/VacuumWorld_automoc.cpp">
+      <sourceFolder url="file://$USER_HOME$/.CLion12/system/cmake/generated/e4eb749a/e4eb749a/Debug/VacuumWorld_automoc.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$USER_HOME$/.CLion12/system/cmake/generated/e4eb749a/e4eb749a/Debug/visualizer_automoc.cpp">
+      <sourceFolder url="file://$USER_HOME$/.CLion12/system/cmake/generated/e4eb749a/e4eb749a/Debug/visualizer_automoc.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$USER_HOME$/.CLion12/system/cmake/generated/e4eb749a/e4eb749a/MinSizeRel/VacuumWorld_automoc.cpp">
+      <sourceFolder url="file://$USER_HOME$/.CLion12/system/cmake/generated/e4eb749a/e4eb749a/MinSizeRel/VacuumWorld_automoc.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$USER_HOME$/.CLion12/system/cmake/generated/e4eb749a/e4eb749a/MinSizeRel/visualizer_automoc.cpp">
+      <sourceFolder url="file://$USER_HOME$/.CLion12/system/cmake/generated/e4eb749a/e4eb749a/MinSizeRel/visualizer_automoc.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$USER_HOME$/.CLion12/system/cmake/generated/e4eb749a/e4eb749a/RelWithDebInfo/VacuumWorld_automoc.cpp">
+      <sourceFolder url="file://$USER_HOME$/.CLion12/system/cmake/generated/e4eb749a/e4eb749a/RelWithDebInfo/VacuumWorld_automoc.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$USER_HOME$/.CLion12/system/cmake/generated/e4eb749a/e4eb749a/RelWithDebInfo/visualizer_automoc.cpp">
+      <sourceFolder url="file://$USER_HOME$/.CLion12/system/cmake/generated/e4eb749a/e4eb749a/RelWithDebInfo/visualizer_automoc.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$USER_HOME$/.CLion12/system/cmake/generated/e4eb749a/e4eb749a/Release/VacuumWorld_automoc.cpp">
+      <sourceFolder url="file://$USER_HOME$/.CLion12/system/cmake/generated/e4eb749a/e4eb749a/Release/VacuumWorld_automoc.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$USER_HOME$/.CLion12/system/cmake/generated/e4eb749a/e4eb749a/Release/visualizer_automoc.cpp">
+      <sourceFolder url="file://$USER_HOME$/.CLion12/system/cmake/generated/e4eb749a/e4eb749a/Release/visualizer_automoc.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$USER_HOME$/libs/json/jsoncpp.cpp">
+      <sourceFolder url="file://$USER_HOME$/libs/json/jsoncpp.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/DirtEntity.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/VacuumAction.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/VacuumAgent.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/VacuumEnvironment.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/VacuumEnvironmentState.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/VacuumFactory.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/VacuumPercept.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/VacuumWorldPerformanceMeasure.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/VacuumWorldSimulationResult.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../src/Agent.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../src/Agent.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../src/Entity.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../src/Entity.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../src/EntityFactory.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../src/EntityFactory.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../src/EntityFactoryFactory.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../src/EntityFactoryFactory.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../src/Environment.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../src/Environment.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../src/EnvironmentState.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../src/EnvironmentState.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../src/EnvironmentStateFactory.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../src/EnvironmentStateFactory.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../src/Location.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../src/Location.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../src/Simulator.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../src/Simulator.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../src/SimulatorFactory.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../src/SimulatorFactory.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../src/SimulatorResult.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../src/SimulatorResult.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../src/SimulatorResultFactory.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../src/SimulatorResultFactory.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../src/Tile.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../src/Tile.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../src/TileEnvironment.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../src/TileEnvironment.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../src/TileEnvironmentState.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../src/TileEnvironmentState.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../src/TileGrid.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../src/TileGrid.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../src/TileLocation.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../src/TileLocation.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../src/Visualizer.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../src/Visualizer.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../visualizer/src/FrameVisualizer.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../visualizer/src/FrameVisualizer.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../visualizer/src/TileFrameVisualizer.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../visualizer/src/TileFrameVisualizer.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../visualizer/src/VisualEntity.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../visualizer/src/VisualEntity.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../visualizer/src/VisualEntityFactory.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../visualizer/src/VisualEntityFactory.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../visualizer/src/VisualImageEntity.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../visualizer/src/VisualImageEntity.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../visualizer/src/VisualShapeEntity.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../visualizer/src/VisualShapeEntity.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../visualizer/src/VisualTile.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../visualizer/src/VisualTile.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../visualizer/src/VisualTileGrid.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../visualizer/src/VisualTileGrid.cpp" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="Header Search Paths">
+        <CLASSES>
+          <root url="file://$USER_HOME$/libs" />
+          <root url="file://$MODULE_DIR$/include" />
+          <root url="file://$MODULE_DIR$/../../core/include" />
+          <root url="file://$MODULE_DIR$/../../include" />
+          <root url="file://$MODULE_DIR$/../../src" />
+          <root url="file://$MODULE_DIR$/../../visualizer/include" />
+          <root url="file:///usr/include" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/4.8/include" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/4.8/include/objc" />
+          <root url="file:///usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64" />
+          <root url="file:///usr/local/include" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file://$USER_HOME$/libs" />
+          <root url="file://$MODULE_DIR$/include" />
+          <root url="file://$MODULE_DIR$/../../core/include" />
+          <root url="file://$MODULE_DIR$/../../include" />
+          <root url="file://$MODULE_DIR$/../../src" />
+          <root url="file://$MODULE_DIR$/../../visualizer/include" />
+          <root url="file:///usr/include" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/4.8/include" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/4.8/include/objc" />
+          <root url="file:///usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64" />
+          <root url="file:///usr/local/include" />
+        </SOURCES>
+        <excluded>
+          <root url="file://$USER_HOME$/libs/json/jsoncpp.cpp" />
+          <root url="file://$MODULE_DIR$/../../src/EnvironmentState.cpp" />
+          <root url="file://$MODULE_DIR$/../../src/TileEnvironment.cpp" />
+          <root url="file://$MODULE_DIR$/../../src/EnvironmentStateFactory.cpp" />
+          <root url="file://$MODULE_DIR$/../../src/TileGrid.cpp" />
+          <root url="file://$MODULE_DIR$/../../src/SimulatorFactory.cpp" />
+          <root url="file://$MODULE_DIR$/../../src/Visualizer.cpp" />
+          <root url="file://$MODULE_DIR$/../../src/TileLocation.cpp" />
+          <root url="file://$MODULE_DIR$/../../src/EntityFactory.cpp" />
+          <root url="file://$MODULE_DIR$/../../src/Entity.cpp" />
+          <root url="file://$MODULE_DIR$/../../src/Simulator.cpp" />
+          <root url="file://$MODULE_DIR$/../../src/EntityFactoryFactory.cpp" />
+          <root url="file://$MODULE_DIR$/../../src/SimulatorResultFactory.cpp" />
+          <root url="file://$MODULE_DIR$/../../src/Agent.cpp" />
+          <root url="file://$MODULE_DIR$/../../src/Environment.cpp" />
+          <root url="file://$MODULE_DIR$/../../src/TileEnvironmentState.cpp" />
+          <root url="file://$MODULE_DIR$/../../src/Location.cpp" />
+          <root url="file://$MODULE_DIR$/../../src/SimulatorResult.cpp" />
+          <root url="file://$MODULE_DIR$/../../src/Tile.cpp" />
+        </excluded>
+      </library>
+    </orderEntry>
+  </component>
+</module>
