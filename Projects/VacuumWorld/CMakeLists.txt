@@ -68,8 +68,8 @@ qt5_use_modules(visualizer Core Widgets Gui )
 
 set(SOURCE_FILES
         include/DirtEntity.h
-        include/VacuumAction.h
-        include/VacuumAgent.h
+        include/SimpleVacuumAction.h
+        include/SimpleReflexVacuumAgent.h
         include/VacuumEnvironment.h
         include/VacuumEnvironmentState.h
         include/VacuumFactory.h
@@ -77,8 +77,8 @@ set(SOURCE_FILES
         include/VacuumWorldPerformanceMeasure.h
         include/VacuumWorldSimulationResult.h
         src/DirtEntity.cpp
-        src/VacuumAction.cpp
-        src/VacuumAgent.cpp
+        src/SimpleVacuumAction.cpp
+        src/SimpleReflexVacuumAgent.cpp
         src/VacuumEnvironment.cpp
         src/VacuumEnvironmentState.cpp
         src/VacuumFactory.cpp

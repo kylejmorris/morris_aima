@@ -25,15 +25,18 @@
 #define MORRIS_AIMA_VACUUMENVIRONMENT_H
 #include <TileEnvironment.h>
 #include "VacuumEnvironmentState.h"
+#include "SimpleVacuumAction.h"
 #include "VacuumWorldPerformanceMeasure.h"
 
-class VacuumAgent;
+class SimpleReflexVacuumAgent;
+class RandomVacuumAction;
 class VacuumEnvironment : public TileEnvironment {
 private:
     /**
      * The state of the environment
      */
     VacuumEnvironmentState *state;
+
     /**
      * We know this environment contains only 1 vacuum, so we identify it here for easy access instead of searching grid.
      */
@@ -73,6 +76,11 @@ public:
     virtual void updateResults() override;
 
     virtual ~VacuumEnvironment();
+
+    void simpleVacuumAct(SimpleVacuumAction *action);
+    void randomVacuumAct(RandomVacuumAction *action);
+
+    virtual std::string outputToJson() override;
 };
 
 #endif //MORRIS_AIMA_VACUUMENVIRONMENT_H

@@ -1,9 +1,10 @@
 #include "VacuumEnvironment.h"
 #include <VacuumPercept.h>
+#include "RandomReflexVacuumAgent.h"
 #include "Entity.h"
 #include "VacuumEnvironmentState.h"
 #include "TileEnvironmentState.h"
-#include "VacuumAgent.h"
+#include "SimpleReflexVacuumAgent.h"
 #include <vector>
 #include <DirtEntity.h>
 #include <WallEntity.h>
@@ -58,8 +59,11 @@ bool VacuumEnvironmentState::moveVacuum(int x, int y) {
     TileLocation *targetLocation = new TileLocation(x, y);
     bool result = false;
     if(vacuum!=NULL) {
-        if(moveEntity(vacuum->getId(), targetLocation)) {
-            result = true;
+        //only move if we're within environment bounds
+        if(x>=0 && x <this->getWidth() && y>=0 && y<this->getHeight()) {
+            if (moveEntity(vacuum->getId(), targetLocation)) {
+                result = true;
+            }
         }
     }
     delete targetLocation;
@@ -73,9 +77,10 @@ VacuumAgent *VacuumEnvironmentState::findVacuum() {
     //traverse all entities in environment and find the vacuum.
     for(std::vector<Entity *>::iterator it = entities.begin(); it != entities.end(); ++it) {
         Entity *current = (*it);
-        VacuumAgent *vacuum = dynamic_cast<VacuumAgent *>(current);
-        if(vacuum!=NULL) { //we found the agent
-            found = vacuum;
+        if(dynamic_cast<SimpleReflexVacuumAgent *>(current)!=NULL) { //we found the agent
+            found = dynamic_cast<SimpleReflexVacuumAgent *>(current);
+        } else if(dynamic_cast<RandomReflexVacuumAgent *>(current) != NULL) { //we found the agent
+            found = dynamic_cast<RandomReflexVacuumAgent *>(current);
         }
     }
 

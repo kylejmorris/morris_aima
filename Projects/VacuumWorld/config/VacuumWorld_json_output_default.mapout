@@ -20,5 +20,9 @@ VacuumWorld Environment json output
 			    }
             }
 		]
+	},
+	"debug"
+	{
+	    "performance_measure" : _INT_
 	}
 }

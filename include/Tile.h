@@ -14,7 +14,7 @@ class Entity;
 
 class Tile {
 private:
-    std::vector<Entity *>contents;
+    std::vector<Entity *> contents;
 public:
     Tile();
     ~Tile();

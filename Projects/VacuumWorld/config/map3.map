@@ -10,7 +10,7 @@
 	    "entities" :
         [
 		    {
-                "type" : "VacuumAgent",
+                "type" : "SimpleReflexVacuumAgent",
 		 	    "location" :
                 {
                     "x" : 0,

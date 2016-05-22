@@ -10,14 +10,15 @@
 
 #include <TileEnvironment.h>
 #include "TileEnvironmentState.h"
+#include "VacuumAgent.h"
 
-class VacuumAgent;
+class SimpleReflexVacuumAgent;
 
 class VacuumEnvironmentState : public TileEnvironmentState {
 public:
 /**
  * Locate the vacuum within environment state. Important to do this so we have agent to operate on, before simulation starts for real.
- * @return VacuumAgent: the vacuum we found in environment state
+ * @return SimpleReflexVacuumAgent: the vacuum we found in environment state
  */
     VacuumAgent *findVacuum();
 

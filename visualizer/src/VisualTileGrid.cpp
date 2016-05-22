@@ -65,12 +65,12 @@ void VisualTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     painter->drawRect(this->boundingRect());
 
 #ifndef NDEBUG //grid size/properties
-    QGraphicsTextItem *debugText = new QGraphicsTextItem(this->parentItem());
+    //QGraphicsTextItem *debugText = new QGraphicsTextItem(this->parentItem());
+    this->debugText = new QGraphicsTextItem(this->parentItem());
     out << "DEBUG INFO \n_____\n[" << WIDTH << "x" << HEIGHT << " grid]\nRows: " << this->rows << "\nColumns: " << this->columns << "\n";
     debugText->setPlainText(QString::fromStdString(out.str()));
     debugText->setZValue(4);
     this->scene()->addItem(debugText);
-
 #endif
     this->paintTiles(painter,option,widget);
 }

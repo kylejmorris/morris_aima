@@ -38,10 +38,10 @@ add_executable(unit_tests main.cpp ${TEST_FILES} ${JSON_CPP}
         ../src/EnvironmentStateFactory.cpp ../include/EnvironmentStateFactory.h
         ../src/EntityFactoryFactory.cpp ../include/EntityFactoryFactory.h
         ../src/EntityFactory.cpp ../include/EntityFactory.h
-        ../Projects/VacuumWorld/src/VacuumFactory.cpp ../Projects/VacuumWorld/include/VacuumAgent.h
+        ../Projects/VacuumWorld/src/VacuumFactory.cpp ../Projects/VacuumWorld/include/SimpleReflexVacuumAgent.h
         ../Projects/VacuumWorld/src/DirtEntity.cpp ../Projects/VacuumWorld/include/DirtEntity.h
-        ../Projects/VacuumWorld/src/VacuumAgent.cpp ../Projects/VacuumWorld/include/VacuumAgent.h
-        ../Projects/VacuumWorld/src/VacuumAction.cpp ../Projects/VacuumWorld/include/VacuumAction.h
+        ../Projects/VacuumWorld/src/SimpleReflexVacuumAgent.cpp ../Projects/VacuumWorld/include/SimpleReflexVacuumAgent.h
+        ../Projects/VacuumWorld/src/SimpleVacuumAction.cpp ../Projects/VacuumWorld/include/SimpleVacuumAction.h
         ../Projects/VacuumWorld/src/VacuumPercept.cpp ../Projects/VacuumWorld/include/VacuumPercept.h
         ../Projects/VacuumWorld/src/VacuumEnvironmentState.cpp ../Projects/VacuumWorld/include/VacuumEnvironmentState.h ../src/SimulatorResultFactory.cpp ../include/SimulatorResultFactory.h)
 

@@ -10,7 +10,7 @@
 	    "entities" :
         [
 		    {
-                "type" : "VacuumAgent",
+                "type" : "SimpleReflexVacuumAgent",
 		 	    "location" :
                 {
                     "x" : 0,
@@ -20,6 +20,3 @@
 	    ]
 	}
 }
-;valid entities:
-;VacuumAgent
-;Dirt

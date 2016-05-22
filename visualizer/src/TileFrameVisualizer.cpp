@@ -16,6 +16,10 @@ TileFrameVisualizer::TileFrameVisualizer(int rows, int cols, std::string name) {
 }
 
 void TileFrameVisualizer::Construct(int rows, int cols, std::string name) {
+  this->performanceMeasureText = new QGraphicsTextItem;
+  this->performanceMeasureText->setDefaultTextColor(Qt::blue);
+  this->performanceMeasureText->moveBy(0,this->getFrameHeight()/2);
+  this->getScene()->addItem(performanceMeasureText);
   this->setFrameName(name);
   this->grid = new VisualTileGrid(rows, cols, this->getFrameWidth(), this->getFrameHeight());
   this->getScene()->addItem(this->grid);
@@ -26,6 +30,11 @@ void TileFrameVisualizer::update(std::string state) {
   Json::Value root;
   Json::Reader reader;
   bool success = reader.parse(state,root,false);
+  int performanceMeasureInt = root["debug"]["performance_measure"].asInt();
+  std::stringstream out;
+  out << "Performance Measure: " << performanceMeasureInt;
+  performanceMeasureText->setPlainText(QString::fromStdString(out.str()));
+  performanceMeasureText->setZValue(4);
 
 #ifndef NDEBUG
   std::cout << "TileFrameVisualizer.cpp: input state: " << state << "\n";

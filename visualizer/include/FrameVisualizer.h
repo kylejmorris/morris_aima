@@ -18,8 +18,8 @@ protected:
     /**
      * Frame properties and default values.
      */
-    int frameWidth = 1000;
-    int frameHeight = 1000;
+    int frameWidth = 700;
+    int frameHeight = 700;
 
     QString frameName = "Frame Visualizer";
 

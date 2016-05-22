@@ -21,7 +21,7 @@ private:
 public:
     SimulatorResult(Simulator *target);
 
-    Simulator *getSimulator();
+    virtual Simulator *getSimulator();
 
     Environment *getEnvironment();
 

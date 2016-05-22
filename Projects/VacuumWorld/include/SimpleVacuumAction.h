@@ -10,7 +10,7 @@
 #define MORRIS_AIMA_VACUUMACTION_H
 #include <Action.h>
 
-class VacuumAction : public Action {
+class SimpleVacuumAction : public Action {
 public:
     virtual std::string toString() override;
 
@@ -22,7 +22,7 @@ public:
 
     enum ACTION choice;
 
-    VacuumAction(enum VacuumAction::ACTION choice);
+    SimpleVacuumAction(enum SimpleVacuumAction::ACTION choice);
 };
 
 #endif //MORRIS_AIMA_VACUUMACTION_H

@@ -126,10 +126,10 @@ qt5_use_modules(visualizer Core Widgets Gui )
 
 set(VACUUM_WORLD_CORE
 		Projects/VacuumWorld/src/VacuumEnvironment.cpp Projects/VacuumWorld/include/VacuumEnvironment.h
-		Projects/VacuumWorld/src/VacuumAgent.cpp Projects/VacuumWorld/include/VacuumAgent.h
+		Projects/VacuumWorld/src/SimpleReflexVacuumAgent.cpp Projects/VacuumWorld/include/SimpleReflexVacuumAgent.h
 		Projects/VacuumWorld/src/DirtEntity.cpp Projects/VacuumWorld/include/DirtEntity.h
 		Projects/VacuumWorld/src/VacuumPercept.cpp Projects/VacuumWorld/include/VacuumPercept.h
-		Projects/VacuumWorld/src/VacuumAction.cpp Projects/VacuumWorld/include/VacuumAction.h
+		Projects/VacuumWorld/src/SimpleVacuumAction.cpp Projects/VacuumWorld/include/SimpleVacuumAction.h
 		Projects/VacuumWorld/src/VacuumWorldPerformanceMeasure.cpp Projects/VacuumWorld/include/VacuumWorldPerformanceMeasure.h
 		Projects/VacuumWorld/src/VacuumFactory.cpp Projects/VacuumWorld/include/VacuumFactory.h
 		Projects/VacuumWorld/src/VacuumEnvironmentState.cpp Projects/VacuumWorld/include/VacuumEnvironmentState.h
@@ -137,11 +137,17 @@ set(VACUUM_WORLD_CORE
 		Projects/VacuumWorld/include/VacuumFactory.h Projects/VacuumWorld/src/VacuumEnvironmentState.cpp
 		Projects/VacuumWorld/include/VacuumEnvironmentState.h Projects/VacuumWorld/include/VacuumWorldSimulationResult.h
 		Projects/VacuumWorld/src/VacuumWorldSimulationResult.cpp
-		Projects/VacuumWorld/src/WallEntity.cpp Projects/VacuumWorld/include/WallEntity.h)
+		Projects/VacuumWorld/src/WallEntity.cpp Projects/VacuumWorld/include/WallEntity.h Projects/VacuumWorld/src/VacuumAgent.cpp Projects/VacuumWorld/include/VacuumAgent.h Projects/VacuumWorld/src/RandomReflexVacuumAgent.cpp Projects/VacuumWorld/include/RandomReflexVacuumAgent.h Projects/VacuumWorld/src/RandomVacuumAction.cpp Projects/VacuumWorld/include/RandomVacuumAction.h)
 
 add_executable(VacuumWorld Projects/VacuumWorld/src/VacuumWorld_simple_DEMO.cpp ${CORE} ${VACUUM_WORLD_CORE} ${JSON_CPP})
 target_link_libraries(VacuumWorld visualizer "jsoncpp")
 qt5_use_modules( VacuumWorld Core Widgets Gui )
+
+
+#randomized reflex vacuum world
+add_executable(Randomized_VacuumWorld Projects/VacuumWorld/src/Randomized_VacuumWorld_DEMO.cpp ${CORE} ${VACUUM_WORLD_CORE} ${JSON_CPP})
+target_link_libraries(Randomized_VacuumWorld visualizer "jsoncpp")
+qt5_use_modules(Randomized_VacuumWorld Core Widgets Gui )
 
 #TODO organize cmake files into more specific looks
 #---------------------------

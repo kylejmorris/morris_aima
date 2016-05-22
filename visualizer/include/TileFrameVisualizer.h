@@ -16,6 +16,7 @@ class TileFrameVisualizer : public FrameVisualizer {
 private:
     VisualTileGrid *grid;
     VisualTile *testTile;
+    QGraphicsTextItem *performanceMeasureText;
 
 public:
     TileFrameVisualizer(int width, int height, std::string name);

@@ -34,7 +34,6 @@ FrameVisualizer::~FrameVisualizer() {
     delete this->scene;
 }
 
-
 void FrameVisualizer::update(std::string state) {
 }
 
