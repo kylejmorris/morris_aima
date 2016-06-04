@@ -122,8 +122,10 @@ set(VISUALIZER_SRC ${VISUALIZER_PATH}/src/FrameVisualizer.cpp
 
 add_library(visualizer STATIC ${VISUALIZER_SRC} )
 qt5_use_modules(visualizer Core Widgets Gui )
-###########################
 
+###########################
+#VACUUM WORLD PROJECT
+###########################
 set(VACUUM_WORLD_CORE
 		Projects/VacuumWorld/src/VacuumEnvironment.cpp Projects/VacuumWorld/include/VacuumEnvironment.h
 		Projects/VacuumWorld/src/SimpleReflexVacuumAgent.cpp Projects/VacuumWorld/include/SimpleReflexVacuumAgent.h
@@ -149,6 +151,13 @@ add_executable(Randomized_VacuumWorld Projects/VacuumWorld/src/Randomized_Vacuum
 target_link_libraries(Randomized_VacuumWorld visualizer "jsoncpp")
 qt5_use_modules(Randomized_VacuumWorld Core Widgets Gui )
 
+################################
+# MISSIONARIES AND CANNIBALS PROJECT
+################################
+set(MISSIONARIES_AND_CANNIBALS_CORE
+		Projects/MissionariesAndCannibals/MandCEnvironmentState.cpp Projects/MissionariesAndCannibals/MandCEnvironmentState.h
+		)
+add_executable(missionaries_and_cannibals ${MISSIONARIES_AND_CANNIBALS_CORE} ${CORE})
 #TODO organize cmake files into more specific looks
 #---------------------------
 add_subdirectory(testing)
