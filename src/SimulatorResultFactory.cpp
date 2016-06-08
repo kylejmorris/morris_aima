@@ -5,6 +5,8 @@ SimulatorResult *SimulatorResultFactory::createSimulatorResult(std::string type,
     SimulatorResult *result = NULL;
     if(type.compare("VacuumWorld")==0) {
         result = new VacuumWorldSimulationResult(sim);
+    } else if(type.compare("MissionariesAndCannibals")) {
+
     }
     return result;
 }

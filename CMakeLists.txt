@@ -10,6 +10,7 @@ include_directories("include")
 include_directories("Projects/VacuumWorld/include")
 include_directories(${VISUALIZER_PATH}/include)
 include_directories("$ENV{HOME}/libs")
+include_directories("${PROJECT_PATH}/MissionariesAndCannibals/include")
 
 project(morris_aima)
 set(CMAKE_AUTOMOC ON)
@@ -111,14 +112,14 @@ set(CORE src/Agent.cpp core/include/Agent.h
 
 #VISUALIZER SUPPORT
 set(VISUALIZER_SRC ${VISUALIZER_PATH}/src/FrameVisualizer.cpp
-        ${VISUALIZER_PATH}/src/TileFrameVisualizer.cpp
-        ${VISUALIZER_PATH}/src/VisualEntity.cpp
-        ${VISUALIZER_PATH}/src/VisualEntityFactory.cpp
-        ${VISUALIZER_PATH}/src/VisualImageEntity.cpp
-        ${VISUALIZER_PATH}/src/VisualShapeEntity.cpp
-        ${VISUALIZER_PATH}/src/VisualTile.cpp
-        ${VISUALIZER_PATH}/src/VisualTileGrid.cpp
-        )
+		${VISUALIZER_PATH}/src/TileFrameVisualizer.cpp
+		${VISUALIZER_PATH}/src/VisualEntity.cpp
+		${VISUALIZER_PATH}/src/VisualEntityFactory.cpp
+		${VISUALIZER_PATH}/src/VisualImageEntity.cpp
+		${VISUALIZER_PATH}/src/VisualShapeEntity.cpp
+		${VISUALIZER_PATH}/src/VisualTile.cpp
+		${VISUALIZER_PATH}/src/VisualTileGrid.cpp
+		${VISUALIZER_PATH}/src/TerminalTextVisualizer.cpp ${VISUALIZER_PATH}/include/TerminalTextVisualizer.h)
 
 add_library(visualizer STATIC ${VISUALIZER_SRC} )
 qt5_use_modules(visualizer Core Widgets Gui )
@@ -145,7 +146,6 @@ add_executable(VacuumWorld Projects/VacuumWorld/src/VacuumWorld_simple_DEMO.cpp 
 target_link_libraries(VacuumWorld visualizer "jsoncpp")
 qt5_use_modules( VacuumWorld Core Widgets Gui )
 
-
 #randomized reflex vacuum world
 add_executable(Randomized_VacuumWorld Projects/VacuumWorld/src/Randomized_VacuumWorld_DEMO.cpp ${CORE} ${VACUUM_WORLD_CORE} ${JSON_CPP})
 target_link_libraries(Randomized_VacuumWorld visualizer "jsoncpp")
@@ -155,9 +155,12 @@ qt5_use_modules(Randomized_VacuumWorld Core Widgets Gui )
 # MISSIONARIES AND CANNIBALS PROJECT
 ################################
 set(MISSIONARIES_AND_CANNIBALS_CORE
-		Projects/MissionariesAndCannibals/MandCEnvironmentState.cpp Projects/MissionariesAndCannibals/MandCEnvironmentState.h
-		)
-add_executable(missionaries_and_cannibals ${MISSIONARIES_AND_CANNIBALS_CORE} ${CORE})
+		Projects/MissionariesAndCannibals/src/MandCEnvironmentState.cpp Projects/MissionariesAndCannibals/include/MandCEnvironmentState.h
+		Projects/MissionariesAndCannibals/src/MandCEnvironment.cpp Projects/MissionariesAndCannibals/include/MandCEnvironment.h Projects/MissionariesAndCannibals/src/StateNode.cpp Projects/MissionariesAndCannibals/include/StateNode.h Projects/MissionariesAndCannibals/src/MandCAction.cpp Projects/MissionariesAndCannibals/include/MandCAction.h
+		Projects/MissionariesAndCannibals/src/MissionariesAndCannibals_DEMO.cpp)
+add_executable(missionaries_and_cannibals ${MISSIONARIES_AND_CANNIBALS_CORE} ${VACUUM_WORLD_CORE} ${CORE} ${JSON_CPP}) #the dependences are so dumb here. Since factories require all the vacuum stuff, I have to include everything here. I'll fix this if/when I migrate to ros.
+target_link_libraries(missionaries_and_cannibals visualizer "jsoncpp")
+qt5_use_modules(missionaries_and_cannibals Core Widgets Gui )
 #TODO organize cmake files into more specific looks
 #---------------------------
 add_subdirectory(testing)

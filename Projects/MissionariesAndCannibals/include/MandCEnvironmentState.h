@@ -69,6 +69,8 @@ public:
      */
     MandCEnvironmentState();
 
+    //copy constructor
+    MandCEnvironmentState(MandCEnvironmentState &copy);
     virtual bool isValid() override;
     /**
      * Check if states are equal.
@@ -79,9 +81,8 @@ public:
     /**
      * Send missionaries and cannibals over the river.
      * A maximum of 2 people can fit on the ship at once.
-     * @returns MandCEnvironmentState: Updated state with this action complete. If for some reason the action results in an updated state
+     * @returns MandCEnvironmentState: Updated state with this action complete. If the resulting state is invalid, then return NULL.
      */
-    MandCEnvironmentState ship(int numCannibals, int numMissionaries);
+    MandCEnvironmentState *ship(int numCannibals, int numMissionaries);
 };
-
 #endif //MORRIS_AIMA_MANDCENVIRONMENTSTATE_H

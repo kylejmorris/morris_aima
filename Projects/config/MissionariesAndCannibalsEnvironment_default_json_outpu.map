@@ -1,0 +1,36 @@
+{
+    "Environment"
+	{
+		"age"
+		"type" : "Missionaries_and_Cannibals_Environment"
+		"found" : TRUE/FALSE : whether or not goal state was found,
+		"frontier" : [ ;all the frontier nodes and their info
+		    _STATENODE_ ;see bottom of file to see structure of a state node.
+		],
+		"explored" [ ;nodes that have been expanded and checked
+		    _STATENODE_
+		]
+		"target_node" : _STATENODE_ ;the node we just most recently explored
+        }
+	},
+	"solution_path" : [ ;if the goal was found, this will contain nodes outlining the solution
+	    {
+	        "id" : _INT_, ;since json orders stuff randomly, I have to give each node an id so we know what order the path is in.
+	        "state": _STATENODE_ ;rest of the node info here
+	    }
+	    _STATENODE_
+	]
+	"debug"
+	{
+	    "performance_measure" : _INT_
+	}
+}
+
+STATENODE STRUCTURE:
+{
+         "cannibals_left" : _INT_
+         "cannibals_right" : _INT_
+         "missionaries_left" : _INT_
+         "missoinaries_right" : _INT_
+         "river_crossed" : _BOOL_
+}

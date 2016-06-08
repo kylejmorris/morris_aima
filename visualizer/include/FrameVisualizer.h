@@ -81,5 +81,4 @@ public:
 
     QGraphicsView *getView();
 };
-
 #endif //MORRIS_AIMA_FRAMEVISUALIZER_H
