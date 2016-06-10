@@ -10,15 +10,20 @@ MandCEnvironmentState::MandCEnvironmentState() {
 
 bool MandCEnvironmentState::isValid() {
     bool result = true;
-    //make sure no one in the environment has just vanished, or extras appear.
-    if(this->cannibalsLeft+this->cannibalsRight!=6) {
+    if (this->cannibalsLeft < 0 || this->cannibalsRight < 0 || this->missionariesLeft < 0 ||
+        this->missionariesRight < 0) {
         result = false;
     }
-    if(this->missionariesLeft+this->missionariesRight!=6) {
+    //make sure no one in the environment has just vanished, or extras appear.
+    if (this->cannibalsLeft + this->cannibalsRight != 3) {
+        result = false;
+    }
+    if (this->missionariesLeft + this->missionariesRight != 3) {
         result = false;
     }
     //are missionaries going to be killed? Can't have that now can we.
-    if(this->missionariesLeft<this->cannibalsLeft || this->missionariesRight<this->cannibalsRight) {
+    if ((this->missionariesLeft < this->cannibalsLeft && this->missionariesLeft > 0) ||
+        ((this->missionariesRight < this->cannibalsRight) && this->missionariesRight > 0)) {
         result = false;
     }
 
@@ -35,6 +40,7 @@ MandCEnvironmentState::MandCEnvironmentState(MandCEnvironmentState &copy) {
 
 MandCEnvironmentState *MandCEnvironmentState::ship(int numCannibals, int numMissionaries) {
     MandCEnvironmentState *newState = new MandCEnvironmentState;
+    MandCEnvironmentState *result = nullptr;
     newState->setRiverCrossed(this->isRiverCrossed());
     newState->setCannibalsRight(getCannibalsRight());
     newState->setCannibalsLeft(getCannibalsLeft());
@@ -44,20 +50,30 @@ MandCEnvironmentState *MandCEnvironmentState::ship(int numCannibals, int numMiss
     //transfer from right to left
     if(isRiverCrossed()) {
         newState->setMissionariesRight(newState->getMissionariesRight()-numMissionaries);
+        newState->setMissionariesLeft(newState->getMissionariesLeft() + numMissionaries);
+
         newState->setCannibalsRight(newState->getCannibalsRight()-numCannibals);
+        newState->setCannibalsLeft(newState->getCannibalsLeft() + numCannibals);
         newState->setRiverCrossed(!newState->isRiverCrossed());
     } else { //transfer from left to right
         newState->setMissionariesLeft(newState->getMissionariesLeft()-numMissionaries);
+        newState->setMissionariesRight(newState->getMissionariesRight() + numMissionaries);
+
         newState->setCannibalsLeft(newState->getCannibalsLeft()-numCannibals);
+        newState->setCannibalsRight(newState->getCannibalsRight() + numCannibals);
+
         newState->setRiverCrossed(!newState->isRiverCrossed());
     }
 
     //incase of state being invalid, just delete it
     if(!newState->isValid()) {
         delete newState;
+        result = nullptr;
+    } else {
+        result = newState;
     }
 
-    return newState;
+    return result;
 }
 
 int MandCEnvironmentState::compareTo(EnvironmentState *other) {

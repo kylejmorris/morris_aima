@@ -29,7 +29,7 @@ public:
     /**
      * Return results summary as a string.
      */
-    virtual std::string getResults() = 0;
+    virtual std::string getResults();
 
     /**
      * Output the simulation results to a file

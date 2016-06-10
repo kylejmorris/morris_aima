@@ -2,7 +2,7 @@
     "Environment"
 	{
 		"age"
-		"type" : "Missionaries_and_Cannibals_Environment"
+		"type" : "MissionariesAndCannibals"
 		"found" : TRUE/FALSE : whether or not goal state was found,
 		"frontier" : [ ;all the frontier nodes and their info
 		    _STATENODE_ ;see bottom of file to see structure of a state node.

@@ -91,6 +91,16 @@ protected:
      * Perform all possible actions on the state node and return the resulting nodes generated.
      */
     std::vector<StateNode *> expandNode(StateNode *target);
+
+    /**
+     * Check if a given node is found in the frontier.
+     */
+    bool inFrontier(StateNode *node);
+
+    /**
+     * Check if a given node is found in the explored set
+     */
+    bool inExploredSet(StateNode *node);
 };
 
 #endif //MORRIS_AIMA_MANDCENVIRONMENT_H

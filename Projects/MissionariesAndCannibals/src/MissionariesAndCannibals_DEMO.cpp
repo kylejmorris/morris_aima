@@ -18,8 +18,8 @@ void displayPrompt() {
 }
 
 int main(int argc, char *argv[]) {
-    int cycleSpeed = 800;
-    int cycles = 10;
+    int cycleSpeed = 1000;
+    int cycles = 13;
     int simulationId = 0; //between 0 and 8, which file to run
     QApplication application(argc, argv);
     displayPrompt();

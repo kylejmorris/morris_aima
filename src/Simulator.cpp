@@ -6,6 +6,8 @@
 #include <TileFrameVisualizer.h>
 #include <VacuumEnvironment.h>
 #include <SimulatorResultFactory.h>
+#include <MandCEnvironment.h>
+#include <TerminalTextVisualizer.h>
 
 static long currentCycle = 0;
 static int initialDisplay = 10;
@@ -24,6 +26,7 @@ void Simulator::cycle() {
     this->display->update(environmentState);
     this->display->render();
 }
+
 
 Simulator::Simulator(Environment *e, Visualizer *v, long cycleTime) {
     Construct(e,v,cycleTime);
@@ -58,7 +61,11 @@ void Simulator::stop() {
 
 void Simulator::save() {
     //TODO noticing a LOT of factories using the same "VacuumWorld" and other names of projects. Should probably make some global set of variables for the project names so I don't have to manuelly update several factories. Perhaps a root Factory object?
-    SimulatorResult *result = SimulatorResultFactory::createSimulatorResult("VacuumWorld", this);
+    std::string simulationType = "VacuumWorld";
+    if (dynamic_cast<MandCEnvironment *>(this->environment) != NULL) {
+        simulationType = "MissionariesAndCannibals";
+    }
+    SimulatorResult *result = SimulatorResultFactory::createSimulatorResult(simulationType, this);
     result->writeToFile("simulation_output.txt");
 }
 

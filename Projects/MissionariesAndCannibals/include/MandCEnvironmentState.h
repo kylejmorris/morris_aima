@@ -71,7 +71,8 @@ public:
 
     //copy constructor
     MandCEnvironmentState(MandCEnvironmentState &copy);
-    virtual bool isValid() override;
+
+    virtual bool isValid();
     /**
      * Check if states are equal.
      * @return: 0 if equal, nonzero if otherwise

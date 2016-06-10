@@ -11,6 +11,10 @@
 #include "Visualizer.h"
 
 class TerminalTextVisualizer : public Visualizer {
+    /**
+     * The output generated when we update.
+     */
+    std::string output;
 public:
     virtual void update(std::string state) override;
 

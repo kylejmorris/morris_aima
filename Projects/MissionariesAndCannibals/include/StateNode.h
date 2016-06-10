@@ -32,6 +32,8 @@ private:
     MandCAction *action;
 
 public:
+    bool operator==(const StateNode &node) const;
+
     int getPathCost() const {
         return pathCost;
     }
@@ -56,15 +58,15 @@ public:
         StateNode::parent = parent;
     }
 
-    MandCEnvironmentState *getState() const {
-        return state;
-    }
+    MandCEnvironmentState *getState() const;
 
     void setState(MandCEnvironmentState *state) {
         StateNode::state = state;
     }
 
     StateNode(int pathCost, MandCEnvironmentState *state, StateNode *parent, MandCAction *action);
+
+    int compareTo(StateNode *other);
 };
 
 

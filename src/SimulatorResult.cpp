@@ -40,3 +40,7 @@ bool SimulatorResult::writeToFile(std::string outputFile) {
 Visualizer *SimulatorResult::getVisualizer() {
     return getSimulator()->getDisplay();
 }
+
+std::string SimulatorResult::getResults() {
+    return "this simulation has no results.";
+}

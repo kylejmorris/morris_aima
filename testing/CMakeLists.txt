@@ -16,6 +16,7 @@ include_directories("../include")
 
 #all the test files
 
+set(TEST_FILES Entity_Tests.cpp Tile_Tests.cpp TileEnvironmentState_Tests.cpp)
 
 set(JSON_CPP $ENV{HOME}/libs/json/jsoncpp.cpp
              $ENV{HOME}/libs/json/json.h
@@ -43,8 +44,18 @@ add_executable(unit_tests main.cpp ${TEST_FILES} ${JSON_CPP}
         ../Projects/VacuumWorld/src/SimpleReflexVacuumAgent.cpp ../Projects/VacuumWorld/include/SimpleReflexVacuumAgent.h
         ../Projects/VacuumWorld/src/SimpleVacuumAction.cpp ../Projects/VacuumWorld/include/SimpleVacuumAction.h
         ../Projects/VacuumWorld/src/VacuumPercept.cpp ../Projects/VacuumWorld/include/VacuumPercept.h
-        ../Projects/VacuumWorld/src/VacuumEnvironmentState.cpp ../Projects/VacuumWorld/include/VacuumEnvironmentState.h ../src/SimulatorResultFactory.cpp ../include/SimulatorResultFactory.h)
+        ../Projects/VacuumWorld/src/VacuumEnvironmentState.cpp ../Projects/VacuumWorld/include/VacuumEnvironmentState.h ../src/SimulatorResultFactory.cpp ../include/SimulatorResultFactory.h
+        ../Projects/VacuumWorld/src/RandomReflexVacuumAgent.cpp ../Projects/VacuumWorld/include/RandomReflexVacuumAgent.h
+        ../Projects/VacuumWorld/src/WallEntity.cpp ../Projects/VacuumWorld/include/WallEntity.h
+        ../Projects/VacuumWorld/src/RandomVacuumAction.cpp ../Projects/VacuumWorld/include/RandomVacuumAction.h
+        ../Projects/VacuumWorld/src/VacuumWorldSimulationResult.cpp ../Projects/VacuumWorld/include/VacuumWorldSimulationResult.h
+        ../src/SimulatorResult.cpp ../core/include/SimulatorResult.h
+        ../include/Simulator.h ../src/Simulator.cpp
+        ../Projects/VacuumWorld/src/VacuumEnvironment.cpp ../Projects/VacuumWorld/include/VacuumEnvironment.h
+        ../Projects/VacuumWorld/include/VacuumWorldPerformanceMeasure.h ../Projects/VacuumWorld/src/VacuumWorldPerformanceMeasure.cpp
+        )
 
-target_link_libraries(unit_tests gtest_main gtest)
+
+target_link_libraries(unit_tests gtest_main gtest visualizer)
 qt5_use_modules( unit_tests Core Widgets Gui )
 

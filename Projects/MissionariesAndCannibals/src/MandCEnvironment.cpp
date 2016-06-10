@@ -7,7 +7,16 @@
 #include "MandCAction.h"
 
 void MandCEnvironment::loadEnvironment(string fileName) {
+
     StateNode *initialNode = NULL;
+    MandCEnvironmentState *initialState = new MandCEnvironmentState;
+    initialState->setCannibalsLeft(1);
+    initialState->setCannibalsRight(2);
+    initialState->setMissionariesLeft(3);
+    initialState->setRiverCrossed(false);
+    initialState->setMissionariesRight(0);
+    initialNode = new StateNode(0, initialState, NULL, NULL);
+    expandNode(initialNode);
     this->goalNode = NULL;
     this->initialState = new MandCEnvironmentState; //automatically does initial setup
     this->goalState = new MandCEnvironmentState;
@@ -63,9 +72,20 @@ std::string MandCEnvironment::outputToJson() {
     std::string result;
     //general environment info
     outputRoot["Environment"]["age"] = (int) getAge();
-    outputRoot["Environment"]["type"] = "Missionaries_and_Cannibals_Environment";
+    outputRoot["Environment"]["type"] = "MissionariesAndCannibals";
     if(goalNode!=NULL) {
         outputRoot["Environment"]["found"] = true;
+        outputRoot["Environment"]["solution_path"] = Json::arrayValue;
+        StateNode *currentPathStep = goalNode;
+        int count = 0;
+        while (currentPathStep != NULL) {
+            Json::Value temp;
+            temp["id"] = count;
+            temp["state"] = outputStateToJson(currentPathStep->getState());
+            outputRoot["Environment"]["solution_path"].append(temp);
+            currentPathStep = currentPathStep->getParent();
+            count++;
+        }
     } else {
         outputRoot["Environment"]["found"] = false;
         outputRoot["Environment"]["frontier"] = Json::arrayValue;
@@ -87,15 +107,29 @@ double MandCEnvironment::getPerformanceMeasure() {
 }
 
 void MandCEnvironment::act() {
-    if(frontier.empty()) {
-        std::cout << "ERROR NO POSSIBLE SOLUTION " << std::endl;
-    } else {
-        //remove from frontier
-        StateNode *popped = frontier.at(0);
-        frontier.erase(frontier.begin());
-        //mark as explored
-        std::vector<StateNode *> expanded = expandNode(popped);
+    if (!goalFound()) {
+        if (frontier.empty()) {
+            std::cout << "ERROR NO POSSIBLE SOLUTION " << std::endl;
+        } else {
+            //remove from frontier
+            StateNode *popped = frontier.at(0);
+            frontier.erase(frontier.begin());
+            //mark as explored
+            addToExplored(popped);
 
+            //expanding node
+            std::vector<StateNode *> expanded = expandNode(popped);
+
+            for (StateNode *curr : expanded) {
+                if (!inFrontier(curr) && !inExploredSet(curr)) {
+                    if (curr->getState()->compareTo(goalState) == 0) {
+                        this->goalNode = curr;
+                    } else {
+                        addToFrontier(curr);
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -146,7 +180,38 @@ std::vector<StateNode *> MandCEnvironment::expandNode(StateNode *target) {
     curr = new StateNode(target->getPathCost()+1, expandedState, target, new MandCAction(0,2));
     expanded.push_back(curr);
 
-    for(std::vector<StateNode *>::iterator it)
+    for (std::vector<StateNode *>::iterator it = expanded.begin(); it < expanded.end(); it++) {
+        //delete all the invalid nodes that were generated
+        StateNode *node = *it;
+        MandCEnvironmentState *state = node->getState();
+        if (state == NULL) { //this state must be invalid
+            it = expanded.erase(it);
+            it--;
+        }
+    }
 
     return expanded;
+}
+
+bool MandCEnvironment::inFrontier(StateNode *node) {
+    bool result = false;
+    for (StateNode *curr : frontier) {
+        if (curr->compareTo(node) == 0) {
+            result = true;
+        }
+    }
+
+    return result;
+}
+
+bool MandCEnvironment::inExploredSet(StateNode *node) {
+    bool result = false;
+
+    for (StateNode *curr : explored) {
+        if (curr->compareTo(node) == 0) {
+            result = true;
+        }
+    }
+
+    return result;
 }
