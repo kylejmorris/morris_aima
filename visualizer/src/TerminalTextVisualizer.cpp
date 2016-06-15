@@ -29,7 +29,7 @@ void TerminalTextVisualizer::update(std::string state) {
                 } else {
                     out << "river=left side";
                 }
-                out << "}\n\n";
+                out << "}\n";
             }
         } else {
             //outputing frontier

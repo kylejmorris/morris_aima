@@ -7,7 +7,6 @@
 #include "MandCAction.h"
 
 void MandCEnvironment::loadEnvironment(string fileName) {
-
     StateNode *initialNode = NULL;
     MandCEnvironmentState *initialState = new MandCEnvironmentState;
     initialState->setCannibalsLeft(1);
