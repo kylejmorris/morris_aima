@@ -1,4 +1,0 @@
-=====VACUUM WORLD SIMULATION RESULTS=====
-	Simulation Cycles: 10
-	Environment Size: [4x4 tiles]
-	Performance Measure: 158
