@@ -184,10 +184,28 @@ include_directories(
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
 
+#JSONCPP support
+set(jsoncpp_ROOT "$ENV{HOME}/libs/jsoncpp")
+message(JSON dir: ${jsoncpp_ROOT})
+find_library(jsoncpp NAMES jsoncpp)
+include_directories(${jsoncpp_ROOT}/include)
+link_directories(${jsoncpp_ROOT}/lib)
+set(JSON_CPP $ENV{HOME}/libs/json/jsoncpp.cpp
+        $ENV{HOME}/libs/json/json.h
+        $ENV{HOME}/libs/json/json-forwards.h)
+
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
-
+#VARIABLES FOR ENVIRONMENT FILES
+set(ENVIRONMENT_CORE src/Agent.cpp
+        src/Entity.cpp
+        src/Location.cpp
+        src/EnvironmentState.cpp
+        src/EntityFactory.cpp
+        src/EntityFactoryFactory.cpp
+        src/EnvironmentStateFactory.cpp
+        )
 include_directories(include ${catkin_INCLUDE_DIRS})
 
-add_executable(morris_aima_environment_node src/morris_aima_environment_node.cpp)
+add_executable(morris_aima_environment_node src/morris_aima_environment_node.cpp ${ENVIRONMENT_CORE} )
 target_link_libraries(morris_aima_environment_node ${catkin_LIBRARIES})
