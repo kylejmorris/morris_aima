@@ -114,6 +114,7 @@ catkin_package(
 ## Your package locations should be listed before other locations
 # include_directories(include)
 include_directories(
+  include
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -194,18 +195,21 @@ set(JSON_CPP $ENV{HOME}/libs/json/jsoncpp.cpp
         $ENV{HOME}/libs/json/json.h
         $ENV{HOME}/libs/json/json-forwards.h)
 
+include_directories(include ${catkin_INCLUDE_DIRS})
+
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 #VARIABLES FOR ENVIRONMENT FILES
-set(ENVIRONMENT_CORE src/Agent.cpp
-        src/Entity.cpp
-        src/Location.cpp
-        src/EnvironmentState.cpp
-        src/EntityFactory.cpp
-        src/EntityFactoryFactory.cpp
-        src/EnvironmentStateFactory.cpp
+set(ENVIRONMENT_CORE #src/Agent.cpp
+    #    src/Entity.cpp
+    #    src/Location.cpp
+    #    src/EnvironmentState.cpp
+    #    src/EntityFactory.cpp
+    #    src/EntityFactoryFactory.cpp
+    #    src/EnvironmentStateFactory.cpp
+        src/Environment.cpp
+        src/EnvironmentFactory.cpp
         )
-include_directories(include ${catkin_INCLUDE_DIRS})
 
-add_executable(morris_aima_environment_node src/morris_aima_environment_node.cpp ${ENVIRONMENT_CORE} )
+add_executable(morris_aima_environment_node src/morris_aima_environment_node.cpp ${ENVIRONMENT_CORE})
 target_link_libraries(morris_aima_environment_node ${catkin_LIBRARIES})

@@ -1,61 +1,32 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
-
 #include <sstream>
+#include <Environment.h>
+#include <EnvironmentFactory.h>
 
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
  */
-int main(int argc, char **argv)
-{
-  ros::init(argc, argv, "morris_aima_environment_node");
-
-  /**
-   * NodeHandle is the main access point to communications with the ROS system.
-   * The first NodeHandle constructed will fully initialize this node, and the last
-   * NodeHandle destructed will close down the node.
-   */
-  ros::NodeHandle n;
-
-  /**
-   Topic will be decided.
-*/
-  ros::Publisher chatter_pub = n.advertise<std_msgs::String>("undetermined", 1000);
-
-  ros::Rate loop_rate(10);
-
-  /**
-   * A count of how many messages we have sent. This is used to create
-   * a unique string for each message.
-   */
-  int count = 0;
-  while (ros::ok())
-  {
+int main(int argc, char **argv) {
+    ros::init(argc, argv, "morris_aima_environment_node");
     /**
-     * This is a message object. You stuff it with data, and then publish it.
+     * NodeHandle is the main access point to communications with the ROS system.
+     * The first NodeHandle constructed will fully initialize this node, and the last
+     * NodeHandle destructed will close down the node.
      */
-    std_msgs::String msg;
+    ros::NodeHandle n("morris_aima_environment");
 
-    std::stringstream ss;
-    ss << "Environment Setup: hello!" << count;
-    msg.data = ss.str();
+    //set of the environment with provided configuration
+    std::string worldType;
+    ros::param::get("/morris_aima_control/world_type", worldType);
+    XmlRpc::XmlRpcValue properties;
+    ros::param::get("config", properties);
+    Environment *environment = EnvironmentFactory::createEnvironment(worldType,properties);
 
-    ROS_INFO("%s", msg.data.c_str());
+    //run main loop, so long as the ros node is up and running.
+    while(ros::ok()) {
+    }
 
-    /**
-     * The publish() function is how you send messages. The parameter
-     * is the message object. The type of this object must agree with the type
-     * given as a template parameter to the advertise<>() call, as was done
-     * in the constructor above.
-     */
-    chatter_pub.publish(msg);
-
-    ros::spinOnce();
-
-    loop_rate.sleep();
-    ++count;
-  }
-
-
-  return 0;
+    ros::spin();
+    return 0;
 }
