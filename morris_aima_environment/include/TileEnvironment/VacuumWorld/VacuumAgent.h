@@ -1,0 +1,15 @@
+/**
+* CLASS: SimpleReflexVacuumAgent
+* DATE: 11/05/16
+* AUTHOR: ${AUTHOR}
+* DESCRIPTION: ${DESCRIPTION}
+*/
+
+#ifndef MORRIS_AIMA_SIMPLEREFLEXVACUUMAGENT_H
+#define MORRIS_AIMA_SIMPLEREFLEXVACUUMAGENT_H
+#include <Agent.h>
+
+class VacuumAgent : public Agent {
+};
+
+#endif //MORRIS_AIMA_SIMPLEREFLEXVACUUMAGENT_H
