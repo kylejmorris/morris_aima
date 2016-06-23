@@ -6,7 +6,7 @@
 * and a simple randomized agent.
 *
 * AGENTS (supported in environment)
-*    VacuumAgent, RandomizedVacuumAgent
+*   VacuumAgent, RandomizedVacuumAgent
 * ENTITIES (supported in environment):
 *   Dirt: Objects that vacuums can clean up from tiles.
 *   Wall: objects that vacuums can't pass through.
@@ -25,6 +25,7 @@
 #define MORRIS_AIMA_VACUUMENVIRONMENT_H
 #include <TileEnvironment.h>
 #include "VacuumEnvironmentState.h"
+#include <std_srvs/Empty.h>
 #include "SimpleVacuumAction.h"
 #include "VacuumWorldPerformanceMeasure.h"
 
@@ -32,6 +33,29 @@ class SimpleReflexVacuumAgent;
 class RandomVacuumAction;
 class VacuumEnvironment : public TileEnvironment {
 private:
+    /**
+     * When initialized, this will provide the service used to activate the environment.
+     * ie: will receive callbacks to activate()
+     */
+    ros::ServiceServer activateService;
+
+    /**
+     * When initialized, this will provide the service used to deactivate the environment.
+     * ie: will receive callbacks to deactivate();
+     */
+    ros::ServiceServer deactivateService;
+
+    /**
+     * When initialized, this will provide the service used to load the environment.
+     * ie: will receive callbacks to load();
+     */
+    ros::ServiceServer loadService;
+
+    /**
+     * Publishes state of VacuumWorld environment
+     */
+    ros::Publisher statePublisher;
+
     /**
      * The state of the environment
      */
@@ -49,6 +73,12 @@ private:
     TileLocation *vacuumLocation;
 
 public:
+    virtual void publishState() override;
+
+    virtual void reset() override;
+
+    virtual void initialize() override;
+
     virtual double getPerformanceMeasure();
 
     virtual EnvironmentState *readState() override;
@@ -79,6 +109,24 @@ public:
 
     void simpleVacuumAct(SimpleVacuumAction *action);
     void randomVacuumAct(RandomVacuumAction *action);
+
+    /**
+     * Activate the environment so it may cycle. This just calls the parent Environment activate() routine and is used to provide the activate service to ros.
+     */
+    bool activate_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp);
+    /**
+     * Activate the environment so it won't cycle. This just calls the parent Environment deactivate() routine and is used to provide the activate service to ros.
+     */
+    bool deactivate_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp);
+    /**
+     * Reset the environment. This will deactivate and refresh it to it's initial state, whatever that was specified as in the configuration given.
+     */
+    bool reset_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp);
+
+    /**
+     * Load the environment. This will reset, and refresh the environment with new parameters specified
+     */
+    bool load_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp);
 
     virtual std::string outputToJson() override;
 };

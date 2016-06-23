@@ -21,6 +21,14 @@ public:
 
     virtual void loadEnvironment(string fileName);
 
+    /**
+     * Load parameters from ros param server and setup the environment.
+     * Environment must current NOT be activated(cycling) in order to load a new
+     * configuration.
+     * @return bool: True if loading was successful. False otherwise.
+     */
+    virtual bool load();
+
     virtual EnvironmentState *readState();
 
     virtual bool add(Entity *e, Location *place);

@@ -15,9 +15,11 @@
 #include <string>
 #include "EnvironmentState.h"
 #include "Entity.h"
+#include <ros/service_server.h>
 #include "Location.h"
 #include "PerformanceMeasure.h"
 #include <vector>
+#include <ros/node_handle.h>
 
 using namespace std;
 
@@ -33,7 +35,19 @@ private:
      * we will allow cycling. Otherwise assume the environment is paused or under some sort of analysis.
      */
     bool active = false;
+
+private:
+/**
+     * The node handle for the node running this environment.
+     */
+    ros::NodeHandle *nodeHandle;
 public:
+    /**
+     * Set up the environment services/etc to advertise
+     * @param nh: The nodehandle for environment node we're using.
+     */
+    virtual void initialize() = 0;
+
     /**
      * Initialize the environment from a map file, setting initial environment state.
      * @param string fileName: Name of the environment to load.
@@ -82,6 +96,10 @@ public:
      */
     long getAge();
 
+    ros::NodeHandle *getNodeHandle() const;
+
+    void setNodeHandle(ros::NodeHandle *nodeHandle);
+
     /**
      * Output all relevant state information of the environment into a string. By default this is json formatted
      * Note that the output of an environment may have more details than an initial loading map. For example, the age of Environment
@@ -101,6 +119,33 @@ public:
      */
     void cycle();
     //TODO implement a getStatistics method to return some EnvironmentStatistics object.
+
+     /**
+     * Determine if environment is active(able to be cycled) or not(paused).
+     * @return bool: true if active, false otherwise
+     */
+    bool isActive();
+
+    /**
+     * Flag the environment so it may be cycled.
+     */
+    bool activate();
+
+    /**
+     * Flag to prevent cycling of the environment.
+     */
+    bool deactivate();
+
+    /**
+     * Have environment publish it's state on desired topic. This is using ros.
+     */
+    virtual void publishState() = 0;
+
+    /**
+     * Stop the environment from cycling and put it back in it's original state. This may be some default state,
+     * or a configuration specified before.
+     */
+    virtual void reset() = 0;
 protected:
     /**
      * Run through all agents in environment and let them act.
@@ -119,21 +164,6 @@ protected:
      */
     virtual void updateResults() = 0;
 
-    /**
-     * Determine if environment is active(able to be cycled) or not(paused).
-     * @return bool: true if active, false otherwise
-     */
-    bool isActive();
-
-    /**
-     * Start the environment so it may be cycled.
-     */
-    void activate();
-
-    /**
-     * Prevent cycling of the environment.
-     */
-    void deactivate();
 };
 
 #endif //MORRIS_AIMA_ENVIRONMENT_H

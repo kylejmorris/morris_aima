@@ -1,6 +1,4 @@
 #include <vector>
-#include <QtCore/qrect.h>
-#include <QPainter>
 #include "TileGrid.h"
 #include "TileGrid.h"
 #include "Tile.h"

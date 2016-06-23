@@ -2,6 +2,8 @@
 #include <fstream>
 #include <EntityFactoryFactory.h>
 #include <EnvironmentStateFactory.h>
+#include <XmlRpcValue.h>
+#include <ros/ros.h>
 #include "TileEnvironment.h"
 #include "json/json.h"
 #include "Agent.h"
@@ -55,7 +57,58 @@ std::string TileEnvironment::outputToJson() {
     return result;
 }
 
-//TODO this should be updated for using a FACTORY, just feeding in the Environment type and file info as parameters
+bool TileEnvironment::load() {
+    bool result = true; //true until proven otherwise
+    TileEnvironmentState *state;
+    int x, y;
+    std::string environmentType;
+    ros::param::get("/morris_aima_control/world_type", environmentType);
+    XmlRpc::XmlRpcValue properties;
+    getNodeHandle()->getParam("config", properties);
+    if (!properties.hasMember("grid_width")) {
+        result = false;
+        ROS_INFO("ERROR: invalid parameter for grid width");
+    } else {
+        x = properties["grid_width"];
+    }
+    if (!properties.hasMember("grid_height")) {
+        result = false;
+        ROS_INFO("ERROR: invalid parameter for grid height");
+    } else {
+        y = properties["grid_height"];
+    }
+
+    if (!properties.hasMember("entities")) {
+        result = false;
+        ROS_INFO("ERROR: invalid parameter for entities. note: [] indicates no entities.");
+    }
+    //setting the factory for the given type of environment.
+    this->entityFactory = EntityFactoryFactory::createEntityFactory(environmentType);
+
+    //figure out which environment state is associated with this environment
+    EnvironmentState *tempState = EnvironmentStateFactory::createEnvironmentState(environmentType, properties);
+    state = static_cast<TileEnvironmentState *>(tempState);
+
+    XmlRpc::XmlRpcValue entities; //list of entities to put in grid
+    getNodeHandle()->getParam("config/entities", entities);
+    if(!entities.valid()) {
+        ROS_INFO("ERROR: entities configuration for environment is not valid or not set.");
+    } else {
+        for (int count = 0; count < entities.size(); count++) {
+            std::string entityType = static_cast<std::string>(entities[count]["entity_type"]);
+            XmlRpc::XmlRpcValue entityDetails = entities[count];
+            Entity *current = this->entityFactory->createEntity(entityType, &entityDetails);
+            TileLocation loc(entities[count]["location_x"], entities[count]["location_y"]);
+            state->add(current, &loc);
+        }
+    }
+    this->state = state;
+    if(result) {
+        ROS_INFO("Successfully loaded %d x %d environment!",x,y);
+    }
+    return result;
+}
+
 void TileEnvironment::loadEnvironment(string fileName) {
     TileEnvironmentState *state;
     int x, y;
@@ -80,10 +133,9 @@ void TileEnvironment::loadEnvironment(string fileName) {
         y = root["Environment"]["size"]["y"].asInt();
 
         //figure out which environment state is associated with this environment
-        EnvironmentState *tempState = EnvironmentStateFactory::createEnvironmentState(environmentType,root["Environment"]);
+        EnvironmentState *tempState = EnvironmentStateFactory::createEnvironmentState(environmentType,
+                                                                                      root["Environment"]);
         state = static_cast<TileEnvironmentState *>(tempState);
-
-
         for (auto entity : root["Environment"]["entities"]) {
             Entity *current = this->entityFactory->createEntity(entity["type"].asString(), entity["properties"]);
             TileLocation loc(entity["location"]["x"].asInt(), entity["location"]["y"].asInt());

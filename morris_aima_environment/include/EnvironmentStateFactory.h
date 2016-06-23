@@ -11,11 +11,12 @@
 
 #include <EnvironmentState.h>
 #include <string>
+#include <XmlRpcValue.h>
 
 class EnvironmentStateFactory {
 public:
-
     static EnvironmentState *createEnvironmentState(std::string type, Json::Value properties);
+    static EnvironmentState *createEnvironmentState(std::string type, XmlRpc::XmlRpcValue stateProperties);
 };
 
 

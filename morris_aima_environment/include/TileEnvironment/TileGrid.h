@@ -20,7 +20,7 @@ private:
     //Width and height of grid. Once set this doesn't change.
     const int WIDTH;
     const int HEIGHT;
-    std::vector<std::vector<Tile>> tiles;
+    std::vector<std::vector<Tile> > tiles;
 public:
     TileGrid(int width, int height);
     ~TileGrid();

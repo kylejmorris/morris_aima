@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.0)
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 project(morris_aima_environment)
 
 ## Find catkin macros and libraries
@@ -195,21 +196,58 @@ set(JSON_CPP $ENV{HOME}/libs/json/jsoncpp.cpp
         $ENV{HOME}/libs/json/json.h
         $ENV{HOME}/libs/json/json-forwards.h)
 
-include_directories(include ${catkin_INCLUDE_DIRS})
+include_directories(include include/TileEnvironment include/TileEnvironment/VacuumWorld ${catkin_INCLUDE_DIRS})
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 #VARIABLES FOR ENVIRONMENT FILES
-set(ENVIRONMENT_CORE #src/Agent.cpp
-    #    src/Entity.cpp
-    #    src/Location.cpp
-    #    src/EnvironmentState.cpp
-    #    src/EntityFactory.cpp
-    #    src/EntityFactoryFactory.cpp
-    #    src/EnvironmentStateFactory.cpp
-        src/Environment.cpp
+#would make sense to just make this a library
+set(ENVIRONMENT_CORE
+        src/Agent.cpp
+        src/Entity.cpp include/Entity.h
+        src/Location.cpp
+        src/EnvironmentState.cpp
+        src/EntityFactory.cpp include/EntityFactory.h
+        src/EntityFactoryFactory.cpp include/EntityFactoryFactory.h
+        src/EnvironmentStateFactory.cpp include/EnvironmentStateFactory.h
+        src/Environment.cpp include/Environment.h
         src/EnvironmentFactory.cpp
         )
+#really this could be a library
+set(TILE_ENVIRONMENT_SRC
+        src/TileEnvironment/TileEnvironment.cpp include/TileEnvironment/TileEnvironment.h
+        src/TileEnvironment/Tile.cpp include/TileEnvironment/Tile.h
+        src/TileEnvironment/TileEnvironmentState.cpp include/TileEnvironment/TileEnvironmentState.h
+        src/TileEnvironment/TileGrid.cpp include/TileEnvironment/TileGrid.h
+        src/TileEnvironment/TileLocation.cpp include/TileEnvironment/TileLocation.h
+        )
 
-add_executable(morris_aima_environment_node src/morris_aima_environment_node.cpp ${ENVIRONMENT_CORE})
-target_link_libraries(morris_aima_environment_node ${catkin_LIBRARIES})
+set(VACUUM_WORLD_SRC
+        src/TileEnvironment/VacuumWorld/DirtEntity.cpp
+        src/TileEnvironment/VacuumWorld/RandomReflexVacuumAgent.cpp
+        src/TileEnvironment/VacuumWorld/RandomVacuumAction.cpp
+        src/TileEnvironment/VacuumWorld/SimpleReflexVacuumAgent.cpp
+        src/TileEnvironment/VacuumWorld/SimpleVacuumAction.cpp
+        src/TileEnvironment/VacuumWorld/VacuumAgent.cpp
+        src/TileEnvironment/VacuumWorld/VacuumEnvironment.cpp
+        src/TileEnvironment/VacuumWorld/VacuumEnvironmentState.cpp
+        src/TileEnvironment/VacuumWorld/VacuumFactory.cpp
+        src/TileEnvironment/VacuumWorld/VacuumPercept.cpp
+        src/TileEnvironment/VacuumWorld/VacuumWorldPerformanceMeasure.cpp
+        src/TileEnvironment/VacuumWorld/WallEntity.cpp
+        include/TileEnvironment/VacuumWorld/DirtEntity.h
+        include/TileEnvironment/VacuumWorld/RandomReflexVacuumAgent.h
+        include/TileEnvironment/VacuumWorld/RandomVacuumAction.h
+        include/TileEnvironment/VacuumWorld/SimpleReflexVacuumAgent.h
+        include/TileEnvironment/VacuumWorld/SimpleVacuumAction.h
+        include/TileEnvironment/VacuumWorld/VacuumAgent.h
+        include/TileEnvironment/VacuumWorld/VacuumEnvironment.h
+        include/TileEnvironment/VacuumWorld/VacuumEnvironmentState.h
+        include/TileEnvironment/VacuumWorld/VacuumFactory.h
+        include/TileEnvironment/VacuumWorld/VacuumPercept.h
+        include/TileEnvironment/VacuumWorld/VacuumWorldPerformanceMeasure.h
+        include/TileEnvironment/VacuumWorld/WallEntity.h
+)
+
+add_executable(morris_aima_environment_node src/morris_aima_environment_node.cpp ${ENVIRONMENT_CORE} ${TILE_ENVIRONMENT_SRC} ${VACUUM_WORLD_SRC})
+target_link_libraries(morris_aima_environment_node ${catkin_LIBRARIES} "jsoncpp")

@@ -1,11 +1,17 @@
 #include <VacuumPercept.h>
 #include <DirtEntity.h>
 #include <json/json.h>
+#include <ros/node_handle.h>
+#include <std_srvs/Empty.h>
 #include "SimpleVacuumAction.h"
 #include "VacuumEnvironment.h"
 #include "SimpleReflexVacuumAgent.h"
 #include "SimpleVacuumAction.h"
 #include "RandomVacuumAction.h"
+
+void VacuumEnvironment::reset() {
+}
+
 
 VacuumEnvironment::VacuumEnvironment() : TileEnvironment() {
     this->performanceMeasure = new VacuumWorldPerformanceMeasure;
@@ -29,6 +35,10 @@ void VacuumEnvironment::act() {
         }
         delete forVacuum;
     }
+}
+
+void VacuumEnvironment::publishState() {
+
 }
 
 void VacuumEnvironment::generate() {
@@ -98,6 +108,11 @@ void VacuumEnvironment::simpleVacuumAct(SimpleVacuumAction *action) {
     }
 }
 
+bool VacuumEnvironment::load_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp) {
+    this->load();
+}
+
+
 void VacuumEnvironment::randomVacuumAct(RandomVacuumAction *action) {
     if(action!=NULL) {
 //respond to the action made by agent, updating environment state
@@ -121,6 +136,25 @@ void VacuumEnvironment::randomVacuumAct(RandomVacuumAction *action) {
             state->cleanTile();
         }
     }
+}
+
+bool VacuumEnvironment::activate_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp) {
+    this->activate();
+}
+
+bool VacuumEnvironment::deactivate_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp) {
+    this->deactivate();
+}
+
+bool VacuumEnvironment::reset_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp) {
+    this->reset();
+}
+
+void VacuumEnvironment::initialize() {
+    activateService = getNodeHandle()->advertiseService("start", &VacuumEnvironment::activate_callback, this);
+    deactivateService = getNodeHandle()->advertiseService("stop", &VacuumEnvironment::deactivate_callback, this);
+    loadService = getNodeHandle()->advertiseService("load", &VacuumEnvironment::load_callback, this);
+    statePublisher = getNodeHandle()->advertise<ros::morris_aima_msgs::VacuumWorldState>("vacuum_world_state")
 }
 
 double VacuumEnvironment::getPerformanceMeasure() {
