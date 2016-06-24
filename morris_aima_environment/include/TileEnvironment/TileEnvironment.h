@@ -13,6 +13,11 @@
 class EntityFactory;
 class TileEnvironment : public Environment {
 private:
+    /**
+     * Whether or not a state has been loaded into environment.
+     * If some configuration has been set, we are able to publish/cycle/etc.
+     */
+    bool loaded = false;
     TileEnvironmentState *state;
     EntityFactory *entityFactory; //for building entities in a Tile Environment
 public:
@@ -58,6 +63,13 @@ protected:
     virtual void generate() override;
 
     virtual void updateResults() override;
+
+    /**
+     * Check if the loaded member is set.
+     */
+    bool isLoaded();
+
+    virtual void reset();
 };
 
 

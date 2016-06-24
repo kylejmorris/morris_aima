@@ -7,6 +7,7 @@ project(morris_aima_environment)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   roscpp
+  morris_aima_msgs
   rospy
   std_msgs
 )

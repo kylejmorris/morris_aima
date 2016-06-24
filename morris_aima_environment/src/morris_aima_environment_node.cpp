@@ -66,11 +66,13 @@ int main(int argc, char **argv) {
     //run main loop, so long as the ros node is up and running.
     while(ros::ok()) {
         std::string outputmsg;
+
         if(environment->isActive()) {
             outputmsg = "active";
         } else {
             outputmsg = "inactive";
         }
+
         environment->cycle();
         ROS_INFO("%s", outputmsg.c_str());
         ros::spinOnce();

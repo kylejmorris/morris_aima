@@ -103,10 +103,27 @@ bool TileEnvironment::load() {
         }
     }
     this->state = state;
-    if(result) {
-        ROS_INFO("Successfully loaded %d x %d environment!",x,y);
+    if(this->state==NULL) {
+       result = false;
     }
+    if(result) {
+        loaded = true;
+        ROS_INFO("Successfully loaded %d x %d environment!",x,y);
+    } else {
+        ROS_INFO("Failed to load the %d x %d environment!",x,y);
+    }
+
     return result;
+}
+
+void TileEnvironment::reset() {
+    Environment::reset();
+    this->loaded = false;
+}
+
+
+bool TileEnvironment::isLoaded() {
+    return this->loaded;
 }
 
 void TileEnvironment::loadEnvironment(string fileName) {

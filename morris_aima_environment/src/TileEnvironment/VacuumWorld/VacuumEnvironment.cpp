@@ -5,13 +5,26 @@
 #include <std_srvs/Empty.h>
 #include "SimpleVacuumAction.h"
 #include "VacuumEnvironment.h"
+#include "morris_aima_msgs/VacuumWorldInfo.h"
 #include "SimpleReflexVacuumAgent.h"
 #include "SimpleVacuumAction.h"
 #include "RandomVacuumAction.h"
 
 void VacuumEnvironment::reset() {
+    if(isLoaded()) {
+        TileEnvironment::reset();
+        delete this->state;
+        if(this->vacuumLocation!=NULL) {
+            delete this->vacuumLocation;
+        }
+        delete this->vacuum;
+        delete this->performanceMeasure;
+        this->performanceMeasure = new VacuumWorldPerformanceMeasure;
+        ROS_INFO("Environment has been reset!");
+    } else {
+        ROS_INFO("Nothing to reset!");
+    }
 }
-
 
 VacuumEnvironment::VacuumEnvironment() : TileEnvironment() {
     this->performanceMeasure = new VacuumWorldPerformanceMeasure;
@@ -37,8 +50,38 @@ void VacuumEnvironment::act() {
     }
 }
 
-void VacuumEnvironment::publishState() {
+void VacuumEnvironment::publish() {
+    morris_aima_msgs::VacuumWorldInfo worldState; //contains all info to publish
+    if(isLoaded()) { //if environment isn't loaded, don't try doing anything here.
+        worldState.loaded = true;
+        worldState.age = getAge();
+        worldState.height = state->getHeight();
+        worldState.width = state->getWidth();
+        worldState.performance_measure = getPerformanceMeasure();
 
+        for (int row = 0; row < this->state->getHeight(); row++) {
+            for (int col = 0; col < state->getWidth(); col++) {
+                TileLocation location(col, row);
+                std::vector<Entity *> onTile = state->getEntitiesAt(&location);
+                for (auto current : onTile) {
+                    morris_aima_msgs::TileEntityInfo currentEntity; //current entity on a tile we're making info for
+                    currentEntity.type = current->getType();
+                    currentEntity.id = current->getId();
+                    currentEntity.location_x = col;
+                    currentEntity.location_y = row;
+
+                    worldState.entities.push_back(currentEntity);
+                }
+            }
+        }
+    } else { //what we assign if nothing was set to configure.
+        worldState.loaded = false;
+        worldState.performance_measure = -1;
+        worldState.age = 0;
+        worldState.height = 0;
+        worldState.width = 0;
+    }
+    this->statePublisher.publish(worldState);
 }
 
 void VacuumEnvironment::generate() {
@@ -109,7 +152,13 @@ void VacuumEnvironment::simpleVacuumAct(SimpleVacuumAction *action) {
 }
 
 bool VacuumEnvironment::load_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp) {
-    this->load();
+    if(isActive()) {
+        ROS_INFO("NOTICE: Please deactivate the environment before loading a new one.");
+    } else {
+        this->load();
+        //By keeping a VacuumWorldState instead of using TileEnvironmentState, we don't have to keep downcasting for subclass methods.
+        this->state = static_cast<VacuumEnvironmentState *>(TileEnvironment::readState()); //since it was figured out in parent, must bring it here. as a VacuumWorld State
+    }
 }
 
 
@@ -139,7 +188,11 @@ void VacuumEnvironment::randomVacuumAct(RandomVacuumAction *action) {
 }
 
 bool VacuumEnvironment::activate_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp) {
-    this->activate();
+    if(isLoaded()) {
+        this->activate();
+    } else {
+        ROS_INFO("error: Environment has not yet been loaded!");
+    }
 }
 
 bool VacuumEnvironment::deactivate_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp) {
@@ -147,14 +200,20 @@ bool VacuumEnvironment::deactivate_callback(std_srvs::Empty::Request &req, std_s
 }
 
 bool VacuumEnvironment::reset_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp) {
+    if(isActive()) {
+        ROS_INFO("First stopping environment...");
+        this->deactivate();
+    }
     this->reset();
+    return true;
 }
 
 void VacuumEnvironment::initialize() {
     activateService = getNodeHandle()->advertiseService("start", &VacuumEnvironment::activate_callback, this);
     deactivateService = getNodeHandle()->advertiseService("stop", &VacuumEnvironment::deactivate_callback, this);
     loadService = getNodeHandle()->advertiseService("load", &VacuumEnvironment::load_callback, this);
-    statePublisher = getNodeHandle()->advertise<ros::morris_aima_msgs::VacuumWorldState>("vacuum_world_state")
+    resetService = getNodeHandle()->advertiseService("reset", &VacuumEnvironment::reset_callback, this);
+    statePublisher = getNodeHandle()->advertise<morris_aima_msgs::VacuumWorldInfo>("vacuum_world",1000);
 }
 
 double VacuumEnvironment::getPerformanceMeasure() {

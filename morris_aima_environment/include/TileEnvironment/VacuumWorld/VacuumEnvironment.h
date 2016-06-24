@@ -52,6 +52,12 @@ private:
     ros::ServiceServer loadService;
 
     /**
+     * When initialized, this will provide the service used to reset the environment.
+     * ie: will receive callbacks to reset();
+     */
+    ros::ServiceServer resetService;
+
+    /**
      * Publishes state of VacuumWorld environment
      */
     ros::Publisher statePublisher;
@@ -59,21 +65,21 @@ private:
     /**
      * The state of the environment
      */
-    VacuumEnvironmentState *state;
+    VacuumEnvironmentState *state = NULL;
 
     /**
      * We know this environment contains only 1 vacuum, so we identify it here for easy access instead of searching grid.
      */
-    VacuumAgent *vacuum;
+    VacuumAgent *vacuum = NULL;
 
-    VacuumWorldPerformanceMeasure *performanceMeasure;
+    VacuumWorldPerformanceMeasure *performanceMeasure = NULL;
     /**
      * Where we found vacuum. Only valid if the Vacuum is found.
      */
-    TileLocation *vacuumLocation;
+    TileLocation *vacuumLocation = NULL;
 
 public:
-    virtual void publishState() override;
+    virtual void publish() override;
 
     virtual void reset() override;
 
@@ -118,15 +124,16 @@ public:
      * Activate the environment so it won't cycle. This just calls the parent Environment deactivate() routine and is used to provide the activate service to ros.
      */
     bool deactivate_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp);
-    /**
-     * Reset the environment. This will deactivate and refresh it to it's initial state, whatever that was specified as in the configuration given.
-     */
-    bool reset_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp);
 
     /**
      * Load the environment. This will reset, and refresh the environment with new parameters specified
      */
     bool load_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp);
+
+    /**
+     * Reset the environment. This will clear the cycle history and all statistics.
+     */
+    bool reset_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp);
 
     virtual std::string outputToJson() override;
 };

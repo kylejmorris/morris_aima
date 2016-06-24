@@ -139,13 +139,13 @@ public:
     /**
      * Have environment publish it's state on desired topic. This is using ros.
      */
-    virtual void publishState() = 0;
+    virtual void publish() = 0;
 
     /**
      * Stop the environment from cycling and put it back in it's original state. This may be some default state,
      * or a configuration specified before.
      */
-    virtual void reset() = 0;
+     virtual void reset();
 protected:
     /**
      * Run through all agents in environment and let them act.

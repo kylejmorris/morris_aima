@@ -8,14 +8,15 @@ long Environment::getAge() {
 
 void Environment::cycle() {
     if(isActive()) {
-        ROS_INFO("Cycling environment. AGE %s", getAge());
+        int age = getAge();
+        ROS_INFO("Cycling environment. AGE %d", age);
         act();
         generate();
         updateResults();
         //update environments age
         this->age++;
     }
-    publishState();
+    publish();
 }
 
 bool Environment::isActive() {
@@ -23,11 +24,23 @@ bool Environment::isActive() {
 }
 
 bool Environment::activate() {
-    this->active = true;
+    if(isActive()) {
+        ROS_INFO("NOTICE: Environment is already activated.");
+    } else {
+        this->active = true;
+    }
 }
 
 bool Environment::deactivate() {
-    this->active = false;
+    if(!isActive()) {
+        ROS_INFO("NOTICE: Environment is already deactivated.");
+    } else {
+        this->active = false;
+    }
+}
+
+void Environment::reset() {
+    this->age = 0; //just resetting the age
 }
 
 ros::NodeHandle *Environment::getNodeHandle() const {
