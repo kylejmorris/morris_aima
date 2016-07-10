@@ -15,4 +15,6 @@ An entity contains the following structure:
 More concretely: /morris_aima_environment/config/entities = [{entity_type,location_x,location_y} {entity_type, location_x, location_y} ... ]
 
     
+PUBLICATIONS:
+    publishes morris_aima_msgs/TileEnvironmentInfo messages on morris_aima_environment/tile_environment_info
    
