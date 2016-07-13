@@ -60,7 +60,7 @@ private:
     /**
      * Publishes state of VacuumWorld environment
      */
-    ros::Publisher statePublisher;
+    //ros::Publisher statePublisher;
 
     /**
      * The state of the environment
@@ -79,11 +79,11 @@ private:
     TileLocation *vacuumLocation = NULL;
 
 public:
-    virtual void publish() override;
+    virtual void publish();
 
     virtual void reset() override;
 
-    virtual void initialize() override;
+    virtual void initialize();
 
     virtual double getPerformanceMeasure();
 

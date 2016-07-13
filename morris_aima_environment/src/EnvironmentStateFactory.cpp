@@ -1,5 +1,6 @@
 #include <VacuumEnvironmentState.h>
 #include <json/json.h>
+#include "VacuumEnvironmentState.h"
 #include "EnvironmentStateFactory.h"
 
 EnvironmentState *EnvironmentStateFactory::createEnvironmentState(std::string type, Json::Value properties) {

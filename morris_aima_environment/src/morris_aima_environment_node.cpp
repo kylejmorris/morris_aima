@@ -27,6 +27,7 @@ bool isValidWorldType(std::string worldType) {
 int main(int argc, char **argv) {
     int cycleRate = defaultRate; //how quick we'll loop
     ros::init(argc, argv, "morris_aima_environment_node");
+
     /**
      * NodeHandle is the main access point to communications with the ROS system.
      * The first NodeHandle constructed will fully initialize this node, and the last

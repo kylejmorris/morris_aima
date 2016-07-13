@@ -197,7 +197,7 @@ set(JSON_CPP $ENV{HOME}/libs/json/jsoncpp.cpp
         $ENV{HOME}/libs/json/json.h
         $ENV{HOME}/libs/json/json-forwards.h)
 
-include_directories(include include/TileEnvironment include/TileEnvironment/VacuumWorld ${catkin_INCLUDE_DIRS})
+include_directories(include include/TileEnvironment include/MissionariesAndCannibals include/TileEnvironment/VacuumWorld ${catkin_INCLUDE_DIRS})
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
@@ -250,5 +250,17 @@ set(VACUUM_WORLD_SRC
         include/TileEnvironment/VacuumWorld/WallEntity.h
 )
 
-add_executable(morris_aima_environment_node src/morris_aima_environment_node.cpp ${ENVIRONMENT_CORE} ${TILE_ENVIRONMENT_SRC} ${VACUUM_WORLD_SRC})
+SET(MISSIONARIES_AND_CANNIBALS_SRC
+        src/MissionariesAndCannibals/MandCAction.cpp
+        src/MissionariesAndCannibals/MandCEnvironment.cpp
+        src/MissionariesAndCannibals/MandCEnvironmentState.cpp
+        src/MissionariesAndCannibals/StateNode.cpp
+        include/MissionariesAndCannibals/MandCAction.h
+        include/MissionariesAndCannibals/MandCEnvironment.h
+        include/MissionariesAndCannibals/MandCEnvironmentState.h
+        include/MissionariesAndCannibals/StateNode.h
+        )
+
+
+add_executable(morris_aima_environment_node src/morris_aima_environment_node.cpp ${ENVIRONMENT_CORE} ${TILE_ENVIRONMENT_SRC} ${VACUUM_WORLD_SRC} ${MISSIONARIES_AND_CANNIBALS_SRC})
 target_link_libraries(morris_aima_environment_node ${catkin_LIBRARIES} "jsoncpp")

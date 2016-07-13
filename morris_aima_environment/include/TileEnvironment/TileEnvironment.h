@@ -20,6 +20,8 @@ private:
     bool loaded = false;
     TileEnvironmentState *state;
     EntityFactory *entityFactory; //for building entities in a Tile Environment
+    ros::Publisher tileEnvironmentPublisher;
+
 public:
     TileEnvironment();
     ~TileEnvironment();
@@ -64,6 +66,8 @@ protected:
 
     virtual void updateResults() override;
 
+    virtual void publish();
+    virtual void initialize();
     /**
      * Check if the loaded member is set.
      */

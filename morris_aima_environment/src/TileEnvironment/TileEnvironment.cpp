@@ -4,6 +4,7 @@
 #include <EnvironmentStateFactory.h>
 #include <XmlRpcValue.h>
 #include <ros/ros.h>
+#include <morris_aima_msgs/TileEnvironmentInfo.h>
 #include "TileEnvironment.h"
 #include "json/json.h"
 #include "Agent.h"
@@ -181,6 +182,44 @@ Entity *TileEnvironment::remove(int id) {
 
 bool TileEnvironment::exists(int id) {
     return this->state->exists(id);
+}
+
+void TileEnvironment::initialize() {
+    tileEnvironmentPublisher = getNodeHandle()->advertise<morris_aima_msgs::TileEnvironmentInfo>("tile_environment_info",1000);
+}
+
+void TileEnvironment::publish() {
+    morris_aima_msgs::TileEnvironmentInfo worldState;
+    if(isLoaded()) { //if environment isn't loaded, don't try doing anything here.
+        worldState.loaded = true;
+        worldState.age = getAge();
+        worldState.height = state->getHeight();
+        worldState.width = state->getWidth();
+        worldState.performance_measure = getPerformanceMeasure();
+
+        for (int row = 0; row < this->state->getHeight(); row++) {
+            for (int col = 0; col < state->getWidth(); col++) {
+                TileLocation location(col, row);
+                std::vector<Entity *> onTile = state->getEntitiesAt(&location);
+                for (auto current : onTile) {
+                    morris_aima_msgs::TileEntityInfo currentEntity; //current entity on a tile we're making info for
+                    currentEntity.type = current->getType();
+                    currentEntity.id = current->getId();
+                    currentEntity.location_x = col;
+                    currentEntity.location_y = row;
+
+                    worldState.entities.push_back(currentEntity);
+                }
+            }
+        }
+    } else { //what we assign if nothing was set to configure.
+        worldState.loaded = false;
+        worldState.performance_measure = -1;
+        worldState.age = 0;
+        worldState.height = 0;
+        worldState.width = 0;
+    }
+    this->tileEnvironmentPublisher.publish(worldState);
 }
 
 std::vector<Entity *> TileEnvironment::getEntities() {
