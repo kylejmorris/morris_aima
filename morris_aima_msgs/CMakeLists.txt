@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
+
 project(morris_aima_msgs)
 
 ## Find catkin macros and libraries
