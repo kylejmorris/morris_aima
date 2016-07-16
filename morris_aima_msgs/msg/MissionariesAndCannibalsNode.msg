@@ -3,8 +3,9 @@
 #how much it cost to get to this node
 int32 path_cost
 
+MissionariesAndCannibalsNode path
 #the state contained at this node
 MissionariesAndCannibalsState state
 
-#the node we got to this node from.
-MissionariesAndCannibalsNode parent
+#the action taken to get here
+MissionariesAndCannibalsAction action

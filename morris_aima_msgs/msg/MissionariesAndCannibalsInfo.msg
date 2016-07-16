@@ -9,3 +9,8 @@ bool found
 
 #the path to goal from initial state
 #---TODO: Make a list of lists here
+MissionariesAndCannibalsNode[] path
+
+MissionariesAndCannibalsNode[] explored
+
+MissionariesAndCannibalsNode[] frontier

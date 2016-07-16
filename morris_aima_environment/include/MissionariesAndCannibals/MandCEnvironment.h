@@ -39,6 +39,12 @@ private:
     ros::ServiceServer resetService;
 
     /**
+     * When initialized, this will provide the service used to load the environment.
+     * ie: will receive callbacks to reset();
+     */
+    ros::ServiceServer load_service;
+
+    /**
      * The initial environment state we'll start searching from.
      */
     MandCEnvironmentState *initialState;
@@ -50,7 +56,7 @@ private:
     /**
      * The node containing the found goal state, used to backtrack and generate the path to goal
      */
-    StateNode *goalNode;
+    StateNode *goalNode = NULL;
 
     /**
      * The frontier used for our search. Implemented as a queue for BFS.
@@ -63,6 +69,8 @@ private:
      */
     std::vector<StateNode *> explored;
 
+    //default publish that shows each cycle of environment.
+    ros::Publisher environment_publisher;
 public:
     /**
      * Setup the services and other ros components of this environment piece.
@@ -78,6 +86,12 @@ public:
      * Activate the environment so it may cycle. This just calls the parent Environment activate() routine and is used to provide the activate service to ros.
      */
     bool activate_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp);
+
+    /**
+     * load the environment so it may cycle. This just calls the parent Environment activate() routine and is used to provide the activate service to ros.
+     */
+    bool load_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp);
+
     /**
      * Activate the environment so it won't cycle. This just calls the parent Environment deactivate() routine and is used to provide the activate service to ros.
      */

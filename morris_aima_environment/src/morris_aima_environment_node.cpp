@@ -17,6 +17,8 @@ bool isValidWorldType(std::string worldType) {
     bool result = false;
     if(worldType.compare("vacuum_world")==0) {
         result = true;
+    } else if(worldType.compare("missionaries_and_cannibals")==0) {
+        result = true;
     }
     return result;
 }

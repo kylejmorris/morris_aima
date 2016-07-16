@@ -1,4 +1,5 @@
 #include <json/json.h>
+#include <morris_aima_msgs/MissionariesAndCannibalsInfo.h>
 #include "Environment.h"
 #include "MandCEnvironment.h"
 #include <iostream>
@@ -26,7 +27,7 @@ void MandCEnvironment::loadEnvironment(string fileName) {
     this->goalState->setMissionariesRight(3);
     this->goalState->setRiverCrossed(true);
 
-    initialNode = new StateNode(0, this->initialState, NULL, NULL);
+    initialNode = new StateNode(0, this->initialState, NULL, new MandCAction(0,0));
     //in case the initial node has our goal state, just stop the search before we start.
     if(initialNode->getState()->compareTo(goalState)==0) {
         goalNode = new StateNode(0, initialState, NULL, NULL);
@@ -220,6 +221,9 @@ bool MandCEnvironment::inExploredSet(StateNode *node) {
 bool MandCEnvironment::activate_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp) {
     this->activate();
 }
+bool MandCEnvironment::load_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp) {
+    this->loadEnvironment("");
+}
 
 bool MandCEnvironment::deactivate_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp) {
     this->deactivate();
@@ -235,11 +239,82 @@ bool MandCEnvironment::reset_callback(std_srvs::Empty::Request &req, std_srvs::E
 }
 
 void MandCEnvironment::initialize() {
+    environment_publisher = getNodeHandle()->advertise<morris_aima_msgs::MissionariesAndCannibalsInfo>("missionaries_and_cannibals_info", 1000, false);
     activateService = getNodeHandle()->advertiseService("start", &MandCEnvironment::activate_callback, this);
     deactivateService = getNodeHandle()->advertiseService("stop", &MandCEnvironment::deactivate_callback, this);
     resetService = getNodeHandle()->advertiseService("reset", &MandCEnvironment::reset_callback, this);
+    load_service = getNodeHandle()->advertiseService("load", &MandCEnvironment::load_callback, this);
 }
 
 void MandCEnvironment::publish() {
+    morris_aima_msgs::MissionariesAndCannibalsInfo environmentInfo;
+    environmentInfo.age = this->getAge();
+    environmentInfo.found = this->goalFound();
 
+    for(auto node : explored) {
+        //have to construct node message to append to info message
+        morris_aima_msgs::MissionariesAndCannibalsNode nodeMessage;
+        nodeMessage.path_cost = node->getPathCost();
+
+        //To make a node message we must construct a state message
+        morris_aima_msgs::MissionariesAndCannibalsState stateMessage;
+        MandCEnvironmentState *state = node->getState();
+        stateMessage.cannibals_left = state->getCannibalsLeft();
+        stateMessage.cannibals_right = state->getCannibalsRight();
+        stateMessage.missionaries_left = state->getMissionariesLeft();
+        stateMessage.missionaries_right = state->getMissionariesRight();
+        stateMessage.river_crossed = state->isRiverCrossed();
+        //now we add state to the node message
+        nodeMessage.state = stateMessage;
+        nodeMessage.action.cannibals_moved = node->getAction()->getNumCannibals();
+        nodeMessage.action.missionaries_moved = node->getAction()->getNumMissionaries();
+
+        environmentInfo.explored.push_back(nodeMessage);
+    }
+
+    for(auto node : frontier) {
+         //have to construct node message to append to info message
+        morris_aima_msgs::MissionariesAndCannibalsNode nodeMessage;
+        nodeMessage.path_cost = node->getPathCost();
+
+        //To make a node message we must construct a state message
+        morris_aima_msgs::MissionariesAndCannibalsState stateMessage;
+        MandCEnvironmentState *state = node->getState();
+        stateMessage.cannibals_left = state->getCannibalsLeft();
+        stateMessage.cannibals_right = state->getCannibalsRight();
+        stateMessage.missionaries_left = state->getMissionariesLeft();
+        stateMessage.missionaries_right = state->getMissionariesRight();
+        stateMessage.river_crossed = state->isRiverCrossed();
+        //now we add state to the node message
+        nodeMessage.state = stateMessage;
+
+        environmentInfo.frontier.push_back(nodeMessage);
+    }
+
+    if(goalFound()) {
+        StateNode *currentPathStep = goalNode;
+        int count = 0;
+        while (currentPathStep != NULL && currentPathStep->getState()!=NULL) {
+            morris_aima_msgs::MissionariesAndCannibalsNode nodeMessage;
+            MandCEnvironmentState *state = currentPathStep->getState();
+            morris_aima_msgs::MissionariesAndCannibalsState state_message;
+            state_message.cannibals_left = state->getCannibalsLeft();
+            state_message.cannibals_right = state->getCannibalsRight();
+            state_message.missionaries_left = state->getMissionariesLeft();
+            state_message.missionaries_right = state->getMissionariesRight();
+            state_message.river_crossed = state->isRiverCrossed();
+            nodeMessage.state = state_message;
+            nodeMessage.path_cost = currentPathStep->getPathCost();
+            morris_aima_msgs::MissionariesAndCannibalsAction action_message;
+            action_message.cannibals_moved = currentPathStep->getAction()->getNumCannibals();
+            action_message.missionaries_moved = currentPathStep->getAction()->getNumMissionaries();
+            nodeMessage.action = action_message;
+
+            environmentInfo.path.push_back(nodeMessage);
+
+            currentPathStep = currentPathStep->getParent();
+            count++;
+        }
+    }
+    environment_publisher.publish(environmentInfo);
 }
