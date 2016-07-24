@@ -1,14 +1,13 @@
-cmake_minimum_required(VERSION 3.0)
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-project(morris_aima_environment)
-
+cmake_minimum_required(VERSION 2.8.3)
+project(morris_aima_visualization)
+set(CMAKE_AUTOMOC ON)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   roscpp
-  morris_aima_msgs
   rospy
+  morris_aima_msgs
   std_msgs
 )
 
@@ -69,7 +68,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
 #   DEPENDENCIES
-#   std_msgs
+#   std_msgs  # Or other packages containing msgs
 # )
 
 ################################################
@@ -103,8 +102,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES morris_aima_environment
-#  CATKIN_DEPENDS roscpp rospy std_msgs
+#  LIBRARIES morris_aima_visualization
+#  CATKIN_DEPENDS roscpp rospy
 #  DEPENDS system_lib
 )
 
@@ -121,24 +120,24 @@ include_directories(
 )
 
 ## Declare a C++ library
-# add_library(morris_aima_environment
-#   src/${PROJECT_NAME}/morris_aima_environment.cpp
+# add_library(morris_aima_visualization
+#   src/${PROJECT_NAME}/morris_aima_visualization.cpp
 # )
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
-# add_dependencies(morris_aima_environment ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(morris_aima_visualization ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-# add_executable(morris_aima_environment_node src/morris_aima_environment_node.cpp)
+# add_executable(morris_aima_visualization_node src/morris_aima_visualization_node.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-# add_dependencies(morris_aima_environment_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(morris_aima_visualization_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(morris_aima_environment_node
+# target_link_libraries(morris_aima_visualization_node
 #   ${catkin_LIBRARIES}
 # )
 
@@ -157,7 +156,7 @@ include_directories(
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS morris_aima_environment morris_aima_environment_node
+# install(TARGETS morris_aima_visualization morris_aima_visualization_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -182,86 +181,48 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_morris_aima_environment.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_morris_aima_visualization.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
 
-#JSONCPP support
-set(jsoncpp_ROOT "$ENV{HOME}/libs/jsoncpp")
-message(JSON dir: ${jsoncpp_ROOT})
-find_library(jsoncpp NAMES jsoncpp)
-include_directories(${jsoncpp_ROOT}/include)
-link_directories(${jsoncpp_ROOT}/lib)
-set(JSON_CPP $ENV{HOME}/libs/json/jsoncpp.cpp
-        $ENV{HOME}/libs/json/json.h
-        $ENV{HOME}/libs/json/json-forwards.h)
-
-
-include_directories(include include/TileEnvironment include/MissionariesAndCannibals include/TileEnvironment/VacuumWorld ${catkin_INCLUDE_DIRS})
-
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
-#VARIABLES FOR ENVIRONMENT FILES
-#would make sense to just make this a library
-set(ENVIRONMENT_CORE
-        src/Agent.cpp
-        src/Entity.cpp include/Entity.h
-        src/Location.cpp
-        src/EnvironmentState.cpp
-        src/EntityFactory.cpp include/EntityFactory.h
-        src/EntityFactoryFactory.cpp include/EntityFactoryFactory.h
-        src/EnvironmentStateFactory.cpp include/EnvironmentStateFactory.h
-        src/Environment.cpp include/Environment.h
-        src/EnvironmentFactory.cpp
-        )
-#really this could be a library
-set(TILE_ENVIRONMENT_SRC
-        src/TileEnvironment/TileEnvironment.cpp include/TileEnvironment/TileEnvironment.h
-        src/TileEnvironment/Tile.cpp include/TileEnvironment/Tile.h
-        src/TileEnvironment/TileEnvironmentState.cpp include/TileEnvironment/TileEnvironmentState.h
-        src/TileEnvironment/TileGrid.cpp include/TileEnvironment/TileGrid.h
-        src/TileEnvironment/TileLocation.cpp include/TileEnvironment/TileLocation.h
-        )
 
-set(VACUUM_WORLD_SRC
-        src/TileEnvironment/VacuumWorld/DirtEntity.cpp
-        src/TileEnvironment/VacuumWorld/RandomReflexVacuumAgent.cpp
-        src/TileEnvironment/VacuumWorld/RandomVacuumAction.cpp
-        src/TileEnvironment/VacuumWorld/SimpleReflexVacuumAgent.cpp
-        src/TileEnvironment/VacuumWorld/SimpleVacuumAction.cpp
-        src/TileEnvironment/VacuumWorld/VacuumAgent.cpp
-        src/TileEnvironment/VacuumWorld/VacuumEnvironment.cpp
-        src/TileEnvironment/VacuumWorld/VacuumEnvironmentState.cpp
-        src/TileEnvironment/VacuumWorld/VacuumFactory.cpp
-        src/TileEnvironment/VacuumWorld/VacuumPercept.cpp
-        src/TileEnvironment/VacuumWorld/VacuumWorldPerformanceMeasure.cpp
-        src/TileEnvironment/VacuumWorld/WallEntity.cpp
-        include/TileEnvironment/VacuumWorld/DirtEntity.h
-        include/TileEnvironment/VacuumWorld/RandomReflexVacuumAgent.h
-        include/TileEnvironment/VacuumWorld/RandomVacuumAction.h
-        include/TileEnvironment/VacuumWorld/SimpleReflexVacuumAgent.h
-        include/TileEnvironment/VacuumWorld/SimpleVacuumAction.h
-        include/TileEnvironment/VacuumWorld/VacuumAgent.h
-        include/TileEnvironment/VacuumWorld/VacuumEnvironment.h
-        include/TileEnvironment/VacuumWorld/VacuumEnvironmentState.h
-        include/TileEnvironment/VacuumWorld/VacuumFactory.h
-        include/TileEnvironment/VacuumWorld/VacuumPercept.h
-        include/TileEnvironment/VacuumWorld/VacuumWorldPerformanceMeasure.h
-        include/TileEnvironment/VacuumWorld/WallEntity.h
-)
+#########################
+#QT MODULES
+##########################
+find_package( Qt5Core REQUIRED )
+find_package( Qt5Widgets REQUIRED )
+find_package( Qt5Gui REQUIRED )
+#---------------------------
 
-SET(MISSIONARIES_AND_CANNIBALS_SRC
-        src/MissionariesAndCannibals/MandCAction.cpp
-        src/MissionariesAndCannibals/MandCEnvironment.cpp
-        src/MissionariesAndCannibals/MandCEnvironmentState.cpp
-        src/MissionariesAndCannibals/StateNode.cpp
-        include/MissionariesAndCannibals/MandCAction.h
-        include/MissionariesAndCannibals/MandCEnvironment.h
-        include/MissionariesAndCannibals/MandCEnvironmentState.h
-        include/MissionariesAndCannibals/StateNode.h
-        )
+SET(VISUALIZER_SRC
+        include/Visualizer.h
+        src/Visualizer.cpp
+        include/FrameVisualizer.h
+        include/TerminalTextVisualizer.h
+        include/TileFrameVisualizer.h
+        include/VisualEntity.h
+        include/VisualEntityFactory.h
+        include/VisualImageEntity.h
+        include/VisualShapeEntity.h
+        include/VisualTile.h
+        include/VisualTileGrid.h
+        src/FrameVisualizer.cpp
+        src/TerminalTextVisualizer.cpp
+        src/TileFrameVisualizer.cpp
+        src/VisualEntity.cpp
+        src/VisualEntityFactory.cpp
+        src/VisualImageEntity.cpp
+        src/VisualTile.cpp
+        src/VisualShapeEntity.cpp
+        src/VisualTileGrid.cpp
+        src/VisualizerFactory.cpp
+        include/VisualizerFactory.h
+        include/QNodeRosVisualizer.h src/QNodeRosVisualizer.cpp)
 
 
-add_executable(morris_aima_environment_node src/morris_aima_environment_node.cpp ${ENVIRONMENT_CORE} ${TILE_ENVIRONMENT_SRC} ${VACUUM_WORLD_SRC} ${MISSIONARIES_AND_CANNIBALS_SRC})
-target_link_libraries(morris_aima_environment_node ${catkin_LIBRARIES} "jsoncpp")
+add_executable(morris_aima_visualization_node src/mainwindow.cpp ${VISUALIZER_SRC})
+qt5_use_modules(morris_aima_visualization_node Core Widgets Gui )
+target_link_libraries(morris_aima_visualization_node ${catkin_LIBRARIES})
