@@ -198,9 +198,9 @@ find_package( Qt5Gui REQUIRED )
 #---------------------------
 
 SET(VISUALIZER_SRC
-        TileVisualizer.cpp TileVisualizer.h)
+        src/TileVisualizer.cpp include/TileVisualizer.h src/TileMainWindow.cpp include/TileMainWindow.h src/TileQRosNode.cpp include/TileQRosNode.h)
 
 
-add_executable(morris_aima_visualization_node src/mainwindow.cpp ${VISUALIZER_SRC})
+add_executable(morris_aima_visualization_node src/morris_aima_visualization_node.cpp   ${VISUALIZER_SRC})
 qt5_use_modules(morris_aima_visualization_node Core Widgets Gui )
 target_link_libraries(morris_aima_visualization_node ${catkin_LIBRARIES})

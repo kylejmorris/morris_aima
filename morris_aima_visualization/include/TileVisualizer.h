@@ -10,12 +10,15 @@
 #ifndef MORRIS_AIMA_VISUALIZATION_TILEVISUALIZER_H
 #define MORRIS_AIMA_VISUALIZATION_TILEVISUALIZER_H
 
+#include "TileMainWindow.h"
+#include "TileQRosNode.h"
+
 class TileVisualizer {
 private:
     /**
      * The Main window containing the grid to display
      */
-    TileMainWindow *window;
+    TileMainWindow window;
 
     /**
      * The ros node handling signals for ROS, communicate with environment/etc.

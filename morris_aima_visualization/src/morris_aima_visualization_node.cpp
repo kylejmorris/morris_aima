@@ -3,12 +3,14 @@
 #include "std_msgs/String.h"
 #include <sstream>
 #include <VisualizerFactory.h>
+#include <TileVisualizer.h>
 #include "std_srvs/Empty.h"
 #include "std_srvs/EmptyRequest.h"
 #include "std_srvs/EmptyResponse.h"
 #include "Visualizer.h"
 
 //BRUTAL hack, saving main arguments so I can pass them to init when thread is made.
+/*
 static int argc;
 static char **argv;
 
@@ -19,7 +21,7 @@ static int defaultRate = 1; //in hz, how quick we cycle/loop
  * @param worldType: String representing "type" of world we want to init.
  * @param bool: True if valid, false otherwise
  */
-bool isValidWorldType(std::string worldType) {
+/*bool isValidWorldType(std::string worldType) {
     bool result = false;
     if(worldType.compare("vacuum_world")==0) {
         result = true;
@@ -40,19 +42,23 @@ void *spin(void *) {
     return NULL;
 }
 
+*/
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
  */
 int main(int argc, char **argv) {
     QApplication application(argc,argv);
-    ros::init(argc, argv, "morris_aima_visualization_node");
+    TileVisualizer visualizer(argc, argv);
+    visualizer.initialize();
+    visualizer.run();
+//   ros::init(argc, argv, "morris_aima_visualization_node");
 
     /**
      * NodeHandle is the main access point to communications with the ROS system.
      * The first NodeHandle constructed will fully initialize this node, and the last
      * NodeHandle destructed will close down the node.
      */
-    ros::NodeHandle n("morris_aima_visualizer");
+ /*   ros::NodeHandle n("morris_aima_visualizer");
 
     //set up the environment with provided configuration
     std::string worldType;
@@ -80,5 +86,10 @@ int main(int argc, char **argv) {
     //run main loop, so long as the ros node is up and running.
     pthread_t rosspin;
     pthread_create(&rosspin, NULL, spin, NULL);
-    return application.exec();
+    */
+
+    application.connect(&application, SIGNAL(lastWindowClosed()), &application, SLOT(quit()));
+    int result = application.exec();
+    return result;
+
 }

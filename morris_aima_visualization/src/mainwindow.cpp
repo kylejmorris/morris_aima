@@ -11,8 +11,8 @@ int main(int argc, char **argv) {
     QThread *thread = new QThread;
     QNodeRosVisualizer *vizNode = new QNodeRosVisualizer;
     QTimer *timer = new QTimer;
-    vizNode->moveToThread(thread);
-    vizNode->initialize(argc, argv);
+    vizNodemoveToThread(thread);
+    vizNode.initialize(argc, argv);
     thread->start();
     while(true) {
         vizNode->run();
