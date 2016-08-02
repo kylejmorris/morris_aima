@@ -24,7 +24,6 @@ private:
      * The ros node handling signals for ROS, communicate with environment/etc.
      */
     TileQRosNode qnode;
-
 public:
     TileVisualizer(int argc, char **argv);
 

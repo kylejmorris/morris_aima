@@ -7,8 +7,9 @@
 void TileQRosNode::enableUpdating_callback() {
 }
 
-void TileQRosNode::setParameters_callback(int width, int height, std::string name) {
-
+bool TileQRosNode::setParameters_callback(std_srvs::Empty::Request &request, std_srvs::Empty::Response &response) {
+    QString message = QString::fromStdString("POtato!");
+    Q_EMIT setParameters(2,2, message);
 }
 
 void TileQRosNode::reset_callback() {
@@ -22,6 +23,7 @@ void TileQRosNode::update_callback(morris_aima_msgs::TileEnvironmentInfo &msg) {
 
 void TileQRosNode::run() {
     ros::Rate loop_rate(1);
+
 
     while ( ros::ok() )
     {
@@ -43,7 +45,9 @@ bool TileQRosNode::initialize() {
 
     //explicitly needed as nodehandle is going out of scope.
     ros::start();
-    ros::NodeHandle handle;
+    ros::NodeHandle handle("morris_aima_visualizer");
+
+    set_parameters_service = handle.advertiseService("set_parameters",&TileQRosNode::setParameters_callback, this);
 
     start_time = ros::Time::now();
 

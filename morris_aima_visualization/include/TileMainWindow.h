@@ -10,7 +10,10 @@
 #ifndef MORRIS_AIMA_VISUALIZATION_TILEMAINWINDOW_H
 #define MORRIS_AIMA_VISUALIZATION_TILEMAINWINDOW_H
 #include <QMainWindow>
+#include <QGraphicsView>
+#include <QGraphicsScene>
 #include <morris_aima_msgs/TileEnvironmentInfo.h>
+#include "VisualTileGrid.h"
 
 class TileMainWindow : public QMainWindow {
     Q_OBJECT
@@ -19,8 +22,31 @@ private:
      * Whether or not display will accept updates and show them.
      */
     bool updatingEnabled = false;
+
+    const int FRAME_WIDTH = 700;
+    const int FRAME_HEIGHT = 700;
+    QString frameTitle = "Tile Visualizer";
+
+    /**
+     * The grid we are displaying
+     */
+    VisualTileGrid *grid;
+
+    /*
+     * Text showing performance measurement reading.
+     */
+    QGraphicsTextItem *performanceMeasure;
+    /**
+    * The embodiement of the environment display, what is contained within it to be rendered.
+    */
+    QGraphicsScene *scene = NULL;
+
+    /**
+     * QT object for the view, that actually displays the scene.
+     */
+    QGraphicsView *view = NULL;
 public:
-    TileMainWindow(int argc, char **argv);
+    TileMainWindow(int argc, char **argv, QWidget *parent);
 
     /**
      * Display a window with no info yet. Will just set up the frame that will hold environment once loaded.
@@ -54,7 +80,7 @@ public Q_SLOTS:
      * @param heigth: Height in rows of grid to show
      * @param name: The frames name when loaded.
      */
-    void setParameters(int width, int height, std::string name);
+    void setParameters(int width, int height, QString name);
 
     /**
      * Reset the window to a blank display again, now able to set new parameters and load environment info.

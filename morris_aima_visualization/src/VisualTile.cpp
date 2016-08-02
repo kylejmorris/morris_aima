@@ -9,11 +9,13 @@ QRectF VisualTile::boundingRect() const {
 void VisualTile::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     painter->setBrush(Qt::white);
     painter->drawRect(this->boundingRect());
-    for(VisualEntity *currEntity : contents) {
+//TODO: SOMEHOW THIS BLOCK BELOW, BREAKS MY MAIN GUI. IF UNCOMMENTED THEN THE MAIN GUI WILL FREEZE UP, OTHERWISE AN EMPTY GRID RENDERS JUST FINE. Wtf
+   /* for(VisualEntity *currEntity : contents) {
         if(currEntity!=NULL) {
-            currEntity->paint(painter, option, widget);
+            scene()->addItem(currEntity);
+            //currEntity->paint(painter, option, widget);
         }
-    }
+    }*/
 }
 
 bool VisualTile::addEntity(VisualEntity *target) {

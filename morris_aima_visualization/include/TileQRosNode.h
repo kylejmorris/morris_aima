@@ -14,6 +14,7 @@
 #include <QtCore/QThread>
 #include <morris_aima_msgs/TileEnvironmentInfo.h>
 #include <ros/service_server.h>
+#include <std_srvs/Empty.h>
 
 class TileQRosNode : public QThread {
     Q_OBJECT
@@ -29,7 +30,7 @@ private:
      */
     ros::Time start_time;
 
-    ros::ServiceServer run_service;
+    ros::ServiceServer set_parameters_service;
 public:
     TileQRosNode(int argc, char **argv);
 
@@ -50,14 +51,14 @@ public: Q_SIGNALS:
         void update(morris_aima_msgs::TileEnvironmentInfo &msg);
         void enableUpdating();
         void freeze();
-        void setParameters(int width, int height, std::string name);
+        void setParameters(int width, int height, QString name);
         void reset();
 
 public:
     //Callbacks for ros services/subscriptions, corresponding signals will then be sent.
         void update_callback(morris_aima_msgs::TileEnvironmentInfo &msg);
         void enableUpdating_callback();
-        void setParameters_callback(int width, int height, std::string name);
+        bool setParameters_callback(std_srvs::Empty::Request &request, std_srvs::Empty::Response &response);
         void reset_callback();
 };
 

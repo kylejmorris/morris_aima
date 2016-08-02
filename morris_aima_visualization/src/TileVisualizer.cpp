@@ -4,11 +4,11 @@
 #include "TileQRosNode.h"
 #include "morris_aima_msgs/TileEnvironmentInfo.h"
 
-TileVisualizer::TileVisualizer(int argc, char **argv) : window(argc, argv), qnode(argc,argv) {
-    window.show();
+TileVisualizer::TileVisualizer(int argc, char **argv) : window(argc, argv, NULL), qnode(argc,argv) {
 }
 
 bool TileVisualizer::initialize() {
+
     /**
      * Showing gui with no info about environment yet
      */
@@ -24,7 +24,7 @@ bool TileVisualizer::initialize() {
 
     QObject::connect(&qnode, SIGNAL(freeze()), &window, SLOT(disableUpdating()));
 
-    QObject::connect(&qnode, SIGNAL(setParameters(int,int,std::string)), &window, SLOT(setParameters(int,int,std::string))); //Load initial params such as grid width/height and frame name. These don't change during simulation.
+    QObject::connect(&qnode, SIGNAL(setParameters(int,int,QString)), &window, SLOT(setParameters(int,int,QString))); //Load initial params such as grid width/height and frame name. These don't change during simulation.
 
     QObject::connect(&qnode, SIGNAL(reset()), &window, SLOT(resetWindow())); //reset to blank window, able to load new grid sizes now.
 
