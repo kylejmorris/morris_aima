@@ -18,13 +18,13 @@ bool TileVisualizer::initialize() {
      */
     QObject::connect(&qnode, SIGNAL(rosShutdown()), &window, SLOT(closeWindow()));
     //Signal updating the display when ros gets new info
-    QObject::connect(&qnode, SIGNAL(update(morris_aima_msgs::TileEnvironmentInfo)), &window, SLOT(update(morris_aima_msgs::TileEnvironmentInfo)));
+    QObject::connect(&qnode, SIGNAL(update(const morris_aima_msgs::TileEnvironmentInfo)), &window, SLOT(update(const morris_aima_msgs::TileEnvironmentInfo)));
 
     QObject::connect(&qnode, SIGNAL(enableUpdating()), &window, SLOT(enableUpdating())); //Window gui will now accept updates and display most recent info
 
     QObject::connect(&qnode, SIGNAL(freeze()), &window, SLOT(disableUpdating()));
 
-    QObject::connect(&qnode, SIGNAL(setParameters(int,int,QString)), &window, SLOT(setParameters(int,int,QString))); //Load initial params such as grid width/height and frame name. These don't change during simulation.
+    QObject::connect(&qnode, SIGNAL(setParameters(int,int)), &window, SLOT(setParameters(int,int))); //Load initial params such as grid width/height and frame name. These don't change during simulation.
 
     QObject::connect(&qnode, SIGNAL(reset()), &window, SLOT(resetWindow())); //reset to blank window, able to load new grid sizes now.
 

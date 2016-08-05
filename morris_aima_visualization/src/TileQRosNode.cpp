@@ -4,20 +4,28 @@
 #include <ros/node_handle.h>
 #include <ros/ros.h>
 
-void TileQRosNode::enableUpdating_callback() {
+bool TileQRosNode::enableUpdating_callback(std_srvs::Empty::Request &request, std_srvs::Empty::Response &response) {
+    Q_EMIT enableUpdating();
+    return true;
 }
 
 bool TileQRosNode::setParameters_callback(std_srvs::Empty::Request &request, std_srvs::Empty::Response &response) {
-    QString message = QString::fromStdString("POtato!");
-    Q_EMIT setParameters(2,2, message);
+    XmlRpc::XmlRpcValue properties;
+    int width = -1;
+    int height = -1;
+    ros::param::get("/morris_aima_environment/config",properties);
+    width = properties["grid_width"];
+    height = properties["grid_height"];
+    Q_EMIT setParameters(width,height);
 }
 
 void TileQRosNode::reset_callback() {
 
 }
 
-void TileQRosNode::update_callback(morris_aima_msgs::TileEnvironmentInfo &msg) {
-
+void TileQRosNode::update_callback(const morris_aima_msgs::TileEnvironmentInfo &msg) {
+    ROS_INFO("trying to updatE!!!!!");
+    Q_EMIT update(msg);
 }
 
 
@@ -48,6 +56,8 @@ bool TileQRosNode::initialize() {
     ros::NodeHandle handle("morris_aima_visualizer");
 
     set_parameters_service = handle.advertiseService("set_parameters",&TileQRosNode::setParameters_callback, this);
+    enable_update_service = handle.advertiseService("start",&TileQRosNode::enableUpdating_callback, this);
+    update_subscriber = handle.subscribe("/morris_aima_environment/tile_environment_info",1000,&TileQRosNode::update_callback,this);
 
     start_time = ros::Time::now();
 

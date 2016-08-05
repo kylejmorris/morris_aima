@@ -38,6 +38,10 @@ public:
     VisualTileGrid(int rows, int cols, int width, int height);
     virtual QRectF boundingRect() const;
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    /**
+     * Move grid by x,y relative to where it is placed. This moves all contents of grid manually.
+     */
+    virtual void moveBy(int x, int y);
 
     /*
      * We know the grid is square, so this will return the width/height of any given tile.

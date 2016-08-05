@@ -11,7 +11,7 @@
 
 class VisualImageEntity : public VisualEntity {
 private:
-    const std::string IMAGE_DIRECTORY = "visualizer/images/";
+    const std::string IMAGE_DIRECTORY = "images/";
     std::string imageName;
 
     /**

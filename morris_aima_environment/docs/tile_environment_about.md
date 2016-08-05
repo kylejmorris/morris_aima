@@ -15,6 +15,8 @@ An entity contains the following structure:
 More concretely: /morris_aima_environment/config/entities = [{entity_type,location_x,location_y} {entity_type, location_x, location_y} ... ]
 
     
+*The configuration entities will allow the environment to be reset to it's initial state,with the same map loaded. Loading a new world map will change the parameters.
+
 PUBLICATIONS:
     publishes morris_aima_msgs/TileEnvironmentInfo messages on morris_aima_environment/tile_environment_info
    

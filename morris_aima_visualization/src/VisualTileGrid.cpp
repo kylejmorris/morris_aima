@@ -46,10 +46,13 @@ bool VisualTileGrid::addEntity(VisualEntity *entity, int x, int y) {
 }
 
 void VisualTileGrid::clean() {
-    for(int row=0; row<this->rows; row++) {
-        for(int col=0; col<this->columns;col++) {
-            tiles[row][col]->clean();
+    if(drawn) { //only clean if we actually drew it already
+        for (int row = 0; row < this->rows; row++) {
+            for (int col = 0; col < this->columns; col++) {
+                    tiles[row][col]->clean();
+            }
         }
+        drawn = false;
     }
 }
 
@@ -95,3 +98,15 @@ void VisualTileGrid::paintTiles(QPainter *painter, const QStyleOptionGraphicsIte
         drawn = true;
     }
 }
+
+void VisualTileGrid::moveBy(int x, int y) {
+    /*
+    for(int currentRow=0; currentRow<tiles.size(); currentRow++) {
+        for(int currentCol=0; currentCol<tiles.size(); currentCol++) {
+            tiles.at(currentRow).at(currentCol)->moveBy(x,y);
+        }
+    }
+     */
+}
+
+

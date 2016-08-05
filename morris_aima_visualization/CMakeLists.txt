@@ -198,7 +198,10 @@ find_package( Qt5Gui REQUIRED )
 #---------------------------
 
 SET(VISUALIZER_SRC
-        src/TileVisualizer.cpp include/TileVisualizer.h src/TileMainWindow.cpp include/TileMainWindow.h src/TileQRosNode.cpp include/TileQRosNode.h include/VisualTileGrid.h src/VisualTileGrid.cpp include/VisualTile.h src/VisualTile.cpp include/VisualEntity.h src/VisualEntity.cpp)
+        src/TileVisualizer.cpp include/TileVisualizer.h src/TileMainWindow.cpp include/TileMainWindow.h src/TileQRosNode.cpp include/TileQRosNode.h include/VisualTileGrid.h src/VisualTileGrid.cpp include/VisualTile.h src/VisualTile.cpp include/VisualEntity.h src/VisualEntity.cpp include/VisualEntityFactory.h src/VisualEntityFactory.cpp
+        include/VisualImageEntity.h src/VisualImageEntity.cpp include/VisualShapeEntity.h src/VisualShapeEntity.cpp)
+
+
 
 
 add_executable(morris_aima_visualization_node src/morris_aima_visualization_node.cpp   ${VISUALIZER_SRC})

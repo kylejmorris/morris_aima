@@ -7,8 +7,9 @@
 
 #ifndef MORRIS_AIMA_VISUALENTITYFACTORY_H
 #define MORRIS_AIMA_VISUALENTITYFACTORY_H
+#include "VisualEntity.h"
+#include <string>
 
-class VisualEntity;
 class VisualEntityFactory {
 public:
     /**

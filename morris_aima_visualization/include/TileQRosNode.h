@@ -15,6 +15,7 @@
 #include <morris_aima_msgs/TileEnvironmentInfo.h>
 #include <ros/service_server.h>
 #include <std_srvs/Empty.h>
+#include <ros/subscriber.h>
 
 class TileQRosNode : public QThread {
     Q_OBJECT
@@ -31,6 +32,8 @@ private:
     ros::Time start_time;
 
     ros::ServiceServer set_parameters_service;
+    ros::ServiceServer enable_update_service;
+    ros::Subscriber update_subscriber;
 public:
     TileQRosNode(int argc, char **argv);
 
@@ -48,19 +51,18 @@ public:
     //All signals are explained in the TileMainWindow as slots where they are acted on
 public: Q_SIGNALS:
         void rosShutdown();
-        void update(morris_aima_msgs::TileEnvironmentInfo &msg);
+        void update(const morris_aima_msgs::TileEnvironmentInfo msg);
         void enableUpdating();
         void freeze();
-        void setParameters(int width, int height, QString name);
+        void setParameters(int width, int height);
         void reset();
 
 public:
     //Callbacks for ros services/subscriptions, corresponding signals will then be sent.
-        void update_callback(morris_aima_msgs::TileEnvironmentInfo &msg);
-        void enableUpdating_callback();
+        void update_callback(const morris_aima_msgs::TileEnvironmentInfo &msg);
+        bool enableUpdating_callback(std_srvs::Empty::Request &request, std_srvs::Empty::Response &response);
         bool setParameters_callback(std_srvs::Empty::Request &request, std_srvs::Empty::Response &response);
         void reset_callback();
 };
-
 
 #endif //MORRIS_AIMA_VISUALIZATION_TILEQROSNODE_H

@@ -35,7 +35,7 @@ private:
     /*
      * Text showing performance measurement reading.
      */
-    QGraphicsTextItem *performanceMeasure;
+    QGraphicsTextItem *performanceMeasureText;
     /**
     * The embodiement of the environment display, what is contained within it to be rendered.
     */
@@ -50,6 +50,7 @@ public:
 
     /**
      * Display a window with no info yet. Will just set up the frame that will hold environment once loaded.
+     * Anything such as a frame to show a border around environment, empty statistics, and other decoration can be loaded at this time.
      * @returns: True if success, false if gui could not be loaded
      */
     bool initialize();
@@ -62,7 +63,7 @@ public Q_SLOTS:
     /**
      * Update the display with new environment state.
      */
-    void update(morris_aima_msgs::TileEnvironmentInfo &msg);
+    void update(const morris_aima_msgs::TileEnvironmentInfo &msg);
 
     /**
      * Enable updates, so the GUI will show changes to environment.
@@ -80,7 +81,7 @@ public Q_SLOTS:
      * @param heigth: Height in rows of grid to show
      * @param name: The frames name when loaded.
      */
-    void setParameters(int width, int height, QString name);
+    void setParameters(int width, int height);
 
     /**
      * Reset the window to a blank display again, now able to set new parameters and load environment info.

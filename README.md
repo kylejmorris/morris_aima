@@ -12,6 +12,8 @@ In pursuit of graduate studies in Computer Science (with focus in Artificial Int
 # Package Information
 - **morris_aima_environment:** Handles the Environment (model) logic. The state space for a given problem is explored here.
 - **morris_aima_msgs:** Messages and services used by the other packages in this project.
+- **morris_aima_control:** Gathers results from environment/visualizer, provides interface to control both at once.
+- **morris_aima_visualizer:** Visualize what's going on with the Environment using friendly colours and pics instead of scary numbers.
 
 # Future Plans
 Through opportunities provided to me via the University of Manitoba's Autonomous Agents Lab, I will be expanding this software to be a more general framework for Robotics/AI via the ROS system. I hope to use this to aid in my undergraduate research experience, while partaking in various robotics competitions such as HuroCup, RoboCup, and Robot Magic.
