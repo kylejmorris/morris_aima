@@ -50,5 +50,4 @@ public:
     virtual ~VisualImageEntity();
 };
 
-
 #endif //MORRIS_AIMA_VISUALIMAGEENTITY_H
