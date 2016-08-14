@@ -1,0 +1,7 @@
+<launch>
+<node name="morris_aima_visualizer" pkg="morris_aima_visualization" type="morris_aima_visualization_node" args="" respawn="true" />
+<node name="morris_aima_environment" pkg="morris_aima_environment" type="morris_aima_environment_node" args="" respawn="true" />
+
+<!-- Identify world type .-->
+  <param name="/morris_aima_control/world_type" value="vacuum_world" type="str" />
+</launch>
