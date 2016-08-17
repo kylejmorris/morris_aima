@@ -1,0 +1,5 @@
+<launch>
+<node name="morris_aima_environment" pkg="morris_aima_environment" type="morris_aima_environment_node" args="" respawn="true" />
+<!-- Loading map into environment. -->
+<rosparam file="$(find morris_aima_environment)/maps/vacuum_world/test.yaml"/>
+</launch>

@@ -1,0 +1,9 @@
+#default world to load if nothing is specified by user
+morris_aima_environment:
+    config:
+        entities:
+            - entity_type: SimpleReflexVacuumAgent
+              location_x: 0 
+              location_y: 0 
+        grid_height: 1
+        grid_width: 2

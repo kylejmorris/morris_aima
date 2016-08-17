@@ -11,4 +11,4 @@ morris_aima_environment/reset
 - Put the environment back into initial state before anything was loaded. This can't happen unless Environment is not active.
 
 morris_aima_environment/load
-- Load updated configuration parameters into the environment. Environment must not be active. It will be reset with the new parameters are loaded.
+- Load updated configuration parameters into the environment. Environment must not be active. It will be reset when the new parameters are loaded.

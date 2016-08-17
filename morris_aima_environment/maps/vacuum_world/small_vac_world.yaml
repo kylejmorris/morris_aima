@@ -1,0 +1,17 @@
+morris_aima_environment:
+    config:
+        entities:
+            - entity_type: SimpleReflexVacuumAgent
+              location_x: 0 
+              location_y: 0 
+            - entity_type: Dirt
+              location_x: 0
+              location_y: 0 
+            - entity_type: Dirty
+              location_x: 0
+              location_y: 1
+            - entity_type: Wall
+              location_x: 1
+              location_y: 0
+        grid_height: 2
+        grid_width: 2
