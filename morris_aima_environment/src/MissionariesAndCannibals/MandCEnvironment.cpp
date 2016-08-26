@@ -1,5 +1,5 @@
 #include <json/json.h>
-#include <morris_aima_msgs/MissionariesAndCannibalsInfo.h>
+//#include <morris_aima_msgs/MissionariesAndCannibalsInfo.h>
 #include "Environment.h"
 #include "MandCEnvironment.h"
 #include <iostream>
@@ -239,7 +239,7 @@ bool MandCEnvironment::reset_callback(std_srvs::Empty::Request &req, std_srvs::E
 }
 
 void MandCEnvironment::initialize() {
-    environment_publisher = getNodeHandle()->advertise<morris_aima_msgs::MissionariesAndCannibalsInfo>("missionaries_and_cannibals_info", 1000, false);
+    //environment_publisher = getNodeHandle()->advertise<morris_aima_msgs::MissionariesAndCannibalsInfo>("missionaries_and_cannibals_info", 1000, false);
     activateService = getNodeHandle()->advertiseService("start", &MandCEnvironment::activate_callback, this);
     deactivateService = getNodeHandle()->advertiseService("stop", &MandCEnvironment::deactivate_callback, this);
     resetService = getNodeHandle()->advertiseService("reset", &MandCEnvironment::reset_callback, this);
@@ -247,7 +247,7 @@ void MandCEnvironment::initialize() {
 }
 
 void MandCEnvironment::publish() {
-    morris_aima_msgs::MissionariesAndCannibalsInfo environmentInfo;
+    /*morris_aima_msgs::MissionariesAndCannibalsInfo environmentInfo;
     environmentInfo.age = this->getAge();
     environmentInfo.found = this->goalFound();
 
@@ -317,4 +317,5 @@ void MandCEnvironment::publish() {
         }
     }
     environment_publisher.publish(environmentInfo);
+*/
 }

@@ -127,41 +127,60 @@ bool TileEnvironment::isLoaded() {
     return this->loaded;
 }
 
-void TileEnvironment::loadEnvironment(string fileName) {
+void TileEnvironment::load(string fileName) {
     TileEnvironmentState *state;
+    XmlRpc::XmlRpcValue param;
+    std::string relative_path;
+    std::string environmentType;
+    ros::param::get("/morris_aima_environment/relative_path", relative_path);
+    ros::param::get("/morris_aima_control/world_type", environmentType);
     int x, y;
     Json::Value currentEntities; //current entities on tile
     int entityCount; //how many entities of a given type were found on tile
     Json::Value root;
     Json::Value tiles; //pointers to all the tiles in map
     Json::Reader reader;
-    std::string environmentType;
-    std::ifstream inputFile(fileName);
+    std::string maps_dir = relative_path + "/maps/"+environmentType +"/";
+    std::ifstream inputFile(maps_dir + fileName);
+
+    ROS_INFO_STREAM(maps_dir);
     bool success = reader.parse(inputFile, root, false);
     if (!success) {
         std::cout << reader.getFormatedErrorMessages();
     } else {
-        environmentType = root["Enviroment"].get("type", "VacuumEnvironment").asString(); //default is VacuumEnvironment
+        //environmentType = root["Enviroment"].get("type", "VacuumEnvironment").asString(); //default is VacuumEnvironment
 
         //setting the factory for the given type of environment.
-        this->entityFactory = EntityFactoryFactory::createEntityFactory(environmentType);
+        //this->entityFactory = EntityFactoryFactory::createEntityFactory(environmentType);
 
-        tiles = root["Environment"]["tiles"];
-        x = root["Environment"]["size"]["x"].asInt();
-        y = root["Environment"]["size"]["y"].asInt();
+        //tiles = root["Environment"]["tiles"];
+        //x = root["Environment"]["size"]["x"].asInt();
+        //y = root["Environment"]["size"]["y"].asInt();
+        param["config"]["grid_width"]  = root["Environment"]["size"]["x"].asInt();
+        param["config"]["grid_height"]  = root["Environment"]["size"]["y"].asInt();
 
         //figure out which environment state is associated with this environment
-        EnvironmentState *tempState = EnvironmentStateFactory::createEnvironmentState(environmentType,
-                                                                                      root["Environment"]);
-        state = static_cast<TileEnvironmentState *>(tempState);
+        //EnvironmentState *tempState = EnvironmentStateFactory::createEnvironmentState(environmentType,
+                                                                                    // root["Environment"]);
+        //state = static_cast<TileEnvironmentState *>(tempState);
+        int count = 0;
         for (auto entity : root["Environment"]["entities"]) {
-            Entity *current = this->entityFactory->createEntity(entity["type"].asString(), entity["properties"]);
-            TileLocation loc(entity["location"]["x"].asInt(), entity["location"]["y"].asInt());
-            state->add(current, &loc);
+            XmlRpc::XmlRpcValue xml_entity;
+            xml_entity["entity_type"] = entity["type"].asString();
+            xml_entity["location_x"] = entity["location"]["x"].asInt();
+            xml_entity["location_y"] = entity["location"]["y"].asInt();
+            param["config"]["entities"][count] = xml_entity;
+            count++;
+            //Entity *current = this->entityFactory->createEntity(entity["type"].asString(), entity["properties"]);
+            //TileLocation loc(entity["location"]["x"].asInt(), entity["location"]["y"].asInt());
+            //state->add(current, &loc);
         }
+        ros::param::set("/morris_aima_environment/",param);
+        ros::param::set("/morris_aima_environment/relative_path", relative_path);
     }
+     load();
 
-    this->state = state;
+    //this->state = state;
 }
 
 EnvironmentState *TileEnvironment::readState() {

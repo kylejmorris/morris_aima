@@ -5,10 +5,10 @@ project(morris_aima_control)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  morris_aima_msgs
   roscpp
   rospy
   std_msgs
+  morris_aima_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -66,10 +66,11 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   morris_aima_msgs#   std_msgs
-# )
+#generate_messages(
+#  DEPENDENCIES
+#  morris_aima_msgs
+#  std_msgs
+#)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -192,5 +193,10 @@ include_directories(
 SET(RESULT_SRC
         src/Result.cpp include/Result.h src/VacuumWorldResult.cpp include/VacuumWorldResult.h src/ResultFactory.cpp include/ResultFactory.h)
 
+SET(CONTROLLER_SRC
+        src/MainController.cpp include/MainController.h)
 add_executable(morris_aima_result_node src/morris_aima_result_node.cpp ${RESULT_SRC})
+add_executable(morris_aima_controller_node src/morris_aima_controller_node.cpp ${CONTROLLER_SRC})
 target_link_libraries(morris_aima_result_node ${catkin_LIBRARIES})
+target_link_libraries(morris_aima_controller_node ${catkin_LIBRARIES})
+

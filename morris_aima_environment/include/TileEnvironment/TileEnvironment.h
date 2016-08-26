@@ -26,7 +26,10 @@ public:
     TileEnvironment();
     ~TileEnvironment();
 
-    virtual void loadEnvironment(string fileName);
+    /*
+     * Load parameters from a file and to the param server, then call load to initialize environment fully
+     */
+    virtual void load(string fileName);
 
     /**
      * Load parameters from ros param server and setup the environment.

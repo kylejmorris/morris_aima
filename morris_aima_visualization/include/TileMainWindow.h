@@ -18,6 +18,7 @@
 class TileMainWindow : public QMainWindow {
     Q_OBJECT
 private:
+
     /**
      * Whether or not display will accept updates and show them.
      */

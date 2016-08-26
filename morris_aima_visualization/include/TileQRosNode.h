@@ -63,6 +63,7 @@ public:
         bool enableUpdating_callback(std_srvs::Empty::Request &request, std_srvs::Empty::Response &response);
         bool setParameters_callback(std_srvs::Empty::Request &request, std_srvs::Empty::Response &response);
         void reset_callback();
+        std::string getRelativePath();
 };
 
 #endif //MORRIS_AIMA_VISUALIZATION_TILEQROSNODE_H

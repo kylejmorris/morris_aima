@@ -28,6 +28,8 @@
 #include <std_srvs/Empty.h>
 #include "SimpleVacuumAction.h"
 #include "VacuumWorldPerformanceMeasure.h"
+#include <morris_aima_msgs/Load.h>
+
 
 class SimpleReflexVacuumAgent;
 class RandomVacuumAction;
@@ -128,7 +130,7 @@ public:
     /**
      * Load the environment. This will reset, and refresh the environment with new parameters specified
      */
-    bool load_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp);
+    bool load_callback(morris_aima_msgs::Load::Request &req, morris_aima_msgs::Load::Response &resp);
 
     /**
      * Reset the environment. This will clear the cycle history and all statistics.

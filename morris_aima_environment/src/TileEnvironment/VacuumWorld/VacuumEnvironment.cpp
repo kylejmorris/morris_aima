@@ -1,11 +1,11 @@
 #include <VacuumPercept.h>
 #include <DirtEntity.h>
+#include <ros/package.h>
 #include <json/json.h>
 #include <ros/node_handle.h>
 #include <std_srvs/Empty.h>
 #include "SimpleVacuumAction.h"
 #include "VacuumEnvironment.h"
-#include "morris_aima_msgs/VacuumWorldInfo.h"
 #include "SimpleReflexVacuumAgent.h"
 #include "SimpleVacuumAction.h"
 #include "RandomVacuumAction.h"
@@ -102,7 +102,7 @@ EnvironmentState *VacuumEnvironment::readState() {
 }
 
 void VacuumEnvironment::loadEnvironment(string fileName) {
-    TileEnvironment::loadEnvironment(fileName);
+    TileEnvironment::load(fileName);
     this->state = dynamic_cast<VacuumEnvironmentState *>(TileEnvironment::readState());
 }
 
@@ -121,7 +121,7 @@ void VacuumEnvironment::simpleVacuumAct(SimpleVacuumAction *action) {
     }
 }
 
-bool VacuumEnvironment::load_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp) {
+bool VacuumEnvironment::load_callback(morris_aima_msgs::Load::Request &req, morris_aima_msgs::Load::Response &resp) {
     if(isActive()) {
         ROS_INFO("NOTICE: Please deactivate the environment before loading a new one.");
     } else {
@@ -129,7 +129,8 @@ bool VacuumEnvironment::load_callback(std_srvs::Empty::Request &req, std_srvs::E
             ROS_INFO("First resetting environment before load.");
             this->reset();
         }
-        this->load();
+        std::string mapname = req.map_name;
+        this->load(mapname);
         //By keeping a VacuumWorldState instead of using TileEnvironmentState, we don't have to keep downcasting for subclass methods.
         this->state = static_cast<VacuumEnvironmentState *>(TileEnvironment::readState()); //since it was figured out in parent, must bring it here. as a VacuumWorld State
     }

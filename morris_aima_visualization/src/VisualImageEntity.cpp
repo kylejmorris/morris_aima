@@ -1,13 +1,17 @@
 #include "VisualImageEntity.h"
 #include <QPixmap>
 #include <QImage>
+#include <QDir>
 #include <QPainter>
+#include <QDebug>
 #include <QStyleOptionGraphicsItem>
 #include <QWidget>
 #include <QtCore/qdir.h>
+#include <iostream>
 
 VisualImageEntity::VisualImageEntity(std::string imageName) {
-    std::string imagePath = IMAGE_DIRECTORY + imageName;
+    std::string imagePath = IMAGE_DIRECTORY +imageName;//IMAGE_DIRECTORY + imageName;
+
     this->image = new QGraphicsPixmapItem(QPixmap(imagePath.c_str()), this);
 }
 

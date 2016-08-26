@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(morris_aima_visualization)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 set(CMAKE_AUTOMOC ON)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -207,3 +208,4 @@ SET(VISUALIZER_SRC
 add_executable(morris_aima_visualization_node src/morris_aima_visualization_node.cpp   ${VISUALIZER_SRC})
 qt5_use_modules(morris_aima_visualization_node Core Widgets Gui )
 target_link_libraries(morris_aima_visualization_node ${catkin_LIBRARIES})
+
