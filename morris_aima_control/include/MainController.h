@@ -34,6 +34,7 @@ public:
     bool start_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp);
     bool stop_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp);
     bool save_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp);
+    bool reset_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp);
     bool load_callback(morris_aima_msgs::Load::Request &req, morris_aima_msgs::Load::Response &resp);
 };
 #endif //MORRIS_AIMA_CONTROL_MAINCONTROLLER_H

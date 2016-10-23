@@ -1,8 +1,10 @@
 <launch>
 <node name="morris_aima_visualizer" pkg="morris_aima_visualization" type="morris_aima_visualization_node" args="" respawn="true" >
-    <param name="relative_path" value="$(find morris_aima_visualizer)/"/>
+    <param name="relative_path" value="$(find morris_aima_visualization)/"/>
 </node>
 
+<node name="morris_aima_controller" pkg="morris_aima_control" type="morris_aima_controller_node" args="" respawn="true" >
+</node>
 <!-- Identify world type .-->
   <param name="/morris_aima_control/world_type" value="vacuum_world" type="str" />
 

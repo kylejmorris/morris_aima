@@ -8,7 +8,6 @@ TileVisualizer::TileVisualizer(int argc, char **argv) : window(argc, argv, NULL)
 }
 
 bool TileVisualizer::initialize() {
-
     /**
      * Showing gui with no info about environment yet
      */
