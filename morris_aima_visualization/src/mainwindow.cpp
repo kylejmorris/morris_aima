@@ -1,4 +1,8 @@
-//Main visualizer window
+/*
+ * Main visualizer window.
+ * @author: Kyle Morris
+ * Purpose: This file couples the QT based Visualizer and ros framework vizualizer to provide a gui that updates upon receiving ROS signals.
+ */
 
 #include <QApplication>
 #include <QNodeRosVisualizer.h>
@@ -11,14 +15,13 @@ int main(int argc, char **argv) {
     QThread *thread = new QThread;
     QNodeRosVisualizer *vizNode = new QNodeRosVisualizer;
     QTimer *timer = new QTimer;
+
     vizNodemoveToThread(thread);
     vizNode.initialize(argc, argv);
     thread->start();
+
     while(true) {
-        vizNode->run();
         application.processEvents();
     }
-    //QObject::connect(thread, SIGNAL(started()), vizNode, SLOT(run())); //ros loop
-    //QObject::connect(timer, SIGNAL(timeout()), vizNode, SLOT(run()));
 }
 

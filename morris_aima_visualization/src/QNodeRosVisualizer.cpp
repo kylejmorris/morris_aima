@@ -1,6 +1,3 @@
-//
-// Created by votick on 2016/7/24.
-
 #include <ros/init.h>
 #include <QThread>
 #include <ros/rate.h>
@@ -11,6 +8,7 @@
 #include "QNodeRosVisualizer.h"
 
 static int defaultRate = 1; //in hz, how quick we cycle/loop
+
 /**
  * Determine if the given configuration name is a valid environment type to initialize
  * @param worldType: String representing "type" of world we want to init.
@@ -27,6 +25,7 @@ bool QNodeRosVisualizer::isValidWorldType(std::string worldType) {
 void QNodeRosVisualizer::initialize(int argc, char **argv) {
     ros::init(argc, argv, "morris_aima_visualization_node");
     ros::start();
+
     /**
      * NodeHandle is the main access point to communications with the ROS system.
      * The first NodeHandle constructed will fully initialize this node, and the last
@@ -53,14 +52,11 @@ void QNodeRosVisualizer::initialize(int argc, char **argv) {
     ROS_INFO("Configuration complete. Initializing visualizer.");
     visualizer->initialize();
     ROS_INFO("Visualizer successfully Initialized!");
-    //services for activating/deactivating and checking activation of environment.
-    //run main loop, so long as the ros node is up and running.
 }
 
 void QNodeRosVisualizer::render() {
     this->visualizer->render();
 }
-
 
 void QNodeRosVisualizer::run() {
     int cycleRate = defaultRate; //how quick we'll loop
@@ -69,11 +65,4 @@ void QNodeRosVisualizer::run() {
     ROS_INFO("RUNNING ROS LOOP");
     ros::spinOnce();
     this->visualizer->render();
-    //loop_rate.sleep();
 }
-
-
-
-//
-
-#include "QNodeRosVisualizer.h"

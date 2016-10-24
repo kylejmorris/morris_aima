@@ -4,7 +4,7 @@
  * date: July 30, 2016
  * Description: The Ros component for a TileVisualizer, will send info to GUI
  *
- * This grid is fixed size, meaning it's width/height is specified once and then simulation may be done. Must be reset() to
+ * This grid is fixed size, meaning it's width/height are specified once and then simulation may be done. Must be reset() to
  * load in a new size.
  */
 #ifndef MORRIS_AIMA_VISUALIZATION_TILEQROSNODE_H
@@ -50,20 +50,20 @@ public:
 
     //All signals are explained in the TileMainWindow as slots where they are acted on
 public: Q_SIGNALS:
-        void rosShutdown();
-        void update(const morris_aima_msgs::TileEnvironmentInfo msg);
-        void enableUpdating();
-        void freeze();
-        void setParameters(int width, int height);
-        void reset();
+    void rosShutdown();
+    void update(const morris_aima_msgs::TileEnvironmentInfo msg);
+    void enableUpdating();
+    void freeze();
+    void setParameters(int width, int height);
+    void reset();
 
 public:
     //Callbacks for ros services/subscriptions, corresponding signals will then be sent.
-        void update_callback(const morris_aima_msgs::TileEnvironmentInfo &msg);
-        bool enableUpdating_callback(std_srvs::Empty::Request &request, std_srvs::Empty::Response &response);
-        bool setParameters_callback(std_srvs::Empty::Request &request, std_srvs::Empty::Response &response);
-        void reset_callback();
-        std::string getRelativePath();
+    void update_callback(const morris_aima_msgs::TileEnvironmentInfo &msg);
+    bool enableUpdating_callback(std_srvs::Empty::Request &request, std_srvs::Empty::Response &response);
+    bool setParameters_callback(std_srvs::Empty::Request &request, std_srvs::Empty::Response &response);
+    void reset_callback();
+    std::string getRelativePath();
 };
 
 #endif //MORRIS_AIMA_VISUALIZATION_TILEQROSNODE_H

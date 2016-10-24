@@ -32,7 +32,6 @@ void TileQRosNode::update_callback(const morris_aima_msgs::TileEnvironmentInfo &
 void TileQRosNode::run() {
     ros::Rate loop_rate(1);
 
-
     while ( ros::ok() )
     {
         ROS_INFO("Ros is running...");

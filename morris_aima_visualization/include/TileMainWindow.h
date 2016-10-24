@@ -18,12 +18,10 @@
 class TileMainWindow : public QMainWindow {
     Q_OBJECT
 private:
-
     /**
      * Whether or not display will accept updates and show them.
      */
     bool updatingEnabled = false;
-
     const int FRAME_WIDTH = 700;
     const int FRAME_HEIGHT = 700;
     QString frameTitle = "Tile Visualizer";
@@ -75,6 +73,7 @@ public Q_SLOTS:
      * Disable updates, so the GUI will not show any changes to environment.
      */
     void disableUpdating();
+
     /**
      * Set the main parameters for display. These must be set before updating/display can take place.
      * PRECONDITIONS: Window must be in initialized state, or reset, cannot set parameters when updating is enabled.
@@ -89,10 +88,10 @@ public Q_SLOTS:
      * PRECONDITIONS: updating must be disabled for display.
      */
     void resetWindow();
+
     /**
      * Callback for subscription to environment info. Will send a render() signal to main QT window.
      */
-    //void render_callback(morris_aima_msgs::TileEnvironmentInfo &msg);
 };
 
 
